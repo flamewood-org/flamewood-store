@@ -1,22 +1,23 @@
+import { PageHeader } from "@/components/layout/PageHeader";
+
 export const metadata = {
 	title: "Refund Policy - FlameWood",
 };
 
 export default function RefundPolicyPage() {
 	return (
-		<div className="bg-background min-h-screen">
-			<div className="bg-foreground text-white py-16 md:py-24 rounded-b-[40px] px-4">
-				<div className="max-w-4xl mx-auto text-center">
-					<h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
-						Refund Policy
-					</h1>
-					<p className="text-white/70">Returns, Refunds, and Replacements</p>
-				</div>
-			</div>
+		<div className="bg-background min-h-screen min-w-0 overflow-x-hidden">
+			<PageHeader
+				title="Refunds"
+				description="Returns, replacements, and how we handle issues."
+				breadcrumbs={[{ label: "Home", href: "/" }, { label: "Refunds" }]}
+			/>
 
-			<div className="max-w-4xl mx-auto px-4 py-16">
-				<div className="bg-white p-8 rounded-3xl border-l-4 border-l-primary shadow-sm mb-10">
-					<h3 className="text-xl font-bold mb-2">Our Promise</h3>
+			<div className="max-w-3xl mx-auto px-4 py-8 md:py-10">
+				<div className="p-5 rounded-xl border border-border bg-surface mb-8">
+					<h3 className="text-base font-semibold mb-2 text-foreground">
+						Our approach
+					</h3>
 					<p className="text-text-secondary">
 						We stand behind the premium quality of our firewood, coconut, and
 						biomass products. If your order arrives damaged or fails to meet
@@ -24,7 +25,7 @@ export default function RefundPolicyPage() {
 					</p>
 				</div>
 
-				<div className="prose prose-lg prose-gray max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-text-secondary">
+				<div className="prose prose-sm max-w-none prose-headings:text-foreground prose-headings:font-semibold prose-headings:text-base prose-p:text-text-secondary prose-p:text-[15px] prose-p:leading-relaxed prose-li:text-text-secondary">
 					<h2>Returns</h2>
 					<p>
 						Due to the heavy and consumable nature of our biomass products, we

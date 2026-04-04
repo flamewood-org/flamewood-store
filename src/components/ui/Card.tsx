@@ -16,16 +16,16 @@ export function Card({
 	...props
 }: CardProps) {
 	const variants = {
-		default: "bg-surface border border-border shadow-sm",
+		default: "bg-surface border border-border/80 shadow-[var(--shadow-card)]",
 		flat: "bg-surface-alt border-none",
-		elevated: "bg-surface border-none shadow-card",
+		elevated: "bg-surface border-none shadow-[var(--shadow-card)]",
 	};
 
 	const classes = twMerge(
 		clsx(
-			"rounded-2xl overflow-hidden transition-all duration-300",
+			"rounded-xl overflow-hidden transition-shadow duration-200",
 			variants[variant],
-			hover && "hover:shadow-card-hover hover:-translate-y-1",
+			hover && "hover:shadow-[var(--shadow-card-hover)]",
 			className,
 		),
 	);

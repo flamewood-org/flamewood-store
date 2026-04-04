@@ -1,21 +1,20 @@
+import { PageHeader } from "@/components/layout/PageHeader";
+
 export const metadata = {
 	title: "Terms of Service - FlameWood",
 };
 
 export default function TermsOfServicePage() {
 	return (
-		<div className="bg-background min-h-screen">
-			<div className="bg-foreground text-white py-16 md:py-24 rounded-b-[40px] px-4">
-				<div className="max-w-4xl mx-auto text-center">
-					<h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
-						Terms of Service
-					</h1>
-					<p className="text-white/70">Last updated: April 2026</p>
-				</div>
-			</div>
+		<div className="bg-background min-h-screen min-w-0 overflow-x-hidden">
+			<PageHeader
+				title="Terms of service"
+				description="Last updated April 2026."
+				breadcrumbs={[{ label: "Home", href: "/" }, { label: "Terms" }]}
+			/>
 
-			<div className="max-w-4xl mx-auto px-4 py-16">
-				<div className="prose prose-lg px-6 py-10 bg-white rounded-3xl shadow-sm border border-border prose-gray max-w-none prose-headings:font-bold prose-headings:text-foreground prose-p:text-text-secondary">
+			<div className="max-w-3xl mx-auto px-4 py-8 md:py-10">
+				<div className="prose prose-sm max-w-none prose-headings:text-foreground prose-headings:font-semibold prose-headings:text-base prose-p:text-text-secondary prose-p:text-[15px] prose-p:leading-relaxed prose-li:text-text-secondary">
 					<h2>1. Agreement to Terms</h2>
 					<p>
 						By accessing our website at flamewood.com, you are agreeing to be

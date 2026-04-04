@@ -46,7 +46,7 @@ export function CartSidebar() {
 			{/* Overlay */}
 			<button
 				type="button"
-				className={`sidebar-overlay ${isClosing ? "closing" : ""}`}
+				className={`sidebar-overlay border-0 bg-transparent p-0 cursor-pointer ${isClosing ? "closing" : ""}`}
 				onClick={handleClose}
 				onKeyDown={(e) => e.key === "Escape" && handleClose()}
 				aria-label="Close cart"
@@ -60,12 +60,14 @@ export function CartSidebar() {
 				aria-label="Shopping cart"
 			>
 				{/* Header */}
-				<div className="flex items-center justify-between px-6 py-5 border-b border-border">
+				<div className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b border-border shrink-0">
 					<div className="flex items-center gap-3">
 						<ShoppingBag className="w-5 h-5 text-primary" />
-						<h2 className="text-lg font-bold text-foreground">Shopping Cart</h2>
+						<h2 className="text-base font-semibold text-foreground">
+							Shopping Cart
+						</h2>
 						{cart && cart.itemCount > 0 && (
-							<span className="inline-flex items-center justify-center h-6 min-w-[24px] px-1.5 rounded-full bg-primary text-white text-xs font-bold">
+							<span className="inline-flex items-center justify-center h-5 min-w-[20px] px-1.5 rounded-full bg-primary text-white text-[11px] font-medium">
 								{cart.itemCount}
 							</span>
 						)}
@@ -96,7 +98,7 @@ export function CartSidebar() {
 							))}
 						</div>
 					) : isEmpty ? (
-						<div className="flex flex-col items-center justify-center h-full px-6 py-16">
+						<div className="flex flex-col items-center justify-center h-full px-4 sm:px-6 py-12 sm:py-16">
 							<div className="w-20 h-20 rounded-full bg-surface-alt flex items-center justify-center mb-6">
 								<ShoppingBag className="w-10 h-10 text-text-tertiary" />
 							</div>
@@ -146,7 +148,7 @@ export function CartSidebar() {
 										<p className="text-xs text-text-secondary mt-0.5">
 											{item.variant.title}
 										</p>
-										<p className="text-sm font-bold text-primary mt-1">
+										<p className="text-sm font-semibold text-primary mt-1 tabular-nums">
 											₹{(item.variant.price * item.quantity).toFixed(2)}
 										</p>
 
@@ -197,7 +199,7 @@ export function CartSidebar() {
 
 				{/* Footer */}
 				{!isEmpty && cart && (
-					<div className="border-t border-border px-6 py-5 space-y-4 bg-surface">
+					<div className="border-t border-border px-4 sm:px-6 py-4 sm:py-5 space-y-4 bg-surface shrink-0 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
 						{/* Summary */}
 						<div className="space-y-2">
 							<div className="flex justify-between text-sm">
@@ -215,8 +217,8 @@ export function CartSidebar() {
 								</span>
 							</div>
 							<div className="flex justify-between pt-2 border-t border-border">
-								<span className="font-bold text-foreground">Total</span>
-								<span className="font-bold text-xl text-primary">
+								<span className="font-medium text-foreground">Total</span>
+								<span className="font-semibold text-lg text-primary tabular-nums">
 									₹{cart.subtotal.toFixed(2)}
 								</span>
 							</div>
@@ -228,7 +230,7 @@ export function CartSidebar() {
 								size="lg"
 								fullWidth
 								onClick={handleCheckout}
-								className="flex items-center justify-center gap-2 font-semibold shadow-lg hover:shadow-xl transition-shadow"
+								className="flex items-center justify-center gap-2 font-medium"
 							>
 								Checkout
 								<ArrowRight className="w-4 h-4" />

@@ -10,9 +10,12 @@ export function middleware(request: NextRequest) {
 
 	const token = request.cookies.get(CUSTOMER_TOKEN_COOKIE)?.value;
 	if (!token) {
-		const login = new URL("/login", request.url);
-		login.searchParams.set("callbackUrl", pathname);
-		return NextResponse.redirect(login);
+		const url = request.nextUrl.clone();
+		url.pathname = "/";
+		url.search = "";
+		url.searchParams.set("auth", "login");
+		url.searchParams.set("callbackUrl", pathname);
+		return NextResponse.redirect(url);
 	}
 
 	return NextResponse.next();

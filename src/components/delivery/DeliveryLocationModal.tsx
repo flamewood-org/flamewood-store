@@ -24,14 +24,8 @@ function officeKey(o: IndiaPostOffice): string {
 }
 
 export function DeliveryLocationModal() {
-	const {
-		hydrated,
-		isModalOpen,
-		location,
-		closeModal,
-		commitVerifiedLocation,
-	} = useDeliveryLocation();
-	const allowDismiss = !!location;
+	const { hydrated, isModalOpen, location, commitVerifiedLocation } =
+		useDeliveryLocation();
 
 	const [query, setQuery] = useState("");
 	const [suggestions, setSuggestions] = useState<IndiaPostOffice[]>([]);
@@ -59,15 +53,6 @@ export function DeliveryLocationModal() {
 		}, 50);
 		return () => window.clearTimeout(t);
 	}, [isModalOpen, hydrated, location]);
-
-	useEffect(() => {
-		if (!isModalOpen || !allowDismiss) return;
-		const onKey = (e: KeyboardEvent) => {
-			if (e.key === "Escape") closeModal();
-		};
-		window.addEventListener("keydown", onKey);
-		return () => window.removeEventListener("keydown", onKey);
-	}, [isModalOpen, allowDismiss, closeModal]);
 
 	useEffect(() => {
 		if (!isModalOpen) return;
@@ -134,9 +119,7 @@ export function DeliveryLocationModal() {
 					const filtered = filterDeliverable(r.offices);
 					if (filtered.length === 0) {
 						setSuggestions([]);
-						setError(
-							"Delivery is not available for this pincode (India Post non-delivery or outside our service area).",
-						);
+						setError("Delivery not available for this pincode.");
 						return;
 					}
 					setSuggestions(filtered);
@@ -189,17 +172,17 @@ export function DeliveryLocationModal() {
 		setError(null);
 	};
 
+	const resolvedOffice =
+		selectedOffice ??
+		(suggestions.length === 1 ? (suggestions[0] ?? null) : null);
+	const canSubmit = resolvedOffice !== null && !isSearching && !isVerifying;
+
 	const verifyAndSave = async () => {
 		setError(null);
 
-		let office = selectedOffice;
-		if (!office && suggestions.length === 1) {
-			office = suggestions[0] ?? null;
-		}
+		const office = resolvedOffice;
 		if (!office) {
-			setError(
-				"Choose a location from the list after search (type 6-digit pincode or area name).",
-			);
+			setError("Select a location from the list.");
 			return;
 		}
 
@@ -217,9 +200,7 @@ export function DeliveryLocationModal() {
 					isFlameWoodDeliverable(o),
 			);
 			if (!match) {
-				setError(
-					"Delivery could not be confirmed for this selection. Pick another office or pincode.",
-				);
+				setError("Could not confirm delivery. Try another office.");
 				return;
 			}
 			commitVerifiedLocation(buildSavedLocation(match));
@@ -241,56 +222,48 @@ export function DeliveryLocationModal() {
 			e.preventDefault();
 			if (suggestions.length > 0 && highlight >= 0 && suggestions[highlight]) {
 				applyOffice(suggestions[highlight]);
-			} else {
+			} else if (canSubmit) {
 				void verifyAndSave();
 			}
-		} else if (e.key === "Escape" && allowDismiss) {
-			closeModal();
 		}
 	};
 
 	if (!hydrated || !isModalOpen) return null;
 
 	return (
-		<div className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6">
-			<button
-				type="button"
-				className={`absolute inset-0 bg-black/55 backdrop-blur-sm animate-fade-in ${
-					allowDismiss ? "cursor-pointer" : "cursor-default"
-				}`}
-				aria-label={allowDismiss ? "Close" : "Background"}
-				onClick={() => allowDismiss && closeModal()}
-				disabled={!allowDismiss}
+		<div className="fixed inset-0 z-[110] flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto overscroll-contain">
+			{/* Backdrop: does not close the modal — must complete verification */}
+			<div
+				className="absolute inset-0 bg-black/55 backdrop-blur-sm animate-fade-in cursor-default"
+				aria-hidden
 			/>
 
 			<div
-				className="relative bg-white w-full max-w-md rounded-3xl shadow-2xl animate-scale-in overflow-hidden border border-border max-h-[min(90vh,640px)] flex flex-col"
+				className="relative z-[1] my-auto w-full max-w-[min(100%,28rem)] rounded-2xl border border-border bg-white shadow-lg animate-scale-in overflow-hidden flex flex-col max-h-[min(92dvh,40rem)]"
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby="delivery-location-title"
 			>
-				<div className="bg-linear-to-br from-primary/10 to-accent/5 px-6 pt-6 pb-4 border-b border-border/60 shrink-0">
-					<div className="flex items-start gap-3">
-						<div className="shrink-0 w-12 h-12 rounded-2xl bg-primary/15 flex items-center justify-center">
-							<MapPin className="w-6 h-6 text-primary" aria-hidden />
+				<div className="bg-linear-to-br from-primary/10 to-accent/5 px-5 pt-5 pb-3 border-b border-border/60 shrink-0">
+					<div className="flex items-center gap-3">
+						<div className="shrink-0 w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center">
+							<MapPin className="w-5 h-5 text-primary" aria-hidden />
 						</div>
 						<div>
 							<h2
 								id="delivery-location-title"
-								className="text-xl font-black text-foreground tracking-tight"
+								className="text-base font-semibold text-foreground tracking-tight"
 							>
-								Delivery pincode required
+								Delivery pincode
 							</h2>
-							<p className="text-sm text-text-secondary mt-1 leading-snug">
-								Data from India Post (PostalPinCode.in). Enter a 6-digit
-								pincode or search by post office / area, then confirm we deliver
-								there.
+							<p className="text-xs text-text-secondary mt-0.5">
+								6-digit pincode or search by area.
 							</p>
 						</div>
 					</div>
 				</div>
 
-				<div className="p-6 space-y-4 overflow-y-auto flex-1 min-h-0">
+				<div className="p-5 space-y-3 overflow-y-auto flex-1 min-h-0">
 					<div className="relative">
 						<div className="relative">
 							<Input
@@ -298,7 +271,7 @@ export function DeliveryLocationModal() {
 								type="text"
 								inputMode="text"
 								autoComplete="postal-code"
-								placeholder="e.g. 682001 or Kochi"
+								placeholder="Pincode or area"
 								value={query}
 								onChange={(e) => setQuery(e.target.value)}
 								onKeyDown={onKeyDown}
@@ -341,17 +314,13 @@ export function DeliveryLocationModal() {
 					</div>
 
 					{selectedOffice && (
-						<div className="rounded-xl border border-success/30 bg-success/5 px-4 py-3 text-sm">
-							<p className="font-bold text-foreground">Selected</p>
-							<p className="text-text-secondary mt-0.5">
-								<span className="tabular-nums font-semibold text-foreground">
-									{selectedOffice.Pincode}
-								</span>
-								{" — "}
-								{selectedOffice.Name}, {selectedOffice.District},{" "}
-								{selectedOffice.State}
-							</p>
-						</div>
+						<p className="text-sm text-text-secondary">
+							<span className="tabular-nums font-semibold text-foreground">
+								{selectedOffice.Pincode}
+							</span>
+							{" · "}
+							{selectedOffice.Name}, {selectedOffice.District}
+						</p>
 					)}
 
 					{error && (
@@ -367,23 +336,18 @@ export function DeliveryLocationModal() {
 					<Button
 						type="button"
 						onClick={() => void verifyAndSave()}
-						disabled={isVerifying}
-						className="w-full h-12 rounded-xl font-bold shadow-lg shadow-primary/20"
+						disabled={!canSubmit}
+						className="w-full h-12 rounded-xl font-bold shadow-lg shadow-primary/20 disabled:opacity-50 disabled:pointer-events-none"
 					>
 						{isVerifying ? (
 							<span className="inline-flex items-center gap-2">
 								<Loader2 className="h-4 w-4 animate-spin" />
-								Verifying…
+								Saving…
 							</span>
 						) : (
-							"Verify delivery & save"
+							"Save"
 						)}
 					</Button>
-
-					<p className="text-xs text-text-tertiary text-center leading-relaxed">
-						We require a valid India Post pincode with delivery service in our
-						shipping zones. This is saved only in your browser.
-					</p>
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,7 @@
 
 import { PackageSearch, Search } from "lucide-react";
 import { useState } from "react";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 
@@ -15,49 +16,43 @@ export default function TrackOrderPage() {
 	};
 
 	return (
-		<div className="bg-background min-h-[80vh] flex flex-col pt-20 pb-32">
-			{/* Decorative Blobs */}
-			<div className="fixed top-20 right-20 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
-			<div className="fixed bottom-20 left-20 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+		<div className="bg-background min-h-screen min-w-0 overflow-x-hidden flex flex-col">
+			<PageHeader
+				title="Track order"
+				description="Enter your order ID to check status."
+				breadcrumbs={[{ label: "Home", href: "/" }, { label: "Track order" }]}
+			/>
 
-			<div className="max-w-3xl mx-auto px-4 sm:px-6 w-full flex-1 flex flex-col justify-center items-center text-center">
-				<div className="w-24 h-24 bg-surface rounded-full flex items-center justify-center shadow-xl shadow-primary/10 mb-8 animate-fade-in-up">
-					<PackageSearch className="w-12 h-12 text-primary" />
+			<div className="max-w-md mx-auto px-4 sm:px-6 w-full flex-1 flex flex-col items-center text-center py-10 md:py-14">
+				<div className="w-14 h-14 bg-surface rounded-full flex items-center justify-center border border-border mb-6">
+					<PackageSearch className="w-7 h-7 text-primary" />
 				</div>
 
-				<h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-foreground">
-					Track Your Order
-				</h1>
-				<p className="text-lg md:text-xl text-text-secondary mb-12 max-w-lg">
-					Enter your Order ID below to get real-time status updates on your
-					premium shipment.
+				<p className="text-[15px] text-text-secondary mb-8 leading-relaxed">
+					Use the ID from your confirmation email or receipt.
 				</p>
 
-				<form onSubmit={handleTrack} className="w-full max-w-md space-y-4">
+				<form onSubmit={handleTrack} className="w-full space-y-3 text-left">
 					<div className="relative">
-						<Search className="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-text-tertiary" />
+						<Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
 						<Input
 							type="text"
 							placeholder="e.g. ORD-12345"
 							value={orderId}
 							onChange={(e) => setOrderId(e.target.value)}
-							className="pl-14 h-16 rounded-2xl bg-white shadow-lg border-transparent focus:border-primary text-lg"
+							className="pl-10 h-11 rounded-lg bg-surface"
 							required
 						/>
 					</div>
-					<Button
-						type="submit"
-						size="lg"
-						className="w-full h-16 rounded-2xl text-lg font-bold shadow-lg shadow-primary/30"
-					>
-						Track Shipment
+					<Button type="submit" size="lg" className="w-full h-11 rounded-lg">
+						Track shipment
 					</Button>
 				</form>
 
-				<p className="mt-8 text-sm text-text-tertiary">
+				<p className="mt-6 text-sm text-text-tertiary">
 					Need help?{" "}
-					<a href="/contact" className="font-bold text-primary hover:underline">
-						Contact Support
+					<a href="/contact" className="font-medium text-primary hover:underline">
+						Contact support
 					</a>
 				</p>
 			</div>

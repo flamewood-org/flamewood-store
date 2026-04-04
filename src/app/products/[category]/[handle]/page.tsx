@@ -5,7 +5,6 @@ import {
 	ChevronRight,
 	Heart,
 	MapPin,
-	Share2,
 	ShieldCheck,
 	ShoppingBag,
 	Truck,
@@ -70,7 +69,7 @@ export default function ProductDetailPage() {
 
 	if (isLoading) {
 		return (
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 				<div className="animate-pulse">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 						<div className="space-y-4">
@@ -101,8 +100,8 @@ export default function ProductDetailPage() {
 				<div className="w-20 h-20 bg-surface-alt rounded-full flex items-center justify-center mb-6">
 					<ShoppingBag className="w-10 h-10 text-text-tertiary" />
 				</div>
-				<h1 className="text-2xl font-bold text-foreground mb-3">
-					Product Not Found
+				<h1 className="text-xl font-semibold text-foreground mb-2">
+					Product not found
 				</h1>
 				<p className="text-text-secondary mb-8 text-center max-w-md">
 					We couldn't find the product you're looking for. It may have been
@@ -157,27 +156,32 @@ export default function ProductDetailPage() {
 	};
 
 	return (
-		<div className="bg-background min-h-screen pb-20">
-			<div className="border-b border-border bg-white">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-					<nav className="flex items-center text-sm font-medium text-text-secondary">
-						<Link href="/" className="hover:text-primary transition-colors">
+		<div className="min-h-screen min-w-0 overflow-x-hidden bg-background pb-20 sm:pb-24">
+			<div className="border-b border-border bg-white min-w-0">
+				<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 min-w-0">
+					<nav className="flex items-center text-xs sm:text-sm font-medium text-text-secondary min-w-0 overflow-x-auto no-scrollbar gap-x-1 sm:gap-x-0">
+						<Link
+							href="/"
+							className="hover:text-primary transition-colors shrink-0"
+						>
 							Home
 						</Link>
-						<ChevronRight className="w-4 h-4 mx-2" />
+						<ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 mx-1 sm:mx-2 shrink-0 opacity-70" />
 						<Link
 							href="/products/all"
-							className="hover:text-primary transition-colors"
+							className="hover:text-primary transition-colors shrink-0"
 						>
 							Products
 						</Link>
-						<ChevronRight className="w-4 h-4 mx-2" />
-						<span className="text-foreground truncate">{product.title}</span>
+						<ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 mx-1 sm:mx-2 shrink-0 opacity-70" />
+						<span className="text-foreground truncate min-w-0">
+							{product.title}
+						</span>
 					</nav>
 				</div>
 			</div>
 
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 				<div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 					{/* Product Gallery */}
 					<div className="lg:col-span-7 flex flex-col-reverse md:flex-row gap-4">
@@ -248,7 +252,7 @@ export default function ProductDetailPage() {
 					</div>
 
 					{/* Product Info */}
-					<div className="lg:col-span-5 sticky top-24 self-start space-y-6">
+					<div className="lg:col-span-5 lg:sticky lg:top-20 xl:top-24 self-start space-y-6 min-w-0">
 						<div className="flex flex-wrap gap-2">
 							{product.tags.map((tag) => (
 								<span
@@ -260,13 +264,13 @@ export default function ProductDetailPage() {
 							))}
 						</div>
 
-						<h1 className="text-3xl md:text-5xl font-extrabold text-foreground leading-tight tracking-tight">
+						<h1 className="text-2xl md:text-3xl font-semibold text-foreground leading-snug tracking-tight">
 							{product.title}
 						</h1>
 
 						{selectedVariant && (
 							<div className="mb-6 pb-6 border-b border-border">
-								<div className="text-4xl font-bold text-primary mb-1">
+								<div className="text-2xl md:text-3xl font-semibold text-primary mb-1 tabular-nums">
 									₹{totalPrice.toFixed(2)}
 								</div>
 								{selectedVariant.compareAtPrice && (
@@ -277,10 +281,10 @@ export default function ProductDetailPage() {
 							</div>
 						)}
 
-						<div className="space-y-10">
+						<div className="space-y-8">
 							<div>
-								<label className="text-sm font-bold text-foreground uppercase tracking-wider mb-4 block">
-									Select Size / Weight
+								<label className="text-xs font-medium text-text-secondary mb-3 block">
+									Size / weight
 								</label>
 								<WeightSelector
 									options={weightOptions}
@@ -289,9 +293,9 @@ export default function ProductDetailPage() {
 								/>
 							</div>
 
-							<div className="bg-surface p-6 rounded-3xl border border-border shadow-sm space-y-6">
+							<div className="bg-surface p-5 rounded-xl border border-border space-y-5">
 								<div className="flex items-center justify-between">
-									<label className="text-sm font-bold text-foreground">
+									<label className="text-sm font-medium text-foreground">
 										Quantity
 									</label>
 									<div className="flex items-center bg-surface-alt rounded-full border border-border/50 p-1">
@@ -305,7 +309,7 @@ export default function ProductDetailPage() {
 												-
 											</span>
 										</button>
-										<span className="w-12 text-center font-bold text-lg">
+										<span className="w-12 text-center font-medium text-base tabular-nums">
 											{quantity}
 										</span>
 										<button
@@ -326,12 +330,12 @@ export default function ProductDetailPage() {
 								>
 									<Button
 										size="lg"
-										className="flex-1 h-14 text-lg font-bold rounded-2xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all group"
+										className="flex-1 group"
 										onClick={handleAddToCart}
 										disabled={!selectedVariantId || isAddingToCart}
 									>
-										<ShoppingBag className="w-5 h-5 mr-3 group-hover:-translate-y-1 transition-transform" />
-										{isAddingToCart ? "Adding..." : "Add to Cart"}
+										<ShoppingBag className="w-4 h-4 mr-2 opacity-90" />
+										{isAddingToCart ? "Adding…" : "Add to cart"}
 									</Button>
 									<Button
 										variant="secondary"
@@ -341,25 +345,25 @@ export default function ProductDetailPage() {
 											router.push("/cart");
 										}}
 										disabled={!selectedVariantId || isAddingToCart}
-										className="sm:w-1/3 h-14 text-lg font-bold rounded-2xl whitespace-nowrap"
+										className="sm:w-1/3 whitespace-nowrap"
 									>
-										Buy Now
+										Buy now
 									</Button>
 								</div>
 							</div>
 
 							{/* Express Shipping Checker */}
-							<div className="bg-gradient-to-br from-gray-50 to-surface-alt p-6 rounded-3xl border border-border">
-								<div className="flex gap-3 mb-4">
-									<div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm">
-										<MapPin className="w-5 h-5 text-primary" />
+							<div className="bg-surface-alt/60 p-5 rounded-xl border border-border">
+								<div className="flex gap-3 mb-3">
+									<div className="w-9 h-9 rounded-lg bg-surface border border-border flex items-center justify-center shrink-0">
+										<MapPin className="w-4 h-4 text-primary" />
 									</div>
 									<div>
-										<h4 className="font-bold text-foreground">
-											Delivery Estimator
+										<h4 className="text-sm font-medium text-foreground">
+											Delivery estimate
 										</h4>
-										<p className="text-sm text-text-secondary">
-											Enter pincode for precise timeframe
+										<p className="text-xs text-text-secondary mt-0.5">
+											Six-digit pincode
 										</p>
 									</div>
 								</div>
@@ -378,7 +382,7 @@ export default function ProductDetailPage() {
 									</div>
 									<Button
 										onClick={handleCheckShipping}
-										className="h-12 px-6 rounded-xl font-bold whitespace-nowrap"
+										className="whitespace-nowrap"
 									>
 										Check
 									</Button>
@@ -388,15 +392,15 @@ export default function ProductDetailPage() {
 									<div className="mt-4 p-4 bg-white rounded-2xl border border-success/20 shadow-sm animate-fade-in flex items-start gap-3">
 										<CheckCircle2 className="w-6 h-6 text-success flex-shrink-0" />
 										<div>
-											<p className="font-bold text-foreground">
+											<p className="font-medium text-foreground text-sm">
 												{shippingEstimate.requiresManualQuote
 													? "Custom shipping quote required"
-													: `₹${shippingEstimate.cost} Delivery to ${shippingEstimate.region}`}
+													: `₹${shippingEstimate.cost} to ${shippingEstimate.region}`}
 											</p>
 											{!shippingEstimate.requiresManualQuote && (
 												<p className="text-sm text-text-secondary mt-1">
-													Get it in{" "}
-													<span className="font-bold text-foreground">
+													About{" "}
+													<span className="font-medium text-foreground">
 														{shippingEstimate.estimatedDays} days
 													</span>
 												</p>
@@ -407,27 +411,27 @@ export default function ProductDetailPage() {
 							</div>
 
 							{/* Trust Indicators */}
-							<div className="grid grid-cols-2 gap-4">
-								<div className="flex items-center gap-3 p-4 rounded-2xl bg-surface border border-border">
-									<ShieldCheck className="w-8 h-8 text-secondary" />
-									<div className="text-sm">
-										<p className="font-bold">100% Quality</p>
-										<p className="text-text-secondary">Guarantee</p>
+							<div className="grid grid-cols-2 gap-3">
+								<div className="flex items-center gap-2.5 p-3 rounded-lg bg-surface border border-border">
+									<ShieldCheck className="w-5 h-5 text-secondary shrink-0" />
+									<div className="text-xs leading-snug">
+										<p className="font-medium text-foreground">QC checked</p>
+										<p className="text-text-secondary">Before dispatch</p>
 									</div>
 								</div>
-								<div className="flex items-center gap-3 p-4 rounded-2xl bg-surface border border-border">
-									<Truck className="w-8 h-8 text-primary" />
-									<div className="text-sm">
-										<p className="font-bold">Fast Dispatch</p>
-										<p className="text-text-secondary">Within 24hrs</p>
+								<div className="flex items-center gap-2.5 p-3 rounded-lg bg-surface border border-border">
+									<Truck className="w-5 h-5 text-primary shrink-0" />
+									<div className="text-xs leading-snug">
+										<p className="font-medium text-foreground">Dispatch</p>
+										<p className="text-text-secondary">Typically 24–48h</p>
 									</div>
 								</div>
 							</div>
 
 							{/* Product Description */}
-							<div className="pt-8 border-t border-border">
-								<h3 className="text-xl font-bold text-foreground mb-4">
-									About this product
+							<div className="pt-6 border-t border-border">
+								<h3 className="text-base font-semibold text-foreground mb-3">
+									Description
 								</h3>
 								<div className="prose prose-sm text-text-secondary w-full max-w-none leading-relaxed">
 									<p>
@@ -441,7 +445,7 @@ export default function ProductDetailPage() {
 							{product.metafields &&
 								Object.keys(product.metafields).length > 0 && (
 									<div className="pt-8 border-t border-border">
-										<h3 className="text-xl font-bold text-foreground mb-6">
+										<h3 className="text-base font-semibold text-foreground mb-4">
 											Specifications
 										</h3>
 										<div className="grid sm:grid-cols-2 gap-6">
@@ -450,7 +454,7 @@ export default function ProductDetailPage() {
 													<p className="text-sm text-text-secondary mb-1">
 														Moisture Level
 													</p>
-													<p className="font-bold text-foreground">
+													<p className="font-medium text-foreground">
 														{product.metafields.moistureLevel}
 													</p>
 												</div>
@@ -460,7 +464,7 @@ export default function ProductDetailPage() {
 													<p className="text-sm text-text-secondary mb-1">
 														Wood Type
 													</p>
-													<p className="font-bold text-foreground capitalize">
+													<p className="font-medium text-foreground capitalize">
 														{product.metafields.woodType}
 													</p>
 												</div>
@@ -470,7 +474,7 @@ export default function ProductDetailPage() {
 													<p className="text-sm text-text-secondary mb-1">
 														Origin
 													</p>
-													<p className="font-bold text-foreground">
+													<p className="font-medium text-foreground">
 														{product.metafields.origin}
 													</p>
 												</div>
@@ -480,7 +484,7 @@ export default function ProductDetailPage() {
 													<p className="text-sm text-text-secondary mb-1">
 														Grade
 													</p>
-													<p className="font-bold text-foreground">
+													<p className="font-medium text-foreground">
 														{product.metafields.sizeGrade}
 													</p>
 												</div>
@@ -495,8 +499,8 @@ export default function ProductDetailPage() {
 
 			{/* Sticky Bottom Bar for Mobile & Desktop when scrolling */}
 			{showStickyBar && (
-				<div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.05)] animate-fade-in-up">
-					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+				<div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.05)] animate-fade-in-up pb-[env(safe-area-inset-bottom,0px)]">
+					<div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4 min-w-0">
 						<div className="hidden sm:flex items-center gap-4 flex-1">
 							{product.images[0] && (
 								<div className="relative w-12 h-12 rounded bg-surface-alt overflow-hidden shrink-0 border border-border">
@@ -512,7 +516,7 @@ export default function ProductDetailPage() {
 								<p className="font-semibold text-sm line-clamp-1">
 									{product.title}
 								</p>
-								<p className="text-primary font-bold text-sm">
+								<p className="text-primary font-medium text-sm">
 									₹{totalPrice.toFixed(2)}
 								</p>
 							</div>

@@ -60,11 +60,11 @@ export function MarketplaceProductCard({
 	const productHref = `/products/${category}/${product.handle}`;
 
 	return (
-		<div className="group flex flex-col bg-white rounded-xl overflow-hidden border border-border/70 hover:border-border hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300">
+		<div className="group flex flex-col bg-surface rounded-lg overflow-hidden border border-border/70 hover:border-border/90 transition-shadow duration-200 hover:shadow-[var(--shadow-card-hover)]">
 			<div className="relative">
 				<Link
 					href={productHref}
-					className="relative block aspect-square bg-[#f0f4f2] overflow-hidden"
+					className="relative block aspect-square bg-surface-alt overflow-hidden"
 				>
 					{product.images && product.images.length > 0 ? (
 						<Image
@@ -82,7 +82,7 @@ export function MarketplaceProductCard({
 
 					{hasDiscount && firstVariant.compareAtPrice && (
 						<div className="absolute top-3 left-3 z-[1]">
-							<span className="inline-flex items-center rounded-sm bg-error px-2 py-0.5 text-[11px] font-bold text-white shadow-sm">
+							<span className="inline-flex items-center rounded bg-error px-1.5 py-0.5 text-[10px] font-medium text-white">
 								-
 								{Math.round(
 									((firstVariant.compareAtPrice - lowestPrice) /
@@ -132,7 +132,7 @@ export function MarketplaceProductCard({
 					type="button"
 					onClick={handleQuickAdd}
 					disabled={isAddingToCart || !firstVariant}
-					className="absolute bottom-2.5 right-2.5 z-[2] flex size-9 items-center justify-center rounded-md bg-primary text-white shadow-md transition-all hover:bg-primary-light disabled:opacity-60"
+					className="absolute bottom-2 right-2 z-[2] flex size-8 items-center justify-center rounded-md bg-primary text-white text-xs transition-colors hover:bg-primary-dark disabled:opacity-50"
 					aria-label="Add to cart"
 				>
 					{isAddingToCart ? (
@@ -144,19 +144,19 @@ export function MarketplaceProductCard({
 			</div>
 
 			<div className="px-3.5 pt-3 pb-4 flex flex-col gap-1 flex-1">
-				<p className="text-[11px] text-text-tertiary uppercase tracking-wider font-medium truncate">
+				<p className="text-[11px] text-text-tertiary tracking-wide font-normal truncate">
 					{product.vendor || category}
 				</p>
 
 				<Link href={productHref}>
-					<h3 className="text-sm font-semibold text-foreground line-clamp-2 leading-snug group-hover:text-primary transition-colors">
+					<h3 className="text-sm font-medium text-foreground line-clamp-2 leading-snug group-hover:text-primary transition-colors">
 						{product.title}
 					</h3>
 				</Link>
 
 				<div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 mt-1.5 pr-11">
 					<span
-						className={`text-base font-bold tabular-nums ${
+						className={`text-[15px] font-medium tabular-nums ${
 							hasDiscount ? "text-primary" : "text-foreground"
 						}`}
 					>

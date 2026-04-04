@@ -15,13 +15,13 @@ export function Badge({
 	...props
 }: BadgeProps) {
 	const baseStyles =
-		"inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors";
+		"inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium tracking-wide transition-colors";
 
 	const variants = {
-		default: "bg-surface-alt text-text-secondary border border-border/50",
-		success: "bg-success/10 text-success border border-success/20",
+		default: "bg-surface-alt text-text-secondary border border-border/60",
+		success: "bg-success/8 text-success border border-success/15",
 		warning: "bg-warning/10 text-warning border border-warning/20",
-		error: "bg-error/10 text-error border border-error/20",
+		error: "bg-error/8 text-error border border-error/15",
 		outline: "border border-border text-text-secondary bg-transparent",
 	};
 

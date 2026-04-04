@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
-import { LoginForm } from "@/components/auth/LoginForm";
 import { getCustomerFromCookies } from "@/lib/auth-server";
 
 export default async function LoginPage({
@@ -18,25 +16,16 @@ export default async function LoginPage({
 		redirect(dest);
 	}
 
-	const callbackUrl =
-		sp.callbackUrl?.startsWith("/") && !sp.callbackUrl.startsWith("//")
-			? sp.callbackUrl
-			: "/account";
-
-	return (
-		<div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 py-16">
-			<Link href="/" className="mb-10 text-xl font-black tracking-tight">
-				<span className="text-primary">Flame</span>
-				<span className="text-secondary">Wood</span>
-			</Link>
-			{sp.registered && (
-				<p className="text-sm text-success font-medium mb-6 -mt-4 text-center max-w-md">
-					Account created — please sign in with your new password.
-				</p>
-			)}
-			<div className="w-full max-w-md rounded-2xl border border-border bg-surface p-8 shadow-sm">
-				<LoginForm callbackUrl={callbackUrl} />
-			</div>
-		</div>
-	);
+	const params = new URLSearchParams();
+	params.set("auth", "login");
+	if (
+		sp.callbackUrl?.startsWith("/") &&
+		!sp.callbackUrl.startsWith("//")
+	) {
+		params.set("callbackUrl", sp.callbackUrl);
+	}
+	if (sp.registered) {
+		params.set("registered", "1");
+	}
+	redirect(`/?${params.toString()}`);
 }

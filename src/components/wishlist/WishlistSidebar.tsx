@@ -52,8 +52,9 @@ export function WishlistSidebar() {
 	return (
 		<>
 			{/* Overlay */}
-			<div
-				className={`sidebar-overlay ${isClosing ? "closing" : ""}`}
+			<button
+				type="button"
+				className={`sidebar-overlay border-0 bg-transparent p-0 cursor-pointer ${isClosing ? "closing" : ""}`}
 				onClick={handleClose}
 				onKeyDown={(e) => e.key === "Escape" && handleClose()}
 				aria-label="Close wishlist"
@@ -70,9 +71,9 @@ export function WishlistSidebar() {
 				<div className="flex items-center justify-between px-6 py-5 border-b border-border">
 					<div className="flex items-center gap-3">
 						<Heart className="w-5 h-5 text-primary" />
-						<h2 className="text-lg font-bold text-foreground">Wishlist</h2>
+						<h2 className="text-base font-semibold text-foreground">Wishlist</h2>
 						{itemCount > 0 && (
-							<span className="inline-flex items-center justify-center h-6 min-w-[24px] px-1.5 rounded-full bg-primary text-white text-xs font-bold">
+							<span className="inline-flex items-center justify-center h-5 min-w-[20px] px-1.5 rounded-full bg-primary text-white text-[11px] font-medium">
 								{itemCount}
 							</span>
 						)}
@@ -90,7 +91,7 @@ export function WishlistSidebar() {
 				{/* Content */}
 				<div className="flex-1 overflow-y-auto">
 					{items.length === 0 ? (
-						<div className="flex flex-col items-center justify-center h-full px-6 py-16">
+						<div className="flex flex-col items-center justify-center h-full px-4 sm:px-6 py-12 sm:py-16">
 							<div className="w-20 h-20 rounded-full bg-surface-alt flex items-center justify-center mb-6">
 								<Heart className="w-10 h-10 text-text-tertiary" />
 							</div>
@@ -143,7 +144,7 @@ export function WishlistSidebar() {
 											>
 												{product.title}
 											</Link>
-											<p className="text-sm font-bold text-primary mt-1">
+											<p className="text-sm font-semibold text-primary mt-1 tabular-nums">
 												₹{lowestPrice.toFixed(2)}
 											</p>
 
@@ -183,7 +184,7 @@ export function WishlistSidebar() {
 
 				{/* Footer */}
 				{items.length > 0 && (
-					<div className="border-t border-border px-6 py-5 bg-surface">
+					<div className="border-t border-border px-4 sm:px-6 py-4 sm:py-5 bg-surface shrink-0 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
 						<p className="text-center text-xs text-text-tertiary">
 							{itemCount} item{itemCount !== 1 ? "s" : ""} saved
 						</p>

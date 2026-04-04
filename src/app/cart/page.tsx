@@ -40,8 +40,8 @@ export default function CartPage() {
 
 	if (isLoading) {
 		return (
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-				<h1 className="text-3xl font-bold text-foreground mb-8">
+			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+				<h1 className="text-2xl font-semibold text-foreground mb-6">
 					Shopping Cart
 				</h1>
 				<div className="space-y-4">
@@ -55,11 +55,11 @@ export default function CartPage() {
 
 	if (!cart || cart.items.length === 0) {
 		return (
-			<div className="min-h-screen bg-linear-to-b from-gray-50/50 to-white">
+			<div className="min-h-screen min-w-0 overflow-x-hidden bg-linear-to-b from-gray-50/50 to-white">
 				{/* Breadcrumb */}
 				<div className="bg-white border-b border-border">
-					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-						<nav className="flex items-center space-x-2 text-sm">
+					<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 min-w-0">
+						<nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm">
 							<Link
 								href="/"
 								className="text-text-secondary hover:text-primary transition-colors"
@@ -72,7 +72,7 @@ export default function CartPage() {
 					</div>
 				</div>
 
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+				<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 					<div className="text-center py-16 max-w-2xl mx-auto">
 						<div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-linear-to-br from-primary/10 to-secondary/10 mb-6">
 							<svg
@@ -90,8 +90,8 @@ export default function CartPage() {
 								/>
 							</svg>
 						</div>
-						<h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-							Your Cart is Empty
+						<h1 className="text-2xl font-semibold text-foreground mb-3">
+							Your cart is empty
 						</h1>
 						<p className="text-text-secondary mb-8 text-lg">
 							Looks like you haven&apos;t added any products yet.
@@ -99,7 +99,7 @@ export default function CartPage() {
 						<Link href="/products/all">
 							<Button
 								size="lg"
-								className="px-8 shadow-lg hover:shadow-xl transition-shadow"
+								className="px-6"
 							>
 								Start Shopping →
 							</Button>
@@ -116,11 +116,11 @@ export default function CartPage() {
 			: cart.subtotal;
 
 	return (
-		<div className="min-h-screen bg-linear-to-b from-gray-50/50 to-white">
+		<div className="min-h-screen min-w-0 overflow-x-hidden bg-linear-to-b from-gray-50/50 to-white">
 			{/* Breadcrumb */}
 			<div className="bg-white border-b border-border">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-					<nav className="flex items-center space-x-2 text-sm">
+				<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 min-w-0">
+					<nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm">
 						<Link
 							href="/"
 							className="text-text-secondary hover:text-primary transition-colors"
@@ -133,8 +133,8 @@ export default function CartPage() {
 				</div>
 			</div>
 
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-				<h1 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
+			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+				<h1 className="text-2xl font-semibold text-foreground mb-6">
 					Shopping Cart
 				</h1>
 
@@ -144,7 +144,7 @@ export default function CartPage() {
 						{cart.items.map((item) => (
 							<Card
 								key={item.id}
-								className="p-6 group hover:shadow-lg transition-all duration-300 border-2 border-transparent hover:border-primary/10"
+								className="p-5 group hover:shadow-md transition-all duration-200 border border-border hover:border-primary/15"
 							>
 								<div className="flex gap-6">
 									{/* Product Image */}
@@ -174,7 +174,7 @@ export default function CartPage() {
 										<p className="text-sm text-text-secondary mt-1.5">
 											{item.variant.title}
 										</p>
-										<p className="text-xl font-bold text-primary mt-3">
+										<p className="text-xl font-semibold text-primary mt-3">
 											₹{item.variant.price.toFixed(2)}
 											<span className="text-sm text-text-secondary font-normal ml-1">
 												/ kg
@@ -230,8 +230,8 @@ export default function CartPage() {
 
 					{/* Order Summary */}
 					<div className="lg:col-span-1">
-						<Card className="p-6 sticky top-24 shadow-lg border-2 border-primary/10">
-							<h2 className="text-xl font-bold text-foreground mb-6">
+						<Card className="p-5 sticky top-24 shadow-sm border border-border">
+							<h2 className="text-lg font-semibold text-foreground mb-5">
 								Order Summary
 							</h2>
 
@@ -271,8 +271,8 @@ export default function CartPage() {
 									</div>
 								)}
 
-								<div className="border-t-2 border-border pt-4">
-									<div className="flex justify-between text-xl font-bold text-foreground">
+								<div className="border-t border-border pt-4">
+									<div className="flex justify-between text-lg font-semibold text-foreground">
 										<span>Total</span>
 										<span className="text-primary">
 											₹{finalTotal.toFixed(2)}
@@ -328,7 +328,7 @@ export default function CartPage() {
 								size="lg"
 								fullWidth
 								onClick={handleCheckout}
-								className="flex items-center justify-center gap-2 py-3 shadow-lg hover:shadow-xl transition-shadow font-semibold"
+								className="flex items-center justify-center gap-2 py-3 font-medium"
 							>
 								Proceed to Checkout
 								<ArrowRight className="w-5 h-5" />

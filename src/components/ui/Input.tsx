@@ -15,7 +15,7 @@ export function Input({ label, error, className, id, ...props }: InputProps) {
 			{label && (
 				<label
 					htmlFor={inputId}
-					className="block text-sm font-bold text-foreground mb-2"
+					className="block text-xs font-medium text-text-secondary mb-1.5"
 				>
 					{label}
 				</label>
@@ -24,16 +24,19 @@ export function Input({ label, error, className, id, ...props }: InputProps) {
 				id={inputId}
 				className={twMerge(
 					clsx(
-						"w-full px-5 py-3.5 border-2 border-border/50 rounded-xl bg-surface transition-all duration-300",
-						"focus:outline-none focus:ring-0 focus:border-primary hover:border-border",
-						"placeholder:text-text-tertiary placeholder:font-medium",
-						error && "border-error focus:border-error bg-error/5 text-error",
+						"w-full px-3.5 py-2.5 min-h-[42px] border border-border rounded-lg bg-surface transition-colors duration-150",
+						"text-[15px] text-foreground placeholder:text-text-tertiary",
+						"focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/15",
+						"hover:border-border/90",
+						error && "border-error/80 focus:border-error focus:ring-error/15",
 						className,
 					),
 				)}
 				{...props}
 			/>
-			{error && <p className="mt-2 text-sm font-medium text-error">{error}</p>}
+			{error && (
+				<p className="mt-1.5 text-xs font-medium text-error">{error}</p>
+			)}
 		</div>
 	);
 }

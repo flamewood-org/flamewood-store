@@ -26,7 +26,7 @@ export function WeightSelector({
 					key={option.value}
 					onClick={() => onChange(option.value, option.variantId)}
 					className={clsx(
-						"px-4 py-2 rounded-md border-2 font-medium transition-all duration-200",
+						"px-3.5 py-1.5 rounded-lg border font-medium text-sm transition-colors duration-200",
 						selectedValue === option.value
 							? "border-primary bg-primary/10 text-primary"
 							: "border-border bg-surface text-foreground hover:border-primary/50",

@@ -58,7 +58,7 @@ export function QuickViewModal({
 	};
 
 	return (
-		<div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+		<div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto overscroll-contain">
 			{/* Backdrop */}
 			<div
 				className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
@@ -66,7 +66,7 @@ export function QuickViewModal({
 			/>
 
 			{/* Modal Content */}
-			<div className="relative bg-white w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-3xl shadow-2xl animate-scale-in flex flex-col md:flex-row">
+			<div className="relative my-auto w-full max-w-4xl max-h-[min(92dvh,900px)] overflow-hidden rounded-2xl bg-white shadow-xl animate-scale-in flex flex-col md:flex-row">
 				<button
 					type="button"
 					onClick={onClose}
@@ -76,7 +76,7 @@ export function QuickViewModal({
 				</button>
 
 				{/* Left: Image Gallery */}
-				<div className="w-full md:w-1/2 h-[40vh] md:h-initial md:min-h-[500px] bg-surface-alt relative p-6 flex flex-col gap-4">
+				<div className="w-full md:w-1/2 min-h-[220px] h-[38vh] sm:h-[42vh] md:h-auto md:min-h-[min(500px,55vh)] bg-surface-alt relative p-4 sm:p-6 flex flex-col gap-4">
 					<div className="relative flex-1 bg-white rounded-2xl overflow-hidden">
 						{product.images[activeImageIndex] ? (
 							<Image
@@ -119,24 +119,24 @@ export function QuickViewModal({
 				</div>
 
 				{/* Right: Product Info */}
-				<div className="w-full md:w-1/2 p-6 md:p-8 overflow-y-auto max-h-[50vh] md:max-h-none flex flex-col">
+				<div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 overflow-y-auto max-h-[min(52vh,420px)] md:max-h-[min(92dvh,900px)] flex flex-col min-h-0">
 					<div className="flex flex-wrap gap-2 mb-3">
 						{product.tags.slice(0, 2).map((tag) => (
 							<span
 								key={tag}
-								className="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase"
+								className="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-medium uppercase tracking-wide"
 							>
 								{tag}
 							</span>
 						))}
 					</div>
 
-					<h2 className="text-2xl sm:text-3xl font-extrabold text-foreground leading-tight mb-2">
+					<h2 className="text-xl sm:text-2xl font-semibold text-foreground leading-snug mb-2">
 						{product.title}
 					</h2>
 
-					<div className="flex items-end gap-3 pb-6 border-b border-border">
-						<div className="text-3xl font-black text-primary">
+					<div className="flex items-end gap-3 pb-5 border-b border-border">
+						<div className="text-2xl font-semibold text-primary tabular-nums">
 							₹{selectedVariant.price.toFixed(2)}
 						</div>
 						{selectedVariant.compareAtPrice && (
@@ -162,7 +162,7 @@ export function QuickViewModal({
 								>
 									-
 								</button>
-								<span className="w-8 text-center font-bold text-sm">
+								<span className="w-8 text-center font-medium text-sm">
 									{quantity}
 								</span>
 								<button
@@ -177,7 +177,7 @@ export function QuickViewModal({
 							<Button
 								onClick={handleAddToCart}
 								disabled={!selectedVariant || isAddingToCart}
-								className="flex-1 h-12 rounded-xl font-bold shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+								className="flex-1 h-12 rounded-lg font-medium"
 							>
 								{isAddingToCart ? "Adding..." : "Add to Cart"}
 							</Button>

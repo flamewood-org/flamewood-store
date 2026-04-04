@@ -47,6 +47,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 		setSigningOut(true);
 		try {
 			await fetch("/api/auth/logout", { method: "POST" });
+			window.dispatchEvent(new Event("auth-changed"));
 			router.push("/");
 			router.refresh();
 		} finally {
@@ -55,16 +56,16 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 	};
 
 	return (
-		<div className="bg-background min-h-screen pb-24">
-			<div className="bg-surface border-b border-border pt-12 pb-8">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-						<div className="flex items-center gap-6">
-							<div className="w-20 h-20 rounded-full bg-linear-to-br from-primary to-primary-dark flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-primary/20 uppercase">
+		<div className="bg-background min-h-screen min-w-0 overflow-x-hidden pb-24">
+			<div className="bg-surface border-b border-border pt-10 pb-6">
+				<div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
+						<div className="flex items-center gap-5">
+							<div className="w-16 h-16 rounded-full bg-linear-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm font-semibold shadow-md shadow-primary/15 uppercase">
 								{initials}
 							</div>
 							<div>
-								<h1 className="text-3xl font-extrabold text-foreground tracking-tight mb-1">
+								<h1 className="text-2xl font-semibold text-foreground tracking-tight mb-0.5">
 									Welcome, {displayName}
 								</h1>
 								<p className="text-text-secondary flex items-center gap-2 text-sm">
@@ -85,7 +86,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 				</div>
 			</div>
 
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+			<div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 				<div className="flex flex-col lg:flex-row gap-8">
 					<div className="w-full lg:w-64 shrink-0 space-y-2">
 						{(
@@ -139,7 +140,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 					<div className="flex-1">
 						{activeTab === "dashboard" && (
 							<div className="space-y-8 animate-fade-in-up">
-								<h2 className="text-2xl font-bold text-foreground">Overview</h2>
+								<h2 className="text-xl font-semibold text-foreground">Overview</h2>
 								<div className="grid sm:grid-cols-2 gap-6">
 									<Card className="p-6 border-border">
 										<div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
@@ -148,7 +149,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 										<h3 className="text-text-secondary font-medium mb-1 text-sm">
 											Orders
 										</h3>
-										<p className="text-3xl font-bold text-foreground">
+										<p className="text-3xl font-semibold text-foreground">
 											{customer.orders.length}
 										</p>
 									</Card>
@@ -174,7 +175,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 								{customer.orders.length > 0 && (
 									<div>
 										<div className="flex items-center justify-between mb-4">
-											<h3 className="text-lg font-bold text-foreground">
+											<h3 className="text-lg font-semibold text-foreground">
 												Recent orders
 											</h3>
 											<button
@@ -197,7 +198,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 																<ShoppingBag className="w-6 h-6 text-text-tertiary" />
 															</div>
 															<div>
-																<h4 className="font-bold text-foreground">
+																<h4 className="font-semibold text-foreground">
 																	{order.name}
 																</h4>
 																<p className="text-sm text-text-secondary">
@@ -205,7 +206,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 																</p>
 															</div>
 														</div>
-														<p className="font-bold text-lg text-foreground tabular-nums">
+														<p className="font-semibold text-lg text-foreground tabular-nums">
 															{order.currencyCode === "INR" ? "₹" : ""}
 															{order.total.toFixed(2)}
 														</p>
@@ -220,7 +221,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 
 						{activeTab === "orders" && (
 							<div className="space-y-6 animate-fade-in-up">
-								<h2 className="text-2xl font-bold text-foreground mb-6">
+								<h2 className="text-2xl font-semibold text-foreground mb-6">
 									Order history
 								</h2>
 								{customer.orders.length === 0 ? (
@@ -278,7 +279,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 
 						{activeTab === "addresses" && (
 							<div className="space-y-6 animate-fade-in-up">
-								<h2 className="text-2xl font-bold text-foreground mb-2">
+								<h2 className="text-2xl font-semibold text-foreground mb-2">
 									Addresses
 								</h2>
 								<p className="text-text-secondary text-sm mb-6">
@@ -305,32 +306,32 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 
 						{activeTab === "settings" && (
 							<div className="space-y-6 animate-fade-in-up">
-								<h2 className="text-2xl font-bold text-foreground mb-6">
+								<h2 className="text-2xl font-semibold text-foreground mb-6">
 									Profile
 								</h2>
 								<Card className="p-6 space-y-4 border-border">
 									<div className="grid md:grid-cols-2 gap-4">
 										<div>
-											<p className="text-xs font-bold text-text-tertiary uppercase mb-1">
+											<p className="text-xs font-semibold text-text-tertiary uppercase mb-1">
 												First name
 											</p>
 											<p className="font-medium">{customer.firstName || "—"}</p>
 										</div>
 										<div>
-											<p className="text-xs font-bold text-text-tertiary uppercase mb-1">
+											<p className="text-xs font-semibold text-text-tertiary uppercase mb-1">
 												Last name
 											</p>
 											<p className="font-medium">{customer.lastName || "—"}</p>
 										</div>
 									</div>
 									<div>
-										<p className="text-xs font-bold text-text-tertiary uppercase mb-1">
+										<p className="text-xs font-semibold text-text-tertiary uppercase mb-1">
 											Email
 										</p>
 										<p className="font-medium">{customer.email}</p>
 									</div>
 									<div>
-										<p className="text-xs font-bold text-text-tertiary uppercase mb-1">
+										<p className="text-xs font-semibold text-text-tertiary uppercase mb-1">
 											Phone
 										</p>
 										<p className="font-medium">{customer.phone || "—"}</p>

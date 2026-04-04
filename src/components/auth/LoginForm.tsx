@@ -6,7 +6,21 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 
-export function LoginForm({ callbackUrl }: { callbackUrl: string }) {
+type LoginFormProps = {
+	callbackUrl: string;
+	variant?: "page" | "modal";
+	showRegisteredBanner?: boolean;
+	onSwitchToRegister?: () => void;
+	onSuccess?: () => void;
+};
+
+export function LoginForm({
+	callbackUrl,
+	variant = "page",
+	showRegisteredBanner,
+	onSwitchToRegister,
+	onSuccess,
+}: LoginFormProps) {
 	const router = useRouter();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -36,6 +50,8 @@ export function LoginForm({ callbackUrl }: { callbackUrl: string }) {
 					: "/account";
 			router.push(safe);
 			router.refresh();
+			window.dispatchEvent(new Event("auth-changed"));
+			onSuccess?.();
 		} catch {
 			setError("Something went wrong. Try again.");
 		} finally {
@@ -43,16 +59,38 @@ export function LoginForm({ callbackUrl }: { callbackUrl: string }) {
 		}
 	};
 
+	const isModal = variant === "modal";
+
 	return (
-		<div className="w-full max-w-md mx-auto">
-			<div className="text-center mb-8">
-				<h1 className="text-2xl font-bold text-foreground tracking-tight">
-					Sign in
-				</h1>
-				<p className="text-text-secondary text-sm mt-2">
-					Use the email and password for your FlameWood store account.
+		<div className={isModal ? "w-full" : "w-full max-w-md mx-auto"}>
+			{!isModal && (
+				<div className="text-center mb-8">
+					<h1 className="text-2xl font-bold text-foreground tracking-tight">
+						Sign in
+					</h1>
+					<p className="text-text-secondary text-sm mt-2">
+						Use the email and password for your FlameWood store account.
+					</p>
+				</div>
+			)}
+
+			{isModal && showRegisteredBanner && (
+				<p className="text-sm text-success font-medium mb-4" role="status">
+					Account created — sign in with your new password.
 				</p>
-			</div>
+			)}
+
+			{!isModal && showRegisteredBanner && (
+				<p className="text-sm text-success font-medium mb-6 text-center">
+					Account created — please sign in with your new password.
+				</p>
+			)}
+
+			{isModal && !showRegisteredBanner && (
+				<p className="text-text-secondary text-sm mb-5">
+					Use your FlameWood store email and password.
+				</p>
+			)}
 
 			<form onSubmit={handleSubmit} className="space-y-4">
 				<div>
@@ -65,7 +103,7 @@ export function LoginForm({ callbackUrl }: { callbackUrl: string }) {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
-						className="h-12"
+						className={isModal ? "h-11" : "h-12"}
 					/>
 				</div>
 				<div>
@@ -78,7 +116,7 @@ export function LoginForm({ callbackUrl }: { callbackUrl: string }) {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						required
-						className="h-12"
+						className={isModal ? "h-11" : "h-12"}
 					/>
 				</div>
 				{error && (
@@ -88,21 +126,33 @@ export function LoginForm({ callbackUrl }: { callbackUrl: string }) {
 				)}
 				<Button
 					type="submit"
-					className="w-full h-12 font-bold"
+					className={`w-full font-semibold ${isModal ? "h-11" : "h-12"}`}
 					disabled={loading}
 				>
 					{loading ? "Signing in…" : "Sign in"}
 				</Button>
 			</form>
 
-			<p className="text-center text-sm text-text-secondary mt-8">
+			<p
+				className={`text-center text-sm text-text-secondary ${isModal ? "mt-5" : "mt-8"}`}
+			>
 				No account?{" "}
-				<Link
-					href="/register"
-					className="font-semibold text-primary hover:underline"
-				>
-					Create one
-				</Link>
+				{onSwitchToRegister ? (
+					<button
+						type="button"
+						onClick={onSwitchToRegister}
+						className="font-semibold text-primary hover:underline"
+					>
+						Create one
+					</button>
+				) : (
+					<Link
+						href="/register"
+						className="font-semibold text-primary hover:underline"
+					>
+						Create one
+					</Link>
+				)}
 			</p>
 		</div>
 	);

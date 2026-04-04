@@ -6,7 +6,21 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 
-export function RegisterForm() {
+type RegisterFormProps = {
+	variant?: "page" | "modal";
+	callbackUrl?: string;
+	onSwitchToLogin?: () => void;
+	onRegisteredNeedsLogin?: () => void;
+	onSuccess?: () => void;
+};
+
+export function RegisterForm({
+	variant = "page",
+	callbackUrl = "/account",
+	onSwitchToLogin,
+	onRegisteredNeedsLogin,
+	onSuccess,
+}: RegisterFormProps) {
 	const router = useRouter();
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -14,6 +28,8 @@ export function RegisterForm() {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
+
+	const isModal = variant === "modal";
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -33,11 +49,17 @@ export function RegisterForm() {
 				return;
 			}
 			if (data.needsLogin) {
-				router.push("/login?registered=1");
+				onRegisteredNeedsLogin?.();
 				return;
 			}
-			router.push("/account");
+			const safe =
+				callbackUrl.startsWith("/") && !callbackUrl.startsWith("//")
+					? callbackUrl
+					: "/account";
+			router.push(safe);
 			router.refresh();
+			window.dispatchEvent(new Event("auth-changed"));
+			onSuccess?.();
 		} catch {
 			setError("Something went wrong. Try again.");
 		} finally {
@@ -46,15 +68,23 @@ export function RegisterForm() {
 	};
 
 	return (
-		<div className="w-full max-w-md mx-auto">
-			<div className="text-center mb-8">
-				<h1 className="text-2xl font-bold text-foreground tracking-tight">
-					Create account
-				</h1>
-				<p className="text-text-secondary text-sm mt-2">
+		<div className={isModal ? "w-full" : "w-full max-w-md mx-auto"}>
+			{!isModal && (
+				<div className="text-center mb-8">
+					<h1 className="text-2xl font-bold text-foreground tracking-tight">
+						Create account
+					</h1>
+					<p className="text-text-secondary text-sm mt-2">
+						Register to track orders and check out faster.
+					</p>
+				</div>
+			)}
+
+			{isModal && (
+				<p className="text-text-secondary text-sm mb-5">
 					Register to track orders and check out faster.
 				</p>
-			</div>
+			)}
 
 			<form onSubmit={handleSubmit} className="space-y-4">
 				<div className="grid grid-cols-2 gap-3">
@@ -66,7 +96,7 @@ export function RegisterForm() {
 							value={firstName}
 							onChange={(e) => setFirstName(e.target.value)}
 							autoComplete="given-name"
-							className="h-12"
+							className={isModal ? "h-11" : "h-12"}
 						/>
 					</div>
 					<div>
@@ -77,7 +107,7 @@ export function RegisterForm() {
 							value={lastName}
 							onChange={(e) => setLastName(e.target.value)}
 							autoComplete="family-name"
-							className="h-12"
+							className={isModal ? "h-11" : "h-12"}
 						/>
 					</div>
 				</div>
@@ -91,7 +121,7 @@ export function RegisterForm() {
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
-						className="h-12"
+						className={isModal ? "h-11" : "h-12"}
 					/>
 				</div>
 				<div>
@@ -105,7 +135,7 @@ export function RegisterForm() {
 						onChange={(e) => setPassword(e.target.value)}
 						required
 						minLength={5}
-						className="h-12"
+						className={isModal ? "h-11" : "h-12"}
 					/>
 					<p className="text-xs text-text-tertiary mt-1">
 						At least 5 characters.
@@ -118,21 +148,33 @@ export function RegisterForm() {
 				)}
 				<Button
 					type="submit"
-					className="w-full h-12 font-bold"
+					className={`w-full font-semibold ${isModal ? "h-11" : "h-12"}`}
 					disabled={loading}
 				>
 					{loading ? "Creating…" : "Create account"}
 				</Button>
 			</form>
 
-			<p className="text-center text-sm text-text-secondary mt-8">
+			<p
+				className={`text-center text-sm text-text-secondary ${isModal ? "mt-5" : "mt-8"}`}
+			>
 				Already have an account?{" "}
-				<Link
-					href="/login"
-					className="font-semibold text-primary hover:underline"
-				>
-					Sign in
-				</Link>
+				{onSwitchToLogin ? (
+					<button
+						type="button"
+						onClick={onSwitchToLogin}
+						className="font-semibold text-primary hover:underline"
+					>
+						Sign in
+					</button>
+				) : (
+					<Link
+						href="/login"
+						className="font-semibold text-primary hover:underline"
+					>
+						Sign in
+					</Link>
+				)}
 			</p>
 		</div>
 	);
