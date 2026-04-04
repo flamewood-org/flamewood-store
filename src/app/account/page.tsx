@@ -218,7 +218,7 @@ export default function AccountPage() {
 															<p className="font-bold text-lg text-foreground">₹{order.total.toFixed(2)}</p>
 														</div>
 														<Button 
-															variant={order.isPending ? "default" : "outline"} 
+															variant={order.isPending ? "primary" : "outline"} 
 															size="sm" 
 															onClick={() => setActiveTab("orders")}
 														>

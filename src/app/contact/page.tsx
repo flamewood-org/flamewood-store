@@ -1,157 +1,87 @@
-"use client";
-
-import { useState } from "react";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 
+export const metadata = {
+	title: "Contact Us - FlameWood",
+	description: "Get in touch with the FlameWood team.",
+};
+
 export default function ContactPage() {
-	const [formData, setFormData] = useState({
-		name: "",
-		email: "",
-		phone: "",
-		subject: "",
-		message: "",
-	});
-
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		// TODO: Implement form submission
-		alert("Thank you for your message! We'll get back to you soon.");
-		setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-	};
-
 	return (
-		<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-			<div className="text-center mb-12">
-				<h1 className="text-4xl font-bold text-foreground mb-4">Contact Us</h1>
-				<p className="text-text-secondary max-w-2xl mx-auto">
-					Have questions about our products or need a custom quote? We&apos;re
-					here to help!
+		<div className="bg-background min-h-screen">
+			{/* Hero */}
+			<div className="bg-foreground text-white py-24 md:py-32 rounded-b-[40px] md:rounded-b-[80px] text-center px-4 relative overflow-hidden">
+				<div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+				<h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight relative z-10">Get in Touch</h1>
+				<p className="text-xl text-white/70 max-w-2xl mx-auto relative z-10">
+					Have a question about bulk orders, shipping, or our premium products? We are here to help.
 				</p>
 			</div>
 
-			<div className="grid lg:grid-cols-3 gap-8">
-				{/* Contact Information */}
-				<div className="lg:col-span-1 space-y-6">
-					<div className="bg-surface border border-border rounded-lg p-6">
-						<div className="flex items-start space-x-4">
-							<Mail className="h-6 w-6 text-primary flex-shrink-0" />
-							<div>
-								<h3 className="font-semibold text-foreground mb-1">Email</h3>
-								<p className="text-text-secondary text-sm">
-									support@flamewood.com
-								</p>
-								<p className="text-text-secondary text-sm">
-									sales@flamewood.com
-								</p>
-							</div>
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-20 relative z-20">
+				<div className="grid lg:grid-cols-3 gap-10">
+					{/* Contact Info Cards */}
+					<div className="lg:col-span-1 space-y-6">
+						<div className="bg-white p-8 rounded-3xl border border-border shadow-lg">
+							<MapPin className="w-8 h-8 text-primary mb-4" />
+							<h3 className="text-xl font-bold mb-2">Our Headquarters</h3>
+							<p className="text-text-secondary leading-relaxed">
+								Kochi EXZ, Ernakulam<br />
+								Kerala, India 682001
+							</p>
+						</div>
+						<div className="bg-white p-8 rounded-3xl border border-border shadow-lg">
+							<Phone className="w-8 h-8 text-primary mb-4" />
+							<h3 className="text-xl font-bold mb-2">Phone & Email</h3>
+							<p className="text-text-secondary leading-relaxed mb-2">
+								Contact us directly for fast support.
+							</p>
+							<a href="tel:+919876543210" className="block font-bold text-foreground hover:text-primary transition-colors">+91 98765 43210</a>
+							<a href="mailto:support@flamewood.com" className="block font-bold text-foreground hover:text-primary transition-colors">support@flamewood.com</a>
+						</div>
+						<div className="bg-white p-8 rounded-3xl border border-border shadow-lg">
+							<Clock className="w-8 h-8 text-primary mb-4" />
+							<h3 className="text-xl font-bold mb-2">Working Hours</h3>
+							<p className="text-text-secondary leading-relaxed">
+								Mon-Sat: 9:00 AM - 6:00 PM<br />
+								Sunday: Closed
+							</p>
 						</div>
 					</div>
 
-					<div className="bg-surface border border-border rounded-lg p-6">
-						<div className="flex items-start space-x-4">
-							<Phone className="h-6 w-6 text-primary flex-shrink-0" />
-							<div>
-								<h3 className="font-semibold text-foreground mb-1">Phone</h3>
-								<p className="text-text-secondary text-sm">+91 98765 43210</p>
-								<p className="text-text-secondary text-sm">
-									Mon-Sat, 9 AM - 6 PM IST
-								</p>
-							</div>
+					{/* Contact Form */}
+					<div className="lg:col-span-2">
+						<div className="bg-white p-10 md:p-14 rounded-3xl border border-border shadow-xl">
+							<h2 className="text-3xl font-black mb-8">Send us a message</h2>
+							<form className="space-y-6">
+								<div className="grid md:grid-cols-2 gap-6">
+									<div className="space-y-2">
+										<label className="text-sm font-bold uppercase tracking-wider text-text-secondary">First Name</label>
+										<Input placeholder="John" className="h-14 bg-surface-alt border-transparent focus:border-primary" />
+									</div>
+									<div className="space-y-2">
+										<label className="text-sm font-bold uppercase tracking-wider text-text-secondary">Last Name</label>
+										<Input placeholder="Doe" className="h-14 bg-surface-alt border-transparent focus:border-primary" />
+									</div>
+								</div>
+								<div className="space-y-2">
+									<label className="text-sm font-bold uppercase tracking-wider text-text-secondary">Email Address</label>
+									<Input type="email" placeholder="john@example.com" className="h-14 bg-surface-alt border-transparent focus:border-primary" />
+								</div>
+								<div className="space-y-2">
+									<label className="text-sm font-bold uppercase tracking-wider text-text-secondary">Message</label>
+									<textarea 
+										className="w-full rounded-2xl bg-surface-alt border-transparent focus:border-primary focus:ring-1 focus:ring-primary p-4 outline-none transition-all resize-none min-h-[150px]"
+										placeholder="How can we help you today?"
+									></textarea>
+								</div>
+								<Button size="lg" className="w-full md:w-auto px-12 h-14 rounded-2xl font-bold shadow-lg shadow-primary/30">
+									<Send className="w-5 h-5 mr-3" /> Send Message
+								</Button>
+							</form>
 						</div>
 					</div>
-
-					<div className="bg-surface border border-border rounded-lg p-6">
-						<div className="flex items-start space-x-4">
-							<MapPin className="h-6 w-6 text-primary flex-shrink-0" />
-							<div>
-								<h3 className="font-semibold text-foreground mb-1">Address</h3>
-								<p className="text-text-secondary text-sm">
-									Flame Wood Headquarters
-									<br />
-									Kerala, India
-									<br />
-									PIN: 682001
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				{/* Contact Form */}
-				<div className="lg:col-span-2">
-					<form onSubmit={handleSubmit} className="space-y-6">
-						<div className="grid sm:grid-cols-2 gap-4">
-							<Input
-								label="Name"
-								type="text"
-								required
-								value={formData.name}
-								onChange={(e) =>
-									setFormData({ ...formData, name: e.target.value })
-								}
-								placeholder="Your name"
-							/>
-							<Input
-								label="Email"
-								type="email"
-								required
-								value={formData.email}
-								onChange={(e) =>
-									setFormData({ ...formData, email: e.target.value })
-								}
-								placeholder="your@email.com"
-							/>
-						</div>
-
-						<div className="grid sm:grid-cols-2 gap-4">
-							<Input
-								label="Phone"
-								type="tel"
-								value={formData.phone}
-								onChange={(e) =>
-									setFormData({ ...formData, phone: e.target.value })
-								}
-								placeholder="+91 XXXXX XXXXX"
-							/>
-							<Input
-								label="Subject"
-								type="text"
-								required
-								value={formData.subject}
-								onChange={(e) =>
-									setFormData({ ...formData, subject: e.target.value })
-								}
-								placeholder="How can we help?"
-							/>
-						</div>
-
-						<div>
-							<label
-								htmlFor="message"
-								className="block text-sm font-medium text-foreground mb-1"
-							>
-								Message
-							</label>
-							<textarea
-								id="message"
-								rows={6}
-								required
-								value={formData.message}
-								onChange={(e) =>
-									setFormData({ ...formData, message: e.target.value })
-								}
-								className="w-full px-4 py-2 border border-border rounded-md bg-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent placeholder:text-text-secondary"
-								placeholder="Tell us more about your requirements..."
-							/>
-						</div>
-
-						<Button type="submit" size="lg" className="w-full sm:w-auto">
-							<Send className="h-4 w-4 mr-2" />
-							Send Message
-						</Button>
-					</form>
 				</div>
 			</div>
 		</div>
