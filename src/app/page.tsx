@@ -13,14 +13,14 @@ export default async function Home() {
 	const heroSlides = buildHeroSlidesFromCollections(collections);
 
 	return (
-		<div className="min-h-screen bg-background min-w-0 overflow-x-hidden">
+		<div className="min-h-screen w-full min-w-0 flex flex-col bg-background overflow-x-hidden">
 			<HomeHero slides={heroSlides} />
 
 			<section
 				id="shop-categories"
 				className="py-10 md:py-14 scroll-mt-24 border-b border-border/60 bg-background"
 			>
-				<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
+				<div className="w-full min-w-0">
 					<div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 md:mb-10">
 						<div>
 							<h2 className="text-lg font-semibold text-foreground tracking-tight">
@@ -106,7 +106,7 @@ export default async function Home() {
 			<BusinessOrdersSection />
 
 			<section className="py-8 border-t border-border/60 bg-surface-alt/30">
-				<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
+				<div className="w-full min-w-0">
 					<div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
 						{[
 							{

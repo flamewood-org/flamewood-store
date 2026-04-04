@@ -69,7 +69,7 @@ export default function ProductDetailPage() {
 
 	if (isLoading) {
 		return (
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+			<div className="w-full min-w-0 py-12">
 				<div className="animate-pulse">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 						<div className="space-y-4">
@@ -158,7 +158,7 @@ export default function ProductDetailPage() {
 	return (
 		<div className="min-h-screen min-w-0 overflow-x-hidden bg-background pb-20 sm:pb-24">
 			<div className="border-b border-border bg-white min-w-0">
-				<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 min-w-0">
+				<div className="w-full min-w-0 py-3 sm:py-4 min-w-0">
 					<nav className="flex items-center text-xs sm:text-sm font-medium text-text-secondary min-w-0 overflow-x-auto no-scrollbar gap-x-1 sm:gap-x-0">
 						<Link
 							href="/"
@@ -181,7 +181,7 @@ export default function ProductDetailPage() {
 				</div>
 			</div>
 
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+			<div className="w-full min-w-0 py-8 md:py-12">
 				<div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 					{/* Product Gallery */}
 					<div className="lg:col-span-7 flex flex-col-reverse md:flex-row gap-4">
@@ -500,7 +500,7 @@ export default function ProductDetailPage() {
 			{/* Sticky Bottom Bar for Mobile & Desktop when scrolling */}
 			{showStickyBar && (
 				<div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.05)] animate-fade-in-up pb-[env(safe-area-inset-bottom,0px)]">
-					<div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4 min-w-0">
+					<div className="w-full min-w-0 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
 						<div className="hidden sm:flex items-center gap-4 flex-1">
 							{product.images[0] && (
 								<div className="relative w-12 h-12 rounded bg-surface-alt overflow-hidden shrink-0 border border-border">

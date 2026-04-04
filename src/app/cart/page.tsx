@@ -40,7 +40,7 @@ export default function CartPage() {
 
 	if (isLoading) {
 		return (
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+			<div className="w-full min-w-0 py-12">
 				<h1 className="text-2xl font-semibold text-foreground mb-6">
 					Shopping Cart
 				</h1>
@@ -58,7 +58,7 @@ export default function CartPage() {
 			<div className="min-h-screen min-w-0 overflow-x-hidden bg-linear-to-b from-gray-50/50 to-white">
 				{/* Breadcrumb */}
 				<div className="bg-white border-b border-border">
-					<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 min-w-0">
+					<div className="w-full min-w-0 py-3 sm:py-4">
 						<nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm">
 							<Link
 								href="/"
@@ -72,7 +72,7 @@ export default function CartPage() {
 					</div>
 				</div>
 
-				<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+				<div className="w-full min-w-0 py-16">
 					<div className="text-center py-16 max-w-2xl mx-auto">
 						<div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-linear-to-br from-primary/10 to-secondary/10 mb-6">
 							<svg
@@ -119,7 +119,7 @@ export default function CartPage() {
 		<div className="min-h-screen min-w-0 overflow-x-hidden bg-linear-to-b from-gray-50/50 to-white">
 			{/* Breadcrumb */}
 			<div className="bg-white border-b border-border">
-				<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 min-w-0">
+				<div className="w-full min-w-0 py-3 sm:py-4">
 					<nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm">
 						<Link
 							href="/"
@@ -133,7 +133,7 @@ export default function CartPage() {
 				</div>
 			</div>
 
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+			<div className="w-full min-w-0 py-12">
 				<h1 className="text-2xl font-semibold text-foreground mb-6">
 					Shopping Cart
 				</h1>

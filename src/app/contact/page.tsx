@@ -17,7 +17,7 @@ export default function ContactPage() {
 				breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
 			/>
 
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+			<div className="w-full min-w-0 py-8 md:py-10">
 				<div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
 					<div className="space-y-4 lg:col-span-1">
 						<div className="p-4 rounded-xl border border-border bg-surface">

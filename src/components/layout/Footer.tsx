@@ -3,6 +3,7 @@
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { siteShellClass } from "@/lib/site-layout";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 
@@ -18,8 +19,8 @@ export function Footer() {
 	};
 
 	return (
-		<footer className="mt-auto border-t border-border bg-foreground text-white/90">
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12 min-w-0">
+		<footer className="mt-auto w-full min-w-0 border-t border-border bg-foreground text-white/90">
+			<div className={`${siteShellClass} py-8 sm:py-10 md:py-12`}>
 				<div className="flex flex-col lg:flex-row lg:items-end gap-6 sm:gap-8 lg:gap-12 pb-8 sm:pb-10 border-b border-white/10">
 					<div className="flex-1 max-w-md">
 						<Link href="/" className="inline-flex items-center gap-2 mb-3">

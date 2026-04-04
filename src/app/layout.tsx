@@ -13,6 +13,7 @@ import { WishlistSidebar } from "@/components/wishlist/WishlistSidebar";
 import { AuthModalProvider } from "@/store/AuthModalContext";
 import { CartProvider } from "@/store/CartContext";
 import { DeliveryLocationProvider } from "@/store/DeliveryLocationContext";
+import { siteShellClass } from "@/lib/site-layout";
 import { WishlistProvider } from "@/store/WishlistContext";
 
 const inter = Inter({
@@ -44,8 +45,12 @@ export default function RootLayout({
 										<AuthUrlSync />
 									</Suspense>
 									<HeaderWrapper />
-									<main className="flex-1 min-w-0 w-full max-w-[1600px] mx-auto overflow-x-hidden">
-										{children}
+									<main className="flex min-h-0 flex-1 w-full min-w-0 flex-col overflow-x-hidden">
+										<div
+											className={`${siteShellClass} flex min-h-0 flex-1 flex-col`}
+										>
+											{children}
+										</div>
 									</main>
 									<Footer />
 									<CartSidebar />

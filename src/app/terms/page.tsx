@@ -13,7 +13,7 @@ export default function TermsOfServicePage() {
 				breadcrumbs={[{ label: "Home", href: "/" }, { label: "Terms" }]}
 			/>
 
-			<div className="max-w-3xl mx-auto px-4 py-8 md:py-10">
+			<div className="w-full min-w-0 py-8 md:py-10">
 				<div className="prose prose-sm max-w-none prose-headings:text-foreground prose-headings:font-semibold prose-headings:text-base prose-p:text-text-secondary prose-p:text-[15px] prose-p:leading-relaxed prose-li:text-text-secondary">
 					<h2>1. Agreement to Terms</h2>
 					<p>

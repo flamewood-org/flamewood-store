@@ -8,7 +8,7 @@ export function BusinessOrdersSection() {
 			id="bulk-deals"
 			className="py-12 md:py-16 scroll-mt-24 overflow-hidden"
 		>
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
+			<div className="w-full min-w-0">
 				<div
 					className="relative rounded-xl sm:rounded-2xl md:rounded-3xl border border-border/80 bg-linear-to-br from-secondary via-[#5c3710] to-[#3d2408] p-5 sm:p-6 md:p-10 lg:p-12 text-white shadow-[0_24px_60px_-12px_rgba(60,35,8,0.45)]"
 					style={{ perspective: "1200px" }}

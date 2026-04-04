@@ -16,6 +16,7 @@ import { HeaderAccountLink } from "@/components/layout/HeaderAccountLink";
 import { SiteSearch } from "@/components/search/SiteSearch";
 import { useCartContext } from "@/store/CartContext";
 import { useDeliveryLocation } from "@/store/DeliveryLocationContext";
+import { siteShellClass } from "@/lib/site-layout";
 import { useWishlistContext } from "@/store/WishlistContext";
 
 export function Header() {
@@ -36,13 +37,15 @@ export function Header() {
 
 	return (
 		<header
-			className={`sticky top-0 z-50 bg-surface transition-shadow duration-200 ${
+			className={`sticky top-0 z-50 w-full min-w-0 bg-surface transition-shadow duration-200 ${
 				scrolled ? "shadow-sm border-b border-border/80" : "border-b border-border/50 md:border-transparent"
 			}`}
 		>
-			{/* Top utility strip — contact, nav shortcuts, account */}
-			<div className="bg-secondary text-white text-[12px] md:text-[13px]">
-				<div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 min-w-0 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-y-1.5 py-1.5 md:py-2">
+			{/* Top utility strip — contact, nav shortcuts, account (hidden on small screens) */}
+			<div className="hidden md:block bg-secondary text-white text-[12px] md:text-[13px]">
+				<div
+					className={`${siteShellClass} flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-y-1.5 py-1.5 md:py-2`}
+				>
 					<div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-white/95 shrink-0 min-w-0">
 						<a
 							href="tel:+919876543210"
@@ -105,7 +108,7 @@ export function Header() {
 				}`}
 			>
 				<div
-					className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 min-w-0 py-2.5 md:py-3 pt-[max(0.625rem,env(safe-area-inset-top,0px))]"
+					className={`${siteShellClass} py-2.5 md:py-3 pt-[max(0.625rem,env(safe-area-inset-top,0px))]`}
 				>
 					<div className="grid h-11 min-w-0 grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 md:h-auto md:gap-4">
 						<div className="flex min-w-0 items-center gap-1.5 sm:gap-2">

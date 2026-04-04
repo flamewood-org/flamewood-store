@@ -8,14 +8,14 @@ export const metadata = {
 
 export default function AboutPage() {
 	return (
-		<div className="bg-background min-h-screen min-w-0 overflow-x-hidden">
+		<div className="flex min-h-0 w-full min-w-0 flex-1 flex-col bg-background overflow-x-hidden">
 			<PageHeader
 				title="About FlameWood"
 				description="Fuel and fibre from Kerala, built around straightforward quality and delivery."
 				breadcrumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
 			/>
 
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+			<div className="w-full min-w-0 py-8 md:py-10">
 				<div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 					<div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-border bg-surface-alt">
 						<Image

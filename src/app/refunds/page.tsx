@@ -13,7 +13,7 @@ export default function RefundPolicyPage() {
 				breadcrumbs={[{ label: "Home", href: "/" }, { label: "Refunds" }]}
 			/>
 
-			<div className="max-w-3xl mx-auto px-4 py-8 md:py-10">
+			<div className="w-full min-w-0 py-8 md:py-10">
 				<div className="p-5 rounded-xl border border-border bg-surface mb-8">
 					<h3 className="text-base font-semibold mb-2 text-foreground">
 						Our approach

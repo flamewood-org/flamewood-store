@@ -58,7 +58,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 	return (
 		<div className="bg-background min-h-screen min-w-0 overflow-x-hidden pb-24">
 			<div className="bg-surface border-b border-border pt-10 pb-6">
-				<div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="w-full min-w-0">
 					<div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
 						<div className="flex items-center gap-5">
 							<div className="w-16 h-16 rounded-full bg-linear-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm font-semibold shadow-md shadow-primary/15 uppercase">
@@ -86,7 +86,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 				</div>
 			</div>
 
-			<div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+			<div className="w-full min-w-0 py-8">
 				<div className="flex flex-col lg:flex-row gap-8">
 					<div className="w-full lg:w-64 shrink-0 space-y-2">
 						{(

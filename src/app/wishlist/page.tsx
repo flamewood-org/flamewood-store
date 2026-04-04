@@ -17,7 +17,7 @@ export default function WishlistPage() {
 				breadcrumbs={[{ label: "Home", href: "/" }, { label: "Wishlist" }]}
 			/>
 
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+			<div className="w-full min-w-0 py-8 md:py-10">
 				<div className="flex flex-col items-center text-center max-w-md mx-auto mb-8">
 					<div className="w-12 h-12 rounded-full border border-border flex items-center justify-center mb-4">
 						<Heart className="h-5 w-5 text-primary" />

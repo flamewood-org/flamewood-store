@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 export function OrderReadyCta() {
 	return (
 		<section className="py-12 md:py-14 border-t border-border/70">
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div className="w-full min-w-0">
 				<div className="relative overflow-hidden rounded-2xl border border-border bg-surface shadow-[var(--shadow-card)]">
 					<div className="absolute inset-0 bg-linear-to-br from-primary/[0.06] via-transparent to-secondary/[0.05] pointer-events-none" />
 					<div className="absolute top-0 right-0 w-40 h-40 md:w-56 md:h-56 rounded-full bg-primary/10 blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />

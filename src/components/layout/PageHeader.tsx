@@ -13,8 +13,8 @@ export function PageHeader({
 	breadcrumbs?: Crumb[];
 }) {
 	return (
-		<div className="border-b border-border bg-surface min-w-0">
-			<div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6 md:py-8 min-w-0">
+		<div className="w-full min-w-0 border-b border-border bg-surface">
+			<div className="w-full min-w-0 py-8 sm:py-10 md:py-12">
 				{breadcrumbs && breadcrumbs.length > 0 && (
 					<nav
 						className="flex flex-nowrap sm:flex-wrap items-center gap-1.5 text-xs text-text-secondary mb-3 sm:mb-4 overflow-x-auto no-scrollbar pb-1 -mx-1 px-1 sm:mx-0 sm:px-0 sm:overflow-visible"
