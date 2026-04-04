@@ -472,13 +472,13 @@ export default function ProductDetailPage() {
 													</p>
 												</div>
 											)}
-											{product.metafields.size_grade && (
+											{product.metafields.sizeGrade && (
 												<div>
 													<p className="text-sm text-text-secondary mb-1">
 														Grade
 													</p>
 													<p className="font-bold text-foreground">
-														{product.metafields.size_grade}
+														{product.metafields.sizeGrade}
 													</p>
 												</div>
 											)}

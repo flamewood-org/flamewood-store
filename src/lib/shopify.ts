@@ -82,15 +82,10 @@ const GET_PRODUCTS_QUERY = `
                   amount
                 }
                 weight
-                quantityAvailable
                 sku
                 availableForSale
               }
             }
-          }
-          metafields(identifiers: [{ namespace: "custom", key: "moisture_level" }, { namespace: "custom", key: "wood_type" }, { namespace: "custom", key: "size_grade" }, { namespace: "custom", key: "packaging_type" }, { namespace: "custom", key: "origin" }]) {
-            key
-            value
           }
         }
       }
@@ -130,7 +125,6 @@ const GET_PRODUCT_BY_HANDLE_QUERY = `
               amount
             }
             weight
-            quantityAvailable
             sku
             availableForSale
           }
@@ -198,7 +192,6 @@ const ADD_TO_CART_MUTATION = `
                   }
                   weight
                   sku
-                  quantityAvailable
                   availableForSale
                   product {
                     title
@@ -246,7 +239,6 @@ const UPDATE_CART_ITEM_MUTATION = `
                   }
                   weight
                   sku
-                  quantityAvailable
                   availableForSale
                   product {
                     title
@@ -294,7 +286,6 @@ const REMOVE_FROM_CART_MUTATION = `
                   }
                   weight
                   sku
-                  quantityAvailable
                   availableForSale
                   product {
                     title
@@ -341,7 +332,6 @@ const GET_CART_QUERY = `
                 }
                 weight
                 sku
-                quantityAvailable
                 availableForSale
                 product {
                   title
@@ -399,13 +389,16 @@ function transformProduct(node: Record<string, any>): Product {
 				sku: edge.node.sku || "",
 				availableForSale: edge.node.availableForSale,
 			})) || [],
-		metafields: node.metafields?.reduce(
-			(acc: Record<string, any>, metafield: Record<string, any>) => {
-				acc[metafield.key] = metafield.value;
+		metafields: (() => {
+			const fields = node.metafields?.edges 
+				? node.metafields.edges.map((e: any) => e.node) 
+				: (Array.isArray(node.metafields) ? node.metafields : []);
+			return fields.reduce((acc: Record<string, any>, m: any) => {
+				const key = m.key.replace(/_([a-z])/g, (g: string) => g[1].toUpperCase());
+				acc[key] = m.value;
 				return acc;
-			},
-			{},
-		),
+			}, {});
+		})(),
 	};
 }
 
