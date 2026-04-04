@@ -11,6 +11,7 @@ export interface CartItem {
 
 export interface Cart {
 	id: string;
+	checkoutUrl: string;
 	items: CartItem[];
 	subtotal: number;
 	totalWeight: number;

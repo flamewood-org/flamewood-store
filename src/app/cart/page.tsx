@@ -9,7 +9,6 @@ import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { CartItemSkeleton } from "@/components/ui/Skeleton";
 import { calculateShipping } from "@/lib/shipping";
-import { generateCheckoutUrl } from "@/lib/shopify";
 import { useCartContext } from "@/store/CartContext";
 import type { ShippingEstimate } from "@/types/cart";
 
@@ -33,11 +32,10 @@ export default function CartPage() {
 	};
 
 	const handleCheckout = () => {
-		if (!cart?.id) return;
+		if (!cart?.checkoutUrl) return;
 
 		// Redirect to Shopify checkout
-		const checkoutUrl = generateCheckoutUrl(cart.id);
-		window.location.href = checkoutUrl;
+		window.location.href = cart.checkoutUrl;
 	};
 
 	if (isLoading) {
@@ -57,7 +55,7 @@ export default function CartPage() {
 
 	if (!cart || cart.items.length === 0) {
 		return (
-			<div className="min-h-screen bg-gradient-to-b from-gray-50/50 to-white">
+			<div className="min-h-screen bg-linear-to-b from-gray-50/50 to-white">
 				{/* Breadcrumb */}
 				<div className="bg-white border-b border-border">
 					<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -76,7 +74,7 @@ export default function CartPage() {
 
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 					<div className="text-center py-16 max-w-2xl mx-auto">
-						<div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 mb-6">
+						<div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-linear-to-br from-primary/10 to-secondary/10 mb-6">
 							<svg
 								className="w-12 h-12 text-primary opacity-50"
 								fill="none"
@@ -118,7 +116,7 @@ export default function CartPage() {
 			: cart.subtotal;
 
 	return (
-		<div className="min-h-screen bg-gradient-to-b from-gray-50/50 to-white">
+		<div className="min-h-screen bg-linear-to-b from-gray-50/50 to-white">
 			{/* Breadcrumb */}
 			<div className="bg-white border-b border-border">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -150,7 +148,7 @@ export default function CartPage() {
 							>
 								<div className="flex gap-6">
 									{/* Product Image */}
-									<div className="relative w-28 h-28 flex-shrink-0 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg overflow-hidden">
+									<div className="relative w-28 h-28 shrink-0 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg overflow-hidden">
 										{item.image ? (
 											<Image
 												src={item.image.url}
@@ -304,7 +302,7 @@ export default function CartPage() {
 								{shippingEstimate && (
 									<div className="mt-3 p-3 bg-white rounded-lg border border-border">
 										<div className="flex items-start gap-3">
-											<CheckCircle2 className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+											<CheckCircle2 className="w-5 h-5 text-success shrink-0 mt-0.5" />
 											<div>
 												<p className="font-semibold text-foreground text-sm">
 													{shippingEstimate.region}

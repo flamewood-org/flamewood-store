@@ -130,13 +130,15 @@ const GET_PRODUCT_BY_HANDLE_QUERY = `
           }
         }
       }
-      metafields(first: 10) {
-        edges {
-          node {
-            key
-            value
-          }
-        }
+      metafields(identifiers: [
+        {namespace: "custom", key: "moistureLevel"},
+        {namespace: "custom", key: "woodType"},
+        {namespace: "custom", key: "origin"},
+        {namespace: "custom", key: "sizeGrade"}
+      ]) {
+        id
+        key
+        value
       }
     }
   }
@@ -178,6 +180,7 @@ const ADD_TO_CART_MUTATION = `
     cartLinesAdd(cartId: $cartId, lines: $lines) {
       cart {
         id
+        checkoutUrl
         lines(first: 10) {
           edges {
             node {
@@ -225,6 +228,7 @@ const UPDATE_CART_ITEM_MUTATION = `
     cartLinesUpdate(cartId: $cartId, lines: $lines) {
       cart {
         id
+        checkoutUrl
         lines(first: 10) {
           edges {
             node {
@@ -272,6 +276,7 @@ const REMOVE_FROM_CART_MUTATION = `
     cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
       cart {
         id
+        checkoutUrl
         lines(first: 10) {
           edges {
             node {
@@ -318,6 +323,7 @@ const GET_CART_QUERY = `
   query getCart($id: ID!) {
     cart(id: $id) {
       id
+      checkoutUrl
       lines(first: 10) {
         edges {
           node {
@@ -390,10 +396,21 @@ function transformProduct(node: Record<string, any>): Product {
 				availableForSale: edge.node.availableForSale,
 			})) || [],
 		metafields: (() => {
-			const fields = node.metafields?.edges 
-				? node.metafields.edges.map((e: any) => e.node) 
-				: (Array.isArray(node.metafields) ? node.metafields : []);
-			return fields.reduce((acc: Record<string, any>, m: any) => {
+			// New identifiers API returns a flat nullable array: [{id, key, value} | null]
+			// Old edges API returns: { edges: [{ node: { key, value } }] }
+			let fields: { key: string; value: string }[] = [];
+			if (Array.isArray(node.metafields)) {
+				// Flat array (identifiers query) — filter out null entries
+				type MetafieldEntry = { id: string; key: string; value: string };
+				fields = (node.metafields as (MetafieldEntry | null)[])
+					.filter((m): m is MetafieldEntry => m !== null)
+					.map((m) => ({ key: m.key, value: m.value }));
+			} else if (node.metafields?.edges) {
+				// Legacy edges format
+				fields = node.metafields.edges.map((e: any) => e.node);
+			}
+			return fields.reduce((acc: Record<string, any>, m: { key: string; value: string }) => {
+				// camelCase the key  e.g. "moisture_level" → "moistureLevel"
 				const key = m.key.replace(/_([a-z])/g, (g: string) => g[1].toUpperCase());
 				acc[key] = m.value;
 				return acc;
@@ -602,6 +619,7 @@ function transformCart(cartData: Record<string, any>): Cart {
 
 	return {
 		id: cartData.id,
+		checkoutUrl: cartData.checkoutUrl || "",
 		items,
 		subtotal: parseFloat(cartData.cost?.subtotalAmount?.amount || 0),
 		totalWeight,
@@ -609,7 +627,4 @@ function transformCart(cartData: Record<string, any>): Cart {
 	};
 }
 
-// Generate checkout URL
-export function generateCheckoutUrl(cartId: string): string {
-	return `https://${SHOPIFY_STORE_DOMAIN}/cart/${cartId}`;
-}
+

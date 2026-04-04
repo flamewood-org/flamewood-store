@@ -45,6 +45,14 @@ export default function ProductDetailPage() {
 	const [showStickyBar, setShowStickyBar] = useState(false);
 	const addToCartRef = useRef<HTMLDivElement>(null);
 
+	// Initialize selected variant when product loads
+	useEffect(() => {
+		if (product && product.variants.length > 0 && !selectedVariantId) {
+			setSelectedVariantId(product.variants[0].id);
+			setSelectedWeight(product.variants[0].title);
+		}
+	}, [product, selectedVariantId]);
+
 	useEffect(() => {
 		const observer = new IntersectionObserver(
 			([entry]) => {
@@ -113,11 +121,6 @@ export default function ProductDetailPage() {
 		variantId: variant.id,
 		price: variant.price,
 	}));
-
-	if (!selectedVariantId && weightOptions.length > 0) {
-		setSelectedVariantId(weightOptions[0].variantId);
-		setSelectedWeight(weightOptions[0].value);
-	}
 
 	const selectedVariant = product.variants.find(
 		(v) => v.id === selectedVariantId,

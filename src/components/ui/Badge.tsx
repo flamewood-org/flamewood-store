@@ -15,7 +15,7 @@ export function Badge({
 	...props
 }: BadgeProps) {
 	const baseStyles =
-		"inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider transition-colors";
+		"inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors";
 
 	const variants = {
 		default: "bg-surface-alt text-text-secondary border border-border/50",

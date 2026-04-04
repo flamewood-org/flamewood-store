@@ -65,7 +65,7 @@ export function Header() {
 							<div className="relative w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center transform group-hover:-rotate-6 transition-all duration-300">
 								<span className="text-xl">🔥</span>
 							</div>
-							<span className="text-2xl font-black bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent hidden sm:block tracking-tight">
+							<span className="text-2xl font-black bg-linear-to-br from-foreground to-foreground/70 bg-clip-text text-transparent hidden sm:block tracking-tight">
 								FlameWood
 							</span>
 						</Link>
@@ -82,7 +82,7 @@ export function Header() {
 							<Link
 								key={item.href}
 								href={item.href}
-								className="px-5 py-2 text-sm font-bold text-text-secondary hover:text-foreground hover:bg-white rounded-full transition-all duration-300 relative group"
+								className="px-5 py-2 text-sm font-medium text-text-secondary hover:text-foreground hover:bg-white rounded-full transition-all duration-300 relative group"
 							>
 								{item.label}
 							</Link>
@@ -154,16 +154,18 @@ export function Header() {
 							aria-label="Cart"
 						>
 							<ShoppingBag className="h-4 w-4" />
-							<span className="text-sm font-bold">{itemCount}</span>
+							<span className="text-sm font-semibold">{itemCount}</span>
 						</button>
 					</div>
 				</div>
 
 				{/* Mobile Menu Backdrop */}
 				{isMobileMenuOpen && (
-					<div 
-						className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden"
+					<button 
+						type="button"
+						className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 lg:hidden w-full h-full border-none p-0 m-0"
 						onClick={() => setIsMobileMenuOpen(false)}
+						aria-label="Close menu"
 					/>
 				)}
 
@@ -175,6 +177,7 @@ export function Header() {
 						<div className="flex items-center justify-between p-4 border-b border-border">
 							<span className="text-xl font-black">Menu</span>
 							<button 
+								type="button"
 								onClick={() => setIsMobileMenuOpen(false)}
 								className="p-2 bg-surface-alt rounded-full text-foreground"
 							>
@@ -220,12 +223,14 @@ export function Header() {
 						<div className="mt-auto p-4 border-t border-border bg-surface-alt">
 							<div className="flex gap-2">
 								<button 
+									type="button"
 									className="flex-1 flex justify-center items-center gap-2 p-3 bg-white rounded-xl font-bold text-sm shadow-sm"
 									onClick={() => { setIsMobileMenuOpen(false); openWishlist(); }}
 								>
 									<Heart className="w-4 h-4" /> Wishlist
 								</button>
 								<button 
+									type="button"
 									className="flex-1 flex justify-center items-center gap-2 p-3 bg-foreground text-white rounded-xl font-bold text-sm shadow-sm"
 									onClick={() => { setIsMobileMenuOpen(false); openCart(); }}
 								>

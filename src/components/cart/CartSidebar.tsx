@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { generateCheckoutUrl } from "@/lib/shopify";
 import { useCartContext } from "@/store/CartContext";
 
 export function CartSidebar() {
@@ -40,9 +39,8 @@ export function CartSidebar() {
 	};
 
 	const handleCheckout = () => {
-		if (!cart?.id) return;
-		const checkoutUrl = generateCheckoutUrl(cart.id);
-		window.location.href = checkoutUrl;
+		if (!cart?.checkoutUrl) return;
+		window.location.href = cart.checkoutUrl;
 	};
 
 	if (!isOpen) return null;
@@ -52,7 +50,8 @@ export function CartSidebar() {
 	return (
 		<>
 			{/* Overlay */}
-			<div
+			<button
+				type="button"
 				className={`sidebar-overlay ${isClosing ? "closing" : ""}`}
 				onClick={handleClose}
 				onKeyDown={(e) => e.key === "Escape" && handleClose()}
@@ -98,7 +97,7 @@ export function CartSidebar() {
 									key={`cart-skel-${i}`}
 									className="flex gap-4"
 								>
-									<div className="w-20 h-20 rounded-lg animate-shimmer flex-shrink-0" />
+									<div className="w-20 h-20 rounded-lg animate-shimmer shrink-0" />
 									<div className="flex-1 space-y-2">
 										<div className="h-4 w-3/4 rounded animate-shimmer" />
 										<div className="h-3 w-1/2 rounded animate-shimmer" />
@@ -133,7 +132,7 @@ export function CartSidebar() {
 									className="flex gap-4 p-3 rounded-xl bg-surface-alt/50 hover:bg-surface-alt transition-colors duration-200 group"
 								>
 									{/* Image */}
-									<div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-surface-alt">
+									<div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-surface-alt">
 										{item.image ? (
 											<Image
 												src={item.image.url}

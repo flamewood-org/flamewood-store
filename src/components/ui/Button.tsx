@@ -21,13 +21,13 @@ export function Button({
 	...props
 }: ButtonProps) {
 	const baseStyles =
-		"inline-flex items-center justify-center font-bold transition-all duration-300 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]";
+		"inline-flex items-center justify-center font-semibold transition-all duration-200 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]";
 
 	const variants = {
 		primary:
-			"bg-primary text-white hover:bg-primary-light focus-visible:ring-primary shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30",
+			"bg-primary text-white hover:bg-primary-light focus-visible:ring-primary shadow-sm shadow-primary/5 hover:shadow-md hover:shadow-primary/10",
 		secondary:
-			"bg-secondary text-white hover:bg-secondary/90 focus-visible:ring-secondary shadow-lg shadow-secondary/20",
+			"bg-secondary text-white hover:bg-secondary/90 focus-visible:ring-secondary shadow-sm shadow-secondary/5",
 		outline:
 			"border-2 border-border bg-surface text-foreground hover:border-primary hover:text-primary focus-visible:ring-primary",
 		ghost:
