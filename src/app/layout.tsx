@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { CartSidebar } from "@/components/cart/CartSidebar";
+import { DeliveryLocationModal } from "@/components/delivery/DeliveryLocationModal";
 import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
-import { WishlistSidebar } from "@/components/wishlist/WishlistSidebar";
+import { HeaderWrapper } from "@/components/layout/HeaderWrapper";
 import { Providers } from "@/components/Providers";
+import { WishlistSidebar } from "@/components/wishlist/WishlistSidebar";
 import { CartProvider } from "@/store/CartContext";
+import { DeliveryLocationProvider } from "@/store/DeliveryLocationContext";
 import { WishlistProvider } from "@/store/WishlistContext";
 
 const outfit = Outfit({
@@ -29,15 +31,20 @@ export default function RootLayout({
 		<html lang="en" className={`${outfit.variable} h-full antialiased`}>
 			<body className="min-h-full flex flex-col bg-background text-foreground selection:bg-primary/20 selection:text-primary">
 				<Providers>
-					<CartProvider>
-						<WishlistProvider>
-							<Header />
-							<main className="flex-1 max-w-[1920px] mx-auto w-full">{children}</main>
-							<Footer />
-							<CartSidebar />
-							<WishlistSidebar />
-						</WishlistProvider>
-					</CartProvider>
+					<DeliveryLocationProvider>
+						<CartProvider>
+							<WishlistProvider>
+								<HeaderWrapper />
+								<main className="flex-1 max-w-[1920px] mx-auto w-full">
+									{children}
+								</main>
+								<Footer />
+								<CartSidebar />
+								<WishlistSidebar />
+								<DeliveryLocationModal />
+							</WishlistProvider>
+						</CartProvider>
+					</DeliveryLocationProvider>
 				</Providers>
 			</body>
 		</html>

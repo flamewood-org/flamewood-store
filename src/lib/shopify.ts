@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { cache } from "react";
 import type { Cart, CartItem } from "@/types/cart";
 import type { Collection, Product } from "@/types/product";
 
@@ -409,18 +410,23 @@ function transformProduct(node: Record<string, any>): Product {
 				// Legacy edges format
 				fields = node.metafields.edges.map((e: any) => e.node);
 			}
-			return fields.reduce((acc: Record<string, any>, m: { key: string; value: string }) => {
-				// camelCase the key  e.g. "moisture_level" → "moistureLevel"
-				const key = m.key.replace(/_([a-z])/g, (g: string) => g[1].toUpperCase());
-				acc[key] = m.value;
-				return acc;
-			}, {});
+			return fields.reduce(
+				(acc: Record<string, any>, m: { key: string; value: string }) => {
+					// camelCase the key  e.g. "moisture_level" → "moistureLevel"
+					const key = m.key.replace(/_([a-z])/g, (g: string) =>
+						g[1].toUpperCase(),
+					);
+					acc[key] = m.value;
+					return acc;
+				},
+				{},
+			);
 		})(),
 	};
 }
 
-// API Functions
-export async function getProducts(
+// API Functions (React cache dedupes identical calls in one server render)
+export const getProducts = cache(async function getProducts(
 	first: number = 20,
 	query?: string,
 ): Promise<Product[]> {
@@ -439,7 +445,7 @@ export async function getProducts(
 	return data.products.edges.map((edge: { node: Record<string, any> }) =>
 		transformProduct(edge.node),
 	);
-}
+});
 
 export async function getProductByHandle(
 	handle: string,
@@ -459,7 +465,9 @@ export async function getProductByHandle(
 	return transformProduct(data.product);
 }
 
-export async function getCollections(): Promise<Collection[]> {
+export const getCollections = cache(async function getCollections(): Promise<
+	Collection[]
+> {
 	const { data, error } = await shopifyFetch<{
 		collections: { edges: Array<{ node: Record<string, any> }> };
 	}>({
@@ -483,7 +491,7 @@ export async function getCollections(): Promise<Collection[]> {
 				}
 			: undefined,
 	}));
-}
+});
 
 export async function createCart(): Promise<string | null> {
 	const { data, error } = await shopifyFetch<{
@@ -627,4 +635,4 @@ function transformCart(cartData: Record<string, any>): Cart {
 	};
 }
 
-
+export { shopifyFetch as storefrontRequest };

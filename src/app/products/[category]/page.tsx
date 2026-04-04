@@ -1,6 +1,6 @@
-import { notFound } from "next/navigation";
-import { SlidersHorizontal, ChevronRight, LayoutGrid } from "lucide-react";
+import { ChevronRight, LayoutGrid, SlidersHorizontal } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import ProductGrid from "./ProductGrid";
 
 interface ProductListingPageProps {
@@ -13,11 +13,23 @@ export default async function ProductListingPage({
 	const { category } = await params;
 
 	// Map category handle to display name and subtitle
-	const categoryData: Record<string, { title: string, subtitle: string }> = {
-		firewood: { title: "Premium Firewood", subtitle: "Sourced sustainably for perfect, long-lasting burns." },
-		coconut: { title: "Coconut Products", subtitle: "High-quality coconut shells & premium charcoal." },
-		biomass: { title: "Biomass Briquettes", subtitle: "Eco-friendly, high-density fuel for ultimate efficiency." },
-		all: { title: "The Collection", subtitle: "Explore our full range of masterfully crafted products." },
+	const categoryData: Record<string, { title: string; subtitle: string }> = {
+		firewood: {
+			title: "Premium Firewood",
+			subtitle: "Sourced sustainably for perfect, long-lasting burns.",
+		},
+		coconut: {
+			title: "Coconut Products",
+			subtitle: "High-quality coconut shells & premium charcoal.",
+		},
+		biomass: {
+			title: "Biomass Briquettes",
+			subtitle: "Eco-friendly, high-density fuel for ultimate efficiency.",
+		},
+		all: {
+			title: "The Collection",
+			subtitle: "Explore our full range of masterfully crafted products.",
+		},
 	};
 
 	const cat = categoryData[category];
@@ -37,7 +49,9 @@ export default async function ProductListingPage({
 
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
 					<nav className="flex items-center justify-center space-x-2 text-sm text-white/50 mb-6 font-medium uppercase tracking-widest">
-						<Link href="/" className="hover:text-white transition-colors">Home</Link>
+						<Link href="/" className="hover:text-white transition-colors">
+							Home
+						</Link>
 						<ChevronRight className="w-4 h-4" />
 						<span className="text-white">{cat.title}</span>
 					</nav>
@@ -56,7 +70,9 @@ export default async function ProductListingPage({
 				<div className="bg-white p-4 rounded-3xl shadow-lg border border-border flex flex-col md:flex-row md:items-center justify-between gap-4 -mt-16 md:-mt-20">
 					<div className="flex items-center gap-4 text-text-secondary pl-2">
 						<LayoutGrid className="w-5 h-5 text-primary" />
-						<span className="font-semibold text-foreground uppercase tracking-wider text-sm">Showing Results</span>
+						<span className="font-semibold text-foreground uppercase tracking-wider text-sm">
+							Showing Results
+						</span>
 					</div>
 					<div className="flex items-center gap-3">
 						<button

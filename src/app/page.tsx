@@ -1,286 +1,279 @@
-import { Package, ShieldCheck, TrendingUp, Truck, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import {
+	ChevronRight,
+	Package,
+	ShieldCheck,
+	TrendingUp,
+	Truck,
+} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { getCollections } from "@/lib/shopify";
 import type { Collection } from "@/types/product";
 
 export default async function Home() {
-	// Fetch collections from Shopify
 	const collections = await getCollections();
-
-	const features = [
-		{
-			icon: Package,
-			title: "Quality Assured",
-			description: "Every product meets strict 100% organic quality standards",
-		},
-		{
-			icon: Truck,
-			title: "Fast Delivery",
-			description: "Reliable and tracked shipping across all of India",
-		},
-		{
-			icon: ShieldCheck,
-			title: "Kerala Origin",
-			description: "Sourced directly from native farmers in Kerala, India",
-		},
-		{
-			icon: TrendingUp,
-			title: "Bulk Pricing",
-			description: "Highly competitive rates for large or B2B orders",
-		},
-	];
 
 	return (
 		<div className="min-h-screen bg-background text-foreground">
-			{/* Hero Section */}
-			<section className="relative pt-24 pb-32 md:pt-36 md:pb-48 overflow-hidden rounded-b-[40px] md:rounded-b-[80px]">
-				{/* Background */ }
-				<div className="absolute inset-0 bg-surface-alt -z-20"></div>
-				<div className="absolute inset-0 bg-linear-to-br from-orange-100/50 via-amber-50/50 to-white -z-10"></div>
-				
-				{/* Abstract Shapes */}
-				<div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[100px] -z-10 animate-float"></div>
-				<div className="absolute bottom-10 right-10 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px] -z-10 animate-float" style={{ animationDelay: '2s' }}></div>
+			{/* Banner */}
+			<section className="relative pt-6 pb-12 md:pt-10 md:pb-16 overflow-hidden">
+				<div className="absolute inset-0 bg-white -z-20" />
+				<div className="absolute inset-0 bg-linear-to-b from-hero-tint/95 via-white to-background -z-10" />
 
-				<div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="text-center max-w-4xl mx-auto flex flex-col items-center">
-						<div className="inline-flex items-center px-4 py-2 rounded-full bg-white/80 border border-white/40 shadow-sm backdrop-blur-sm text-primary text-sm font-bold mb-8 animate-fade-in-down">
-							<span className="mr-2 text-base">🌱</span> 100% Natural Biomass Fuel
-						</div>
-						
-						<h1 className="text-6xl md:text-7xl font-bold text-foreground mb-6 leading-[1.1] tracking-tight animate-fade-in-up">
-							Premium <span className="text-transparent bg-clip-text bg-linear-to-r from-primary via-orange-600 to-secondary">Biomass</span>
-							<br /> Delivered
-						</h1>
-						
-						<p className="text-lg md:text-xl text-text-secondary mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-							Quality assured natural fuel and coconut products sourced directly from Kerala. Competitively priced for all your needs.
-						</p>
-						
-						<div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-							<Link href="/products/all" className="w-full sm:w-auto">
-								<Button
-									size="lg"
-									fullWidth={false}
-									className="px-8 h-14 text-base font-semibold rounded-xl w-full sm:w-auto"
-								>
-									Explore Products
-								</Button>
-							</Link>
-							<Link href="#bulk-deals" className="w-full sm:w-auto">
-								<Button
-									variant="outline"
-									size="lg"
-									fullWidth={false}
-									className="px-8 h-14 text-base font-semibold rounded-xl bg-white/50 backdrop-blur-sm w-full sm:w-auto"
-								>
-									Bulk Buying options
-								</Button>
-							</Link>
-						</div>
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="relative rounded-2xl md:rounded-3xl overflow-hidden border border-border/60 shadow-[0_20px_50px_rgba(124,45,18,0.08)] bg-white">
+						<div className="grid lg:grid-cols-2 gap-0 min-h-[300px] md:min-h-[360px]">
+							<div className="relative flex flex-col justify-center p-8 md:p-12 lg:p-14 bg-hero-tint/80">
+								<div className="absolute top-6 left-6 md:top-8 md:left-8 w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary text-white flex flex-col items-center justify-center text-center text-[10px] md:text-xs font-bold leading-tight shadow-lg z-10 p-2">
+									<span className="opacity-90">100%</span>
+									<span className="text-sm md:text-base">NATURAL</span>
+								</div>
 
-						{/* Trust Indicators inside hero */}
-						<div className="mt-12 flex flex-wrap justify-center gap-x-8 gap-y-4 pt-8 border-t border-border/40 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-							<div className="flex items-center gap-2">
-								<span className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
-									<ShieldCheck className="w-4 h-4 text-primary" />
-								</span>
-								<span className="font-medium text-sm">Certified Quality</span>
+								<p className="text-primary font-bold text-sm uppercase tracking-widest mb-3 mt-14 md:mt-0">
+									Kerala · Premium fuel &amp; coir
+								</p>
+								<h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 leading-[1.15] tracking-tight">
+									Premium biomass &amp; coconut products,{" "}
+									<span className="text-secondary">delivered to you</span>
+								</h1>
+								<p className="text-base md:text-lg text-text-secondary max-w-lg mb-8 leading-relaxed">
+									Quality-assured firewood, biomass, and coir — shop your
+									collections with a clear, fast storefront.
+								</p>
+
+								<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
+									<Link href="/products/all">
+										<Button
+											size="lg"
+											className="h-12 md:h-14 px-8 rounded-xl text-base font-bold bg-primary hover:bg-primary-light text-white border-0 shadow-lg shadow-primary/25 w-full sm:w-auto"
+										>
+											Shop now
+										</Button>
+									</Link>
+									<Link
+										href="#shop-categories"
+										className="inline-flex items-center text-sm font-semibold text-secondary hover:text-primary transition-colors"
+									>
+										Browse categories
+										<ChevronRight className="w-4 h-4 ml-0.5" />
+									</Link>
+								</div>
+
+								<div
+									className="flex gap-2 mt-8"
+									role="tablist"
+									aria-label="Banner"
+								>
+									{[0, 1, 2].map((i) => (
+										<span
+											key={i}
+											className={`h-2 rounded-full transition-all ${
+												i === 0 ? "w-8 bg-primary" : "w-2 bg-border"
+											}`}
+										/>
+									))}
+								</div>
 							</div>
-							<div className="flex items-center gap-2">
-								<span className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
-									<Truck className="w-4 h-4 text-primary" />
-								</span>
-								<span className="font-medium text-sm">Nationwide Delivery</span>
+
+							<div className="relative min-h-[220px] lg:min-h-0 bg-linear-to-br from-primary/5 via-hero-tint to-white flex items-center justify-center p-8">
+								<div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_40%,rgba(194,65,12,0.2),transparent_55%)]" />
+								<div className="relative grid grid-cols-2 gap-4 max-w-md w-full">
+									<div className="aspect-square rounded-2xl bg-white border border-border/60 shadow-md flex items-center justify-center text-6xl">
+										🌿
+									</div>
+									<div className="aspect-square rounded-2xl bg-secondary/5 border border-secondary/15 flex items-center justify-center text-6xl mt-8">
+										🔥
+									</div>
+									<div className="col-span-2 rounded-2xl bg-surface-alt/90 border border-border p-4 flex items-center gap-3">
+										<div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+											<Package className="w-6 h-6 text-primary" />
+										</div>
+										<div>
+											<p className="text-xs font-bold text-text-tertiary uppercase">
+												Your catalog
+											</p>
+											<p className="font-semibold text-foreground">
+												Collections stay in sync with Shopify
+											</p>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			{/* Categories Grid */}
-			<section className="py-20 md:py-24 bg-background relative -mt-10 z-10">
+			{/* Shop by category */}
+			<section
+				id="shop-categories"
+				className="py-16 md:py-20 bg-background scroll-mt-28"
+			>
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-						<div className="max-w-2xl">
-							<h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3 tracking-tight">
-								Shop by Category
-							</h2>
-							<p className="text-base text-text-secondary leading-relaxed">
-								Browse our curated collections of premium biomass and coconut materials prepared for top tier performance.
-							</p>
-						</div>
-						<div className="hidden md:block">
-							<Link href="/products/all" className="inline-flex items-center font-semibold text-primary hover:text-primary-dark transition-colors group">
-								View All Categories
-								<ChevronRight className="w-5 h-5 ml-1 transform group-hover:translate-x-1 transition-transform" />
-							</Link>
-						</div>
-					</div>
+					<h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-4 tracking-tight">
+						Shop by category
+					</h2>
+					<p className="text-center text-text-secondary max-w-2xl mx-auto mb-12 text-sm md:text-base">
+						Choose a collection — same URLs and products as in your Shopify
+						admin.
+					</p>
 
 					{collections.length > 0 ? (
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+						<div className="flex flex-wrap justify-center gap-x-6 gap-y-10 md:gap-x-10">
 							{collections.map((collection: Collection) => (
 								<Link
 									key={collection.id}
 									href={`/products/${collection.handle}`}
-									className="group block"
+									className="group flex flex-col items-center w-[104px] sm:w-[120px]"
 								>
-									<Card 
-										variant="flat"
-										className="relative h-[420px] overflow-hidden rounded-xl w-full"
-									>
-										{/* Big Background Image */}
+									<div className="relative w-[88px] h-[88px] sm:w-[104px] sm:h-[104px] rounded-full overflow-hidden border-4 border-white shadow-md ring-2 ring-primary/20 transition-transform duration-300 group-hover:scale-105 group-hover:ring-primary/35">
 										{collection.image ? (
 											<Image
 												src={collection.image.url}
 												alt={collection.image.altText || collection.title}
-												fill
-												className="object-cover transition-transform duration-1000 group-hover:scale-105"
-												sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+												width={104}
+												height={104}
+												className="object-cover w-full h-full"
 											/>
 										) : (
-											<div className="absolute inset-0 bg-linear-to-br from-surface-alt to-border flex items-center justify-center">
-												<span className="text-5xl opacity-20">🌿</span>
+											<div className="w-full h-full bg-linear-to-br from-hero-tint to-surface-alt flex items-center justify-center text-3xl">
+												🌿
 											</div>
 										)}
-										
-										{/* Gradient Overlay */}
-										<div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent"></div>
-
-										{/* Content */}
-										<div className="absolute bottom-0 left-0 right-0 p-6 transform transition-transform duration-300">
-											<h3 className="text-2xl font-bold text-white mb-2">
-												{collection.title}
-											</h3>
-											<p className="text-sm text-white/80 line-clamp-2 mb-4 font-normal">
-												{collection.description || `Explore our high quality ${collection.title.toLowerCase()} collection`}
-											</p>
-											<div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-												Shop Now
-												<ChevronRight className="w-4 h-4" />
-											</div>
-										</div>
-									</Card>
+									</div>
+									<span className="mt-3 text-center text-xs sm:text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-snug">
+										{collection.title}
+									</span>
 								</Link>
 							))}
 						</div>
 					) : (
-						<div className="text-center py-20 bg-surface-alt rounded-xl border border-border">
+						<div className="text-center py-16 bg-surface-alt rounded-2xl border border-border">
 							<div className="text-5xl mb-4">🛍️</div>
 							<p className="text-lg font-semibold text-foreground mb-1">
 								Collections coming soon
 							</p>
 							<p className="text-sm text-text-secondary">
-								Add collections in your Shopify admin to display them here.
+								Add collections in Shopify — they appear here automatically.
 							</p>
 						</div>
 					)}
-					
-					{/* Mobile view all link */}
-					<div className="mt-8 text-center md:hidden">
-						<Link href="/products/all" className="inline-flex items-center font-semibold text-primary bg-primary/10 px-6 py-3 rounded-xl text-sm">
-							View All Categories
-							<ChevronRight className="w-4 h-4 ml-1" />
+
+					<div className="mt-12 text-center">
+						<Link
+							href="/products/all"
+							className="inline-flex items-center font-semibold text-primary hover:text-primary-dark"
+						>
+							View all products
+							<ChevronRight className="w-5 h-5 ml-1" />
 						</Link>
 					</div>
 				</div>
 			</section>
 
-			{/* Features Section - Reimagined */}
-			<section className="py-20 bg-surface-alt my-10 rounded-[32px] md:rounded-[64px] mx-4 sm:mx-6 lg:mx-8">
+			{/* B2B */}
+			<section id="bulk-deals" className="py-14 md:py-16 scroll-mt-28">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="text-center mb-16 max-w-3xl mx-auto">
-						<h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 tracking-tight">
-							The Flame Wood Advantage
-						</h2>
-						<p className="text-lg text-text-secondary leading-relaxed">
-							Trusted by hundreds of customers across India for uncompromising quality and reliability.
-						</p>
-					</div>
-					
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-						{features.map((feature) => (
-							<div
-								key={feature.title}
-								className="bg-white p-6 rounded-2xl shadow-sm border border-border/50 hover:shadow-md transition-all duration-300 group"
-							>
-								<div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-105 group-hover:bg-primary transition-all duration-300">
-									<feature.icon className="w-6 h-6 text-primary group-hover:text-white transition-colors duration-300" />
-								</div>
-								<h3 className="text-lg font-bold text-foreground mb-2">
-									{feature.title}
-								</h3>
-								<p className="text-sm text-text-secondary leading-relaxed font-normal">
-									{feature.description}
+					<div className="relative overflow-hidden rounded-3xl bg-secondary text-white p-8 md:p-14">
+						<div className="absolute top-0 right-0 w-[min(100%,480px)] h-[480px] bg-linear-to-bl from-primary/35 to-transparent rounded-full blur-3xl opacity-50 pointer-events-none" />
+						<div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
+							<div className="max-w-xl">
+								<p className="text-white/80 text-sm font-semibold uppercase tracking-wider mb-3">
+									B2B
 								</p>
+								<h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+									Bulk orders &amp; custom pricing
+								</h2>
+								<p className="text-lg text-white/85 leading-relaxed mb-8">
+									Restaurants, bakeries, and industrial buyers — request quotes
+									for large volumes.
+								</p>
+								<div className="flex flex-col sm:flex-row gap-3">
+									<Link href="/contact">
+										<Button
+											size="lg"
+											className="bg-white text-secondary hover:bg-hero-tint border-0 font-bold rounded-xl"
+										>
+											Request quote
+										</Button>
+									</Link>
+									<Link href="/contact">
+										<Button
+											variant="outline"
+											size="lg"
+											className="border-white/40 text-white hover:bg-white/10 rounded-xl font-bold"
+										>
+											Contact sales
+										</Button>
+									</Link>
+								</div>
+							</div>
+							<div className="w-full lg:w-auto lg:min-w-[200px] flex items-center justify-center">
+								<div className="rounded-2xl bg-white/10 border border-white/20 px-8 py-6 text-center backdrop-blur-sm">
+									<TrendingUp className="w-10 h-10 mx-auto mb-2 text-accent-light" />
+									<p className="font-bold">Volume savings</p>
+									<p className="text-sm text-white/75 mt-1">
+										On qualifying orders
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* Trust strip — compact */}
+			<section className="py-12 border-t border-border/70 bg-surface-alt/40">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
+						{[
+							{
+								icon: ShieldCheck,
+								title: "Quality assured",
+								text: "Consistent specs on every shipment.",
+							},
+							{
+								icon: Truck,
+								title: "Delivery",
+								text: "Tracked logistics across India.",
+							},
+							{
+								icon: Package,
+								title: "Kerala origin",
+								text: "Sourced through trusted partners.",
+							},
+						].map((x) => (
+							<div
+								key={x.title}
+								className="flex flex-col sm:flex-row gap-3 items-center sm:items-start"
+							>
+								<div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+									<x.icon className="w-5 h-5 text-primary" />
+								</div>
+								<div>
+									<h3 className="font-bold text-foreground text-sm">
+										{x.title}
+									</h3>
+									<p className="text-sm text-text-secondary mt-0.5">{x.text}</p>
+								</div>
 							</div>
 						))}
 					</div>
 				</div>
 			</section>
 
-			{/* Bulk Deals Banner */}
-			<section id="bulk-deals" className="py-20">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="relative overflow-hidden bg-foreground rounded-3xl p-8 md:p-14 lg:p-16 text-white text-center md:text-left">
-						{/* Abstract Backgrounds */}
-						<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-linear-to-bl from-primary/30 to-secondary/10 rounded-full blur-[80px] translate-x-1/3 -translate-y-1/3 opacity-60"></div>
-						
-						<div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
-							<div className="max-w-xl">
-								<div className="inline-flex items-center px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold mb-6 border border-white/20 text-white">
-									💼 B2B Solutions
-								</div>
-								<h2 className="text-3xl md:text-5xl font-bold mb-4 leading-tight tracking-tight text-white">
-									Bulk Orders &<br /><span className="text-primary-light">Custom Pricing</span>
-								</h2>
-								<p className="text-lg mb-8 text-white/80 leading-relaxed font-normal">
-									Special pricing designed for restaurants, bakeries, and industrial
-									buyers. Get custom quotes for orders above 100kg.
-								</p>
-								<div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-									<Button
-										size="lg"
-										className="bg-white text-foreground hover:bg-surface-alt px-8 h-12 rounded-xl text-base font-semibold shadow-lg shadow-white/5"
-									>
-										Request Custom Quote
-									</Button>
-									<Link href="/contact" className="w-full sm:w-auto">
-										<Button
-											variant="outline"
-											size="lg"
-											className="border-white/30 text-white hover:bg-white/10 hover:border-white px-8 h-12 rounded-xl text-base font-semibold w-full sm:w-auto"
-										>
-											Contact Sales
-										</Button>
-									</Link>
-								</div>
-							</div>
-							
-							<div className="hidden lg:block w-64 h-64 relative">
-								<div className="absolute inset-0 bg-linear-to-tr from-primary to-accent rounded-3xl rotate-6 opacity-40 blur-xl"></div>
-								<div className="absolute inset-0 bg-surface-alt rounded-xl -rotate-6 shadow-2xl flex flex-col items-center justify-center p-8 text-foreground">
-									<TrendingUp className="w-12 h-12 text-primary mb-3" />
-									<h4 className="text-xl font-bold text-center mb-1">B2B Portal</h4>
-									<p className="text-center text-sm font-medium text-text-secondary">Save up to 40% on bulk shipments</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			{/* Simple CTA */}
-			<section className="py-20 text-center">
-				<h2 className="text-3xl font-bold text-foreground mb-6">Ready to experience the best?</h2>
+			{/* Ready to order */}
+			<section className="py-16 text-center">
+				<h2 className="text-2xl font-bold text-foreground mb-6">
+					Ready to order?
+				</h2>
 				<Link href="/products/all">
-					<Button size="lg" className="px-8 h-12 rounded-xl text-base font-semibold group">
-						Shop the Collection 
-						<ChevronRight className="w-5 h-5 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
+					<Button
+						size="lg"
+						className="px-8 h-12 rounded-xl font-bold bg-primary hover:bg-primary-light text-white border-0"
+					>
+						Shop the collection
 					</Button>
 				</Link>
 			</section>

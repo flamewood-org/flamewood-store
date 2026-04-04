@@ -70,9 +70,7 @@ export function WishlistSidebar() {
 				<div className="flex items-center justify-between px-6 py-5 border-b border-border">
 					<div className="flex items-center gap-3">
 						<Heart className="w-5 h-5 text-primary" />
-						<h2 className="text-lg font-bold text-foreground">
-							Wishlist
-						</h2>
+						<h2 className="text-lg font-bold text-foreground">Wishlist</h2>
 						{itemCount > 0 && (
 							<span className="inline-flex items-center justify-center h-6 min-w-[24px] px-1.5 rounded-full bg-primary text-white text-xs font-bold">
 								{itemCount}
@@ -100,16 +98,10 @@ export function WishlistSidebar() {
 								Your wishlist is empty
 							</h3>
 							<p className="text-text-secondary text-sm text-center mb-8">
-								Save your favorite products here for easy access
-								later.
+								Save your favorite products here for easy access later.
 							</p>
-							<Link
-								href="/products/all"
-								onClick={handleClose}
-							>
-								<Button className="px-8">
-									Explore Products →
-								</Button>
+							<Link href="/products/all" onClick={handleClose}>
+								<Button className="px-8">Explore Products →</Button>
 							</Link>
 						</div>
 					) : (
@@ -130,11 +122,7 @@ export function WishlistSidebar() {
 											{product.images[0] ? (
 												<Image
 													src={product.images[0].url}
-													alt={
-														product.images[0]
-															.altText ||
-														product.title
-													}
+													alt={product.images[0].altText || product.title}
 													fill
 													className="object-cover"
 													sizes="80px"
@@ -164,14 +152,9 @@ export function WishlistSidebar() {
 												<button
 													type="button"
 													onClick={() =>
-														handleAddToCart(
-															firstVariant.id,
-															product.id,
-														)
+														handleAddToCart(firstVariant.id, product.id)
 													}
-													disabled={
-														addingId === product.id
-													}
+													disabled={addingId === product.id}
 													className="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all duration-200 disabled:opacity-50"
 												>
 													<ShoppingCart className="w-3.5 h-3.5" />
@@ -185,9 +168,7 @@ export function WishlistSidebar() {
 										{/* Remove */}
 										<button
 											type="button"
-											onClick={() =>
-												removeFromWishlist(product.id)
-											}
+											onClick={() => removeFromWishlist(product.id)}
 											className="p-1.5 text-text-tertiary hover:text-error hover:bg-error/5 rounded-lg transition-all opacity-0 group-hover:opacity-100 self-start"
 											aria-label="Remove from wishlist"
 										>

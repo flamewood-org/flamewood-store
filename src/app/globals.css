@@ -24,6 +24,9 @@
 	--color-warning: #f59e0b;
 	--color-error: #dc2626;
 	--color-info: #2563eb;
+
+	/* Warm hero tint (derived from brand orange) */
+	--hero-tint: #fff7ed;
 }
 
 @theme inline {
@@ -45,6 +48,7 @@
 	--color-warning: var(--color-warning);
 	--color-error: var(--color-error);
 	--color-info: var(--color-info);
+	--color-hero-tint: var(--hero-tint);
 	--font-sans: var(--font-inter), system-ui, sans-serif;
 	--radius-sm: 8px;
 	--radius-md: 12px;
@@ -87,53 +91,101 @@ body {
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
 
 @keyframes fadeInUp {
-	from { opacity: 0; transform: translateY(20px); }
-	to { opacity: 1; transform: translateY(0); }
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes fadeInDown {
-	from { opacity: 0; transform: translateY(-10px); }
-	to { opacity: 1; transform: translateY(0); }
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 @keyframes slideInRight {
-	from { transform: translateX(100%); }
-	to { transform: translateX(0); }
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
 }
 
 @keyframes slideOutRight {
-	from { transform: translateX(0); }
-	to { transform: translateX(100%); }
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(100%);
+	}
 }
 
 @keyframes scaleIn {
-	from { opacity: 0; transform: scale(0.95); }
-	to { opacity: 1; transform: scale(1); }
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 @keyframes shimmer {
-	0% { background-position: -200% 0; }
-	100% { background-position: 200% 0; }
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
 }
 
 @keyframes pulse-subtle {
-	0%, 100% { opacity: 1; }
-	50% { opacity: 0.7; }
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
 }
 
 @keyframes float {
-	0%, 100% { transform: translateY(0px); }
-	50% { transform: translateY(-6px); }
+	0%,
+	100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-6px);
+	}
 }
 
 @keyframes marquee {
-	0% { transform: translateX(0); }
-	100% { transform: translateX(-50%); }
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
 }
 
 .animate-fade-in {

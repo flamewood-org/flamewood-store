@@ -8,14 +8,8 @@ import { Button } from "@/components/ui/Button";
 import { useCartContext } from "@/store/CartContext";
 
 export function CartSidebar() {
-	const {
-		cart,
-		isLoading,
-		isOpen,
-		closeCart,
-		updateQuantity,
-		removeFromCart,
-	} = useCartContext();
+	const { cart, isLoading, isOpen, closeCart, updateQuantity, removeFromCart } =
+		useCartContext();
 	const [isClosing, setIsClosing] = useState(false);
 
 	// Lock body scroll when sidebar is open
@@ -69,9 +63,7 @@ export function CartSidebar() {
 				<div className="flex items-center justify-between px-6 py-5 border-b border-border">
 					<div className="flex items-center gap-3">
 						<ShoppingBag className="w-5 h-5 text-primary" />
-						<h2 className="text-lg font-bold text-foreground">
-							Shopping Cart
-						</h2>
+						<h2 className="text-lg font-bold text-foreground">Shopping Cart</h2>
 						{cart && cart.itemCount > 0 && (
 							<span className="inline-flex items-center justify-center h-6 min-w-[24px] px-1.5 rounded-full bg-primary text-white text-xs font-bold">
 								{cart.itemCount}
@@ -93,10 +85,7 @@ export function CartSidebar() {
 					{isLoading ? (
 						<div className="p-6 space-y-4">
 							{Array.from({ length: 3 }, (_, i) => (
-								<div
-									key={`cart-skel-${i}`}
-									className="flex gap-4"
-								>
+								<div key={`cart-skel-${i}`} className="flex gap-4">
 									<div className="w-20 h-20 rounded-lg animate-shimmer shrink-0" />
 									<div className="flex-1 space-y-2">
 										<div className="h-4 w-3/4 rounded animate-shimmer" />
@@ -115,13 +104,10 @@ export function CartSidebar() {
 								Your cart is empty
 							</h3>
 							<p className="text-text-secondary text-sm text-center mb-8">
-								Discover our premium products and add them to
-								your cart.
+								Discover our premium products and add them to your cart.
 							</p>
 							<Link href="/products/all" onClick={handleClose}>
-								<Button className="px-8">
-									Start Shopping →
-								</Button>
+								<Button className="px-8">Start Shopping →</Button>
 							</Link>
 						</div>
 					) : (
@@ -136,10 +122,7 @@ export function CartSidebar() {
 										{item.image ? (
 											<Image
 												src={item.image.url}
-												alt={
-													item.image.altText ||
-													item.productTitle
-												}
+												alt={item.image.altText || item.productTitle}
 												fill
 												className="object-cover"
 												sizes="80px"
@@ -164,11 +147,7 @@ export function CartSidebar() {
 											{item.variant.title}
 										</p>
 										<p className="text-sm font-bold text-primary mt-1">
-											₹
-											{(
-												item.variant.price *
-												item.quantity
-											).toFixed(2)}
+											₹{(item.variant.price * item.quantity).toFixed(2)}
 										</p>
 
 										{/* Quantity Controls */}
@@ -178,10 +157,7 @@ export function CartSidebar() {
 												onClick={() =>
 													updateQuantity(
 														item.id,
-														Math.max(
-															1,
-															item.quantity - 1,
-														),
+														Math.max(1, item.quantity - 1),
 													)
 												}
 												disabled={item.quantity <= 1}
@@ -195,10 +171,7 @@ export function CartSidebar() {
 											<button
 												type="button"
 												onClick={() =>
-													updateQuantity(
-														item.id,
-														item.quantity + 1,
-													)
+													updateQuantity(item.id, item.quantity + 1)
 												}
 												className="w-7 h-7 flex items-center justify-center rounded-md border border-border hover:border-primary/30 hover:bg-primary/5 transition-all"
 											>
@@ -236,17 +209,13 @@ export function CartSidebar() {
 								</span>
 							</div>
 							<div className="flex justify-between text-sm">
-								<span className="text-text-secondary">
-									Shipping
-								</span>
+								<span className="text-text-secondary">Shipping</span>
 								<span className="text-text-secondary text-xs">
 									Calculated at checkout
 								</span>
 							</div>
 							<div className="flex justify-between pt-2 border-t border-border">
-								<span className="font-bold text-foreground">
-									Total
-								</span>
+								<span className="font-bold text-foreground">Total</span>
 								<span className="font-bold text-xl text-primary">
 									₹{cart.subtotal.toFixed(2)}
 								</span>
@@ -264,17 +233,8 @@ export function CartSidebar() {
 								Checkout
 								<ArrowRight className="w-4 h-4" />
 							</Button>
-							<Link
-								href="/cart"
-								onClick={handleClose}
-								className="block"
-							>
-								<Button
-									variant="ghost"
-									size="md"
-									fullWidth
-									className="text-sm"
-								>
+							<Link href="/cart" onClick={handleClose} className="block">
+								<Button variant="ghost" size="md" fullWidth className="text-sm">
 									View Full Cart
 								</Button>
 							</Link>

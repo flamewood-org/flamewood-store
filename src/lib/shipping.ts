@@ -65,6 +65,14 @@ export function detectRegion(pincode: string): keyof typeof REGION_RATES {
 	return "REST_INDIA";
 }
 
+/** True when the pincode is served for standard India delivery (not treated as international). */
+export function isStandardDeliveryAvailable(pincode: string): boolean {
+	if (!/^\d{6}$/.test(pincode.trim())) {
+		return false;
+	}
+	return detectRegion(pincode.trim()) !== "INTERNATIONAL";
+}
+
 export function calculateShipping(totalWeight: number, pincode: string) {
 	const region = detectRegion(pincode);
 	const regionData = REGION_RATES[region];
