@@ -157,7 +157,7 @@ export default function ProductDetailPage() {
 
 	return (
 		<div className="min-h-screen min-w-0 overflow-x-hidden bg-background pb-20 sm:pb-24">
-			<div className="border-b border-border bg-white min-w-0">
+			<div className="border-b border-border bg-surface min-w-0">
 				<div className="w-full min-w-0 py-3 sm:py-4 min-w-0">
 					<nav className="flex items-center text-xs sm:text-sm font-medium text-text-secondary min-w-0 overflow-x-auto no-scrollbar gap-x-1 sm:gap-x-0">
 						<Link
@@ -211,7 +211,7 @@ export default function ProductDetailPage() {
 
 						<Card className="flex-1 overflow-hidden relative group">
 							{product.images[activeImageIndex] ? (
-								<div className="relative aspect-[4/5] md:aspect-[3/4] w-full bg-gray-50">
+								<div className="relative aspect-[4/5] md:aspect-[3/4] w-full bg-surface-alt">
 									<Image
 										src={product.images[activeImageIndex].url}
 										alt={
@@ -232,7 +232,7 @@ export default function ProductDetailPage() {
 										className={`absolute top-4 right-4 p-3 rounded-full shadow-lg transition-all duration-300 z-10 ${
 											inWishlist
 												? "bg-primary text-white"
-												: "bg-white text-foreground hover:bg-primary hover:text-white"
+												: "bg-surface text-foreground hover:bg-primary hover:text-white"
 										}`}
 										aria-label={
 											inWishlist ? "Remove from wishlist" : "Add to wishlist"
@@ -244,7 +244,7 @@ export default function ProductDetailPage() {
 									</button>
 								</div>
 							) : (
-								<div className="aspect-[4/5] md:aspect-[3/4] w-full flex items-center justify-center bg-gray-100 text-text-secondary">
+								<div className="aspect-[4/5] md:aspect-[3/4] w-full flex items-center justify-center bg-surface-alt text-text-secondary border border-border/60">
 									No Image Available
 								</div>
 							)}
@@ -301,7 +301,7 @@ export default function ProductDetailPage() {
 									<div className="flex items-center bg-surface-alt rounded-full border border-border/50 p-1">
 										<button
 											type="button"
-											className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white hover:shadow-sm transition-all disabled:opacity-50"
+											className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface hover:shadow-sm transition-all disabled:opacity-50"
 											onClick={() => setQuantity(Math.max(1, quantity - 1))}
 											disabled={quantity <= 1}
 										>
@@ -314,7 +314,7 @@ export default function ProductDetailPage() {
 										</span>
 										<button
 											type="button"
-											className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white hover:shadow-sm transition-all"
+											className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface hover:shadow-sm transition-all"
 											onClick={() => setQuantity(quantity + 1)}
 										>
 											<span className="text-xl font-medium leading-none mb-1">
@@ -377,7 +377,7 @@ export default function ProductDetailPage() {
 											error={
 												showShippingError ? "Enter 6 digit pincode" : undefined
 											}
-											className="h-12 bg-white rounded-xl"
+											className="h-12 bg-surface rounded-xl"
 										/>
 									</div>
 									<Button
@@ -389,7 +389,7 @@ export default function ProductDetailPage() {
 								</div>
 
 								{shippingEstimate && (
-									<div className="mt-4 p-4 bg-white rounded-2xl border border-success/20 shadow-sm animate-fade-in flex items-start gap-3">
+									<div className="mt-4 p-4 bg-surface rounded-2xl border border-success/20 shadow-sm animate-fade-in flex items-start gap-3">
 										<CheckCircle2 className="w-6 h-6 text-success flex-shrink-0" />
 										<div>
 											<p className="font-medium text-foreground text-sm">
@@ -499,7 +499,7 @@ export default function ProductDetailPage() {
 
 			{/* Sticky Bottom Bar for Mobile & Desktop when scrolling */}
 			{showStickyBar && (
-				<div className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.05)] animate-fade-in-up pb-[env(safe-area-inset-bottom,0px)]">
+				<div className="fixed bottom-0 left-0 right-0 z-40 bg-surface border-t border-border shadow-[0_-4px_20px_rgba(0,0,0,0.05)] animate-fade-in-up pb-[env(safe-area-inset-bottom,0px)]">
 					<div className="w-full min-w-0 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4">
 						<div className="hidden sm:flex items-center gap-4 flex-1">
 							{product.images[0] && (

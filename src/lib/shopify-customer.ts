@@ -189,6 +189,7 @@ export async function registerCustomer(input: {
 	password: string;
 	firstName: string;
 	lastName: string;
+	phone: string;
 }): Promise<{ ok: true } | { ok: false; message: string }> {
 	const { data, error } = await storefrontRequest<{
 		customerCreate: {
@@ -203,6 +204,7 @@ export async function registerCustomer(input: {
 				password: input.password,
 				firstName: input.firstName.trim(),
 				lastName: input.lastName.trim(),
+				phone: input.phone.trim(),
 			},
 		},
 	});

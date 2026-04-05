@@ -53,7 +53,10 @@ export default async function ProductListingPage({
 			<div className="w-full min-w-0 pt-6 md:pt-8">
 				<p className="text-sm text-text-secondary pb-6 border-b border-border/80">
 					Need a different pack or bulk terms?{" "}
-					<Link href="/contact" className="text-foreground font-medium hover:text-primary">
+					<Link
+						href="/contact"
+						className="text-foreground font-medium hover:text-primary"
+					>
 						Contact
 					</Link>
 					.

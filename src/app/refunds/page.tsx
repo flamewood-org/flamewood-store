@@ -1,74 +1,163 @@
-import { PageHeader } from "@/components/layout/PageHeader";
+import type { Metadata } from "next";
+import { LegalDocShell } from "@/components/legal/LegalDocShell";
 
-export const metadata = {
-	title: "Refund Policy - FlameWood",
+export const metadata: Metadata = {
+	title: "Refunds & Returns",
+	description:
+		"How FlameWood handles returns, refunds, replacements, and delivery issues for biomass and coconut products.",
 };
+
+const toc = [
+	{ id: "overview", label: "Overview" },
+	{ id: "eligibility", label: "When we help" },
+	{ id: "not-eligible", label: "What we can’t refund" },
+	{ id: "how-to", label: "How to request help" },
+	{ id: "timing", label: "Refunds & timing" },
+	{ id: "exchanges", label: "Replacements" },
+	{ id: "shipping-returns", label: "Return shipping" },
+	{ id: "cancellations", label: "Cancellations" },
+	{ id: "contact", label: "Contact" },
+] as const;
 
 export default function RefundPolicyPage() {
 	return (
-		<div className="bg-background min-h-screen min-w-0 overflow-x-hidden">
-			<PageHeader
-				title="Refunds"
-				description="Returns, replacements, and how we handle issues."
-				breadcrumbs={[{ label: "Home", href: "/" }, { label: "Refunds" }]}
-			/>
+		<LegalDocShell
+			title="Refunds &amp; returns"
+			description="Fair handling of damaged goods, wrong items, and quality issues — built around heavy, consumable products."
+			breadcrumbs={[{ label: "Home", href: "/" }, { label: "Refunds" }]}
+			lastUpdated="4 April 2026"
+			estimatedRead="7 min"
+			toc={[...toc]}
+		>
+			<h2 id="overview">1. Overview</h2>
+			<p>
+				We sell firewood, biomass, and coconut products that are heavy, often
+				bulk, and sometimes naturally variable. This policy explains how we
+				handle refunds, returns, and replacements while staying practical for
+				both you and our logistics partners.
+			</p>
+			<p>
+				Our goal is simple: if something arrives{" "}
+				<strong>wrong, damaged, or materially different</strong> from what you
+				ordered, we will work with you to fix it — usually through a
+				replacement, partial refund, or full refund where appropriate.
+			</p>
 
-			<div className="w-full min-w-0 py-8 md:py-10">
-				<div className="p-5 rounded-xl border border-border bg-surface mb-8">
-					<h3 className="text-base font-semibold mb-2 text-foreground">
-						Our approach
-					</h3>
-					<p className="text-text-secondary">
-						We stand behind the premium quality of our firewood, coconut, and
-						biomass products. If your order arrives damaged or fails to meet
-						reasonable expectations, we will make it right.
-					</p>
-				</div>
+			<h2 id="eligibility">2. When we can help</h2>
+			<p>We typically offer a remedy when:</p>
+			<ul>
+				<li>
+					<strong>Damage in transit</strong> — visible crushing, soaking, or
+					breakage that makes the product unfit for reasonable use.
+				</li>
+				<li>
+					<strong>Wrong item or grade</strong> — you received a different
+					product, pack size, or grade than shown on your order confirmation.
+				</li>
+				<li>
+					<strong>Critical quality failure</strong> — for example, moisture or
+					contamination that falls clearly outside what we describe for that
+					SKU, where you report it in time (see below).
+				</li>
+			</ul>
+			<p>
+				Please inspect deliveries on arrival where possible. For bulk drops,
+				photograph packaging labels and the issue so we can verify with the
+				carrier if needed.
+			</p>
 
-				<div className="prose prose-sm max-w-none prose-headings:text-foreground prose-headings:font-semibold prose-headings:text-base prose-p:text-text-secondary prose-p:text-[15px] prose-p:leading-relaxed prose-li:text-text-secondary">
-					<h2>Returns</h2>
-					<p>
-						Due to the heavy and consumable nature of our biomass products, we
-						generally do not accept returns for buyer's remorse. However, if
-						there is a fundamental defect with your delivery (e.g., incorrect
-						grade of wood or critical moisture issues), you have 7 days after
-						receiving your item to request a return.
-					</p>
-					<p>
-						To be eligible for a return, your item must be unused and in the
-						same condition that you received it. It must also be in the original
-						packaging.
-					</p>
+			<h2 id="not-eligible">3. What we generally don’t refund</h2>
+			<p>
+				Because of the nature of our products, we <strong>don’t</strong> accept
+				returns for:
+			</p>
+			<ul>
+				<li>Change of mind or “buyer’s remorse” after delivery.</li>
+				<li>
+					Minor colour, texture, or weight variation that is normal for natural
+					biomass or coir, within stated tolerances.
+				</li>
+				<li>
+					Issues reported after the window below, unless we agree otherwise in
+					writing.
+				</li>
+				<li>
+					Problems caused after delivery (e.g. improper storage outdoors without
+					cover) unless we determine otherwise.
+				</li>
+			</ul>
 
-					<h2>Refunds</h2>
-					<p>
-						Once your return is received and inspected, we will send you an
-						email to notify you that we have received your returned item. We
-						will also notify you of the approval or rejection of your refund.
-					</p>
-					<p>
-						If you are approved, then your refund will be processed, and a
-						credit will automatically be applied to your credit card or original
-						method of payment, within a certain amount of days.
-					</p>
+			<h2 id="how-to">4. How to request help</h2>
+			<p>
+				<strong>Step 1 — Contact us promptly.</strong> Email{" "}
+				<a href="mailto:support@flamewood.com">support@flamewood.com</a> with
+				your order number, a short description, and clear photos of the issue
+				(packaging label, damage, or wrong item).
+			</p>
+			<p>
+				<strong>Step 2 — Time window.</strong> For damage, wrong items, or
+				serious quality concerns, please reach out within{" "}
+				<strong>7 calendar days</strong> of delivery unless a longer period is
+				required by law. Late reports may still be reviewed case-by-case but are
+				harder to verify with carriers.
+			</p>
+			<p>
+				<strong>Step 3 — Keep packaging where reasonable.</strong> We may ask
+				you to retain bags, pallets, or labels until we confirm next steps
+				(refund, pickup, or disposal instructions).
+			</p>
 
-					<h2>Exchanges & Replacements</h2>
-					<p>
-						We only replace items if they are defective or damaged in transit.
-						If you need to exchange it for the same item, send us an email at
-						support@flamewood.com and we will organize a freight pickup
-						coordinate.
-					</p>
+			<h2 id="timing">5. Refunds &amp; processing time</h2>
+			<p>
+				Once we approve a refund, we aim to process it within{" "}
+				<strong>5–10 business days</strong>. The time for funds to appear
+				depends on your bank or card issuer. Refunds go to the original payment
+				method unless we agree otherwise (e.g. store credit for operational
+				reasons).
+			</p>
+			<p>
+				Partial refunds may apply if only part of an order is affected or if you
+				choose to keep usable product after we’ve agreed a fair adjustment.
+			</p>
 
-					<h2>Shipping Returns</h2>
-					<p>
-						You will be responsible for paying for your own shipping costs for
-						returning your item unless the return is due to our error. Shipping
-						costs are non-refundable. If you receive a refund, the cost of
-						return shipping will be deducted from your refund.
-					</p>
-				</div>
-			</div>
-		</div>
+			<h2 id="exchanges">6. Replacements</h2>
+			<p>
+				Where stock allows, we may offer a <strong>replacement shipment</strong>{" "}
+				instead of a refund — especially for wrong items or transit damage. If
+				the exact SKU is unavailable, we may offer an equivalent product at the
+				same price or a refund for the affected line items.
+			</p>
+
+			<h2 id="shipping-returns">7. Return shipping &amp; pickup</h2>
+			<p>
+				For approved returns (not change-of-mind), we will usually arrange
+				collection or provide a prepaid label where feasible. If a return is due
+				to <strong>our error</strong>, we cover reasonable return freight. If we
+				later find the claim was not valid under this policy, we may recover
+				reasonable costs as permitted by law.
+			</p>
+			<p>
+				Original outbound shipping charges are generally non-refundable except
+				where required by law or where the entire order is cancelled before
+				dispatch (see below).
+			</p>
+
+			<h2 id="cancellations">8. Cancellations before dispatch</h2>
+			<p>
+				If you need to cancel, contact us as soon as possible. Orders that have
+				not yet been packed or handed to a carrier can often be cancelled for a
+				full refund. Once fulfilment has started, cancellation may only be
+				possible by refusing delivery or following this returns policy after
+				receipt.
+			</p>
+
+			<h2 id="contact">9. Contact</h2>
+			<p>
+				For refund or return questions, email{" "}
+				<a href="mailto:support@flamewood.com">support@flamewood.com</a> or
+				visit our <a href="/contact">Contact</a> page. Include your order number
+				and photos whenever possible — it helps us resolve cases faster.
+			</p>
+		</LegalDocShell>
 	);
 }

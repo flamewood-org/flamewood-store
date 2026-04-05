@@ -75,7 +75,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 						</div>
 						<Button
 							variant="outline"
-							className="hidden md:flex items-center gap-2 bg-white"
+							className="hidden md:flex items-center gap-2 bg-surface"
 							onClick={handleSignOut}
 							disabled={signingOut}
 						>
@@ -140,7 +140,9 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 					<div className="flex-1">
 						{activeTab === "dashboard" && (
 							<div className="space-y-8 animate-fade-in-up">
-								<h2 className="text-xl font-semibold text-foreground">Overview</h2>
+								<h2 className="text-xl font-semibold text-foreground">
+									Overview
+								</h2>
 								<div className="grid sm:grid-cols-2 gap-6">
 									<Card className="p-6 border-border">
 										<div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">

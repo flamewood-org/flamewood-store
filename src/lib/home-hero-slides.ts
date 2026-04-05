@@ -1,13 +1,12 @@
 import type { Collection } from "@/types/product";
 
 /**
- * Tiny JPEG used as `blurDataURL` for hero `<Image placeholder="blur" />` while
- * full-size PNGs load (warm neutral, matches illustrated banners).
+ * Tiny JPEG for `placeholder="blur"` on hero images while full assets load.
  */
 export const HERO_IMAGE_BLUR_DATA_URL =
 	"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==";
 
-/** Image + destination only — artwork includes its own headline and trust strip. */
+/** Hero slide: image fills the card; entire area links to `href`. */
 export type HeroSlide = {
 	id: string;
 	imageUrl: string;
@@ -15,29 +14,30 @@ export type HeroSlide = {
 	alt: string;
 };
 
-/**
- * Illustrated hero art (PNG in `public/hero/`) — one slide per core category.
- * Regenerate assets by replacing files; keep filenames stable for caching.
- */
-const HERO_BRAND_SLIDES: Omit<HeroSlide, "href">[] = [
+/** Alternates catalog JPGs with illustrated PNG banners. */
+const HERO_BRAND_BASE: Omit<HeroSlide, "href">[] = [
 	{
-		id: "brand-firewood",
-		imageUrl: "/hero/brand-firewood.png",
-		alt: "FlameWood illustrated hero — Firewood category",
+		id: "hero-firewood",
+		imageUrl: "/hero/FireWood.jpg",
+		alt: "FlameWood — premium firewood and kiln-dried logs",
 	},
 	{
-		id: "brand-coconut",
-		imageUrl: "/hero/brand-coconut.png",
-		alt: "FlameWood illustrated hero — Coconut and coir category",
+		id: "hero-coconut-coir",
+		imageUrl: "/hero/hero-coir-illustration.png",
+		alt: "FlameWood — coconut coir and natural fibre",
 	},
 	{
-		id: "brand-biomass",
-		imageUrl: "/hero/brand-biomass.png",
-		alt: "FlameWood illustrated hero — Biomass category",
+		id: "hero-biomass",
+		imageUrl: "/hero/powder.jpg",
+		alt: "FlameWood — wood powder and biomass",
+	},
+	{
+		id: "hero-coconut-shell",
+		imageUrl: "/hero/hero-coconut-illustration.png",
+		alt: "FlameWood — coconut shell products",
 	},
 ];
 
-/** Prefer matching Shopify collection when present so links stay in sync with catalog. */
 function hrefForSlideIndex(
 	collections: Collection[],
 	index: number,
@@ -46,11 +46,9 @@ function hrefForSlideIndex(
 	const byOrder = collections[index];
 	if (byOrder?.handle) return `/products/${byOrder.handle}`;
 
-	const wanted = ["firewood", "coconut", "biomass"][index];
+	const wanted = ["firewood", "coconut", "biomass", "coconut"][index];
 	if (wanted) {
-		const match = collections.find(
-			(c) => c.handle.toLowerCase() === wanted,
-		);
+		const match = collections.find((c) => c.handle.toLowerCase() === wanted);
 		if (match) return `/products/${match.handle}`;
 	}
 
@@ -61,15 +59,18 @@ const FALLBACK_HREFS = [
 	"/products/firewood",
 	"/products/coconut",
 	"/products/biomass",
+	"/products/coconut",
 ] as const;
 
 export function buildHeroSlidesFromCollections(
 	collections: Collection[],
 ): HeroSlide[] {
-	return HERO_BRAND_SLIDES.map((b, i) => ({
-		id: b.id,
-		imageUrl: b.imageUrl,
-		alt: b.alt,
-		href: hrefForSlideIndex(collections, i, FALLBACK_HREFS[i] ?? "/products/all"),
+	return HERO_BRAND_BASE.map((b, i) => ({
+		...b,
+		href: hrefForSlideIndex(
+			collections,
+			i,
+			FALLBACK_HREFS[i] ?? "/products/all",
+		),
 	}));
 }

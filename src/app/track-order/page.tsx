@@ -52,7 +52,10 @@ export default function TrackOrderPage() {
 
 					<p className="mt-6 text-sm text-text-tertiary">
 						Need help?{" "}
-						<a href="/contact" className="font-medium text-primary hover:underline">
+						<a
+							href="/contact"
+							className="font-medium text-primary hover:underline"
+						>
 							Contact support
 						</a>
 					</p>

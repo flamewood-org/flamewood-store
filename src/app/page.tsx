@@ -1,12 +1,11 @@
-import { ChevronRight, Package, ShieldCheck, Truck } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { Package, ShieldCheck, Truck } from "lucide-react";
 import { BusinessOrdersSection } from "@/components/home/BusinessOrdersSection";
 import { HomeHero } from "@/components/home/HomeHero";
+import { HomeHeroPromoBar } from "@/components/home/HomeHeroPromoBar";
 import { OrderReadyCta } from "@/components/home/OrderReadyCta";
+import { ShopByCategorySection } from "@/components/home/ShopByCategorySection";
 import { buildHeroSlidesFromCollections } from "@/lib/home-hero-slides";
 import { getCollections } from "@/lib/shopify";
-import type { Collection } from "@/types/product";
 
 export default async function Home() {
 	const collections = await getCollections();
@@ -15,97 +14,13 @@ export default async function Home() {
 	return (
 		<div className="min-h-screen w-full min-w-0 flex flex-col bg-background overflow-x-hidden">
 			<HomeHero slides={heroSlides} />
+			<HomeHeroPromoBar />
 
-			<section
-				id="shop-categories"
-				className="py-10 md:py-14 scroll-mt-24 border-b border-border/60 bg-background"
-			>
-				<div className="w-full min-w-0">
-					<div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 md:mb-10">
-						<div>
-							<h2 className="text-lg font-semibold text-foreground tracking-tight">
-								Shop by category
-							</h2>
-							<p className="text-sm text-text-secondary mt-1 max-w-lg">
-								One column on mobile, three across on desktop.
-							</p>
-						</div>
-						<Link
-							href="/products/all"
-							className="text-sm font-medium text-primary hover:text-primary-dark inline-flex items-center gap-1 shrink-0"
-						>
-							All products
-							<ChevronRight className="w-4 h-4" />
-						</Link>
-					</div>
-
-					{collections.length > 0 ? (
-						<div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
-							{collections.map((collection: Collection) => {
-								const plain =
-									collection.description?.replace(/<[^>]+>/g, "").trim() ?? "";
-								const subtitle =
-									plain.length === 0
-										? "Browse this collection"
-										: plain.length > 100
-											? `${plain.slice(0, 100)}…`
-											: plain;
-								return (
-									<Link
-										key={collection.id}
-										href={`/products/${collection.handle}`}
-										className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface shadow-sm transition-all duration-300 hover:shadow-[var(--shadow-card-hover)] hover:border-primary/20"
-									>
-										<div className="relative aspect-[4/3] w-full overflow-hidden bg-surface-alt">
-											{collection.image ? (
-												<Image
-													src={collection.image.url}
-													alt={collection.image.altText || collection.title}
-													fill
-													className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-													sizes="(max-width: 768px) 100vw, 33vw"
-												/>
-											) : (
-												<div className="flex h-full w-full items-center justify-center text-5xl bg-linear-to-br from-surface-alt to-surface">
-													🌿
-												</div>
-											)}
-											<div className="absolute inset-0 bg-linear-to-t from-black/55 via-black/15 to-transparent" />
-											<div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-												<p className="text-lg md:text-xl font-semibold text-white tracking-tight leading-snug">
-													{collection.title}
-												</p>
-												<p className="mt-1 text-sm text-white/85 line-clamp-2">
-													{subtitle}
-												</p>
-											</div>
-										</div>
-										<div className="flex items-center justify-between px-5 py-4 border-t border-border/60 bg-surface">
-											<span className="text-sm font-medium text-primary group-hover:text-primary-dark">
-												Shop collection
-											</span>
-											<ChevronRight className="w-4 h-4 text-primary transition-transform group-hover:translate-x-0.5" />
-										</div>
-									</Link>
-								);
-							})}
-						</div>
-					) : (
-						<div className="text-center py-12 rounded-xl border border-dashed border-border bg-surface-alt/50">
-							<p className="text-sm font-medium text-foreground">
-								No collections yet
-							</p>
-							<p className="text-xs text-text-secondary mt-1">
-								Add collections in Shopify to show them here.
-							</p>
-						</div>
-					)}
-				</div>
-			</section>
+			<ShopByCategorySection collections={collections} />
 
 			<BusinessOrdersSection />
 
-			<section className="py-8 border-t border-border/60 bg-surface-alt/30">
+			<section className="pb-8 border-b border-border/60">
 				<div className="w-full min-w-0">
 					<div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
 						{[

@@ -239,7 +239,7 @@ export function DeliveryLocationModal() {
 			/>
 
 			<div
-				className="relative z-[1] my-auto w-full max-w-[min(100%,28rem)] rounded-2xl border border-border bg-white shadow-lg animate-scale-in overflow-hidden flex flex-col max-h-[min(92dvh,40rem)]"
+				className="relative z-[1] my-auto w-full max-w-[min(100%,28rem)] rounded-2xl border border-border bg-surface shadow-lg animate-scale-in overflow-hidden flex flex-col max-h-[min(92dvh,40rem)]"
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby="delivery-location-title"
@@ -287,7 +287,7 @@ export function DeliveryLocationModal() {
 						</div>
 
 						{suggestions.length > 0 && (
-							<div className="absolute z-10 left-0 right-0 mt-2 max-h-48 overflow-y-auto rounded-xl border border-border bg-white shadow-lg py-1">
+							<div className="absolute z-10 left-0 right-0 mt-2 max-h-48 overflow-y-auto rounded-xl border border-border bg-surface shadow-lg py-1">
 								{suggestions.map((row, i) => (
 									<button
 										key={`${officeKey(row)}-${i}`}

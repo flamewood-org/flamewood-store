@@ -12,6 +12,7 @@ export async function POST(request: Request) {
 		password?: string;
 		firstName?: string;
 		lastName?: string;
+		phone?: string;
 	};
 	try {
 		body = await request.json();
@@ -23,10 +24,19 @@ export async function POST(request: Request) {
 	const password = body.password;
 	const firstName = body.firstName?.trim() ?? "";
 	const lastName = body.lastName?.trim() ?? "";
+	const phoneRaw = body.phone?.trim() ?? "";
+	const phoneDigits = phoneRaw.replace(/\D/g, "");
 
 	if (!email || !password || password.length < 5) {
 		return NextResponse.json(
 			{ error: "Valid email and password (min 5 characters) are required." },
+			{ status: 400 },
+		);
+	}
+
+	if (!phoneRaw || phoneDigits.length < 8) {
+		return NextResponse.json(
+			{ error: "A valid phone number is required (at least 8 digits)." },
 			{ status: 400 },
 		);
 	}
@@ -36,6 +46,7 @@ export async function POST(request: Request) {
 		password,
 		firstName,
 		lastName,
+		phone: phoneRaw,
 	});
 	if (!created.ok) {
 		return NextResponse.json({ error: created.message }, { status: 400 });

@@ -1,4 +1,10 @@
-import { Building2, CalendarClock, Package, Sparkles } from "lucide-react";
+import {
+	Building2,
+	CalendarClock,
+	Package,
+	Sparkles,
+	Truck,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
@@ -6,37 +12,29 @@ export function BusinessOrdersSection() {
 	return (
 		<section
 			id="bulk-deals"
-			className="py-12 md:py-16 scroll-mt-24 overflow-hidden"
+			className="py-12 pb-5 md:py-16 scroll-mt-24 overflow-hidden"
 		>
 			<div className="w-full min-w-0">
 				<div
-					className="relative rounded-xl sm:rounded-2xl md:rounded-3xl border border-border/80 bg-linear-to-br from-secondary via-[#5c3710] to-[#3d2408] p-5 sm:p-6 md:p-10 lg:p-12 text-white shadow-[0_24px_60px_-12px_rgba(60,35,8,0.45)]"
+					className="relative overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl border border-white/10 bg-black p-5 ring-1 ring-white/5 sm:p-6 md:p-10 lg:p-12"
 					style={{ perspective: "1200px" }}
 				>
-					{/* Ambient glow */}
 					<div
-						className="pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-primary/25 blur-3xl"
-						aria-hidden
-					/>
-					<div
-						className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-accent/15 blur-3xl"
+						className="pointer-events-none absolute inset-0 bg-linear-to-br from-white/[0.06] via-transparent to-transparent"
 						aria-hidden
 					/>
 
-					<div className="relative grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+					<div className="relative grid lg:grid-cols-2 gap-10 lg:gap-12 items-center text-white">
 						<div className="space-y-5 max-w-xl">
-							<p className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/55">
-								<Sparkles className="w-3.5 h-3.5 text-accent-light" />
+							<p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/80">
+								<span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-white/10 ring-1 ring-white/15">
+									<Sparkles className="w-3.5 h-3.5 text-white" aria-hidden />
+								</span>
 								Business orders
 							</p>
-							<h2 className="text-2xl md:text-[1.65rem] font-semibold tracking-tight text-balance leading-snug">
+							<h2 className="text-2xl md:text-4xl lg:text-5xl capitalize font-semibold tracking-tight text-balance leading-tight">
 								Volume supply built around your run rate
 							</h2>
-							<p className="text-sm text-white/75 leading-relaxed">
-								Scheduled drops, palletised loads, and pricing that reflects
-								commitment — tell us what you burn through each month and we&apos;ll
-								structure delivery around it.
-							</p>
 							<ul className="grid sm:grid-cols-2 gap-3 pt-1">
 								{[
 									{
@@ -48,33 +46,41 @@ export function BusinessOrdersSection() {
 										label: "Slotted freight windows",
 									},
 									{
+										icon: Truck,
+										label: "Volume discounts",
+									},
+									{
 										icon: Building2,
 										label: "GST-ready invoicing",
 									},
 								].map((item) => (
 									<li
 										key={item.label}
-										className="flex items-center gap-2.5 rounded-xl bg-white/5 border border-white/10 px-3 py-2.5 text-[13px] text-white/90 backdrop-blur-sm"
+										className="flex items-center gap-2.5 rounded-xl border border-white/12 bg-white/[0.06] px-3 py-2.5 text-[13px] font-medium text-white/95 backdrop-blur-sm"
 									>
-										<item.icon className="w-4 h-4 text-accent-light shrink-0" />
+										<span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white/10 ring-1 ring-white/15">
+											<item.icon
+												className="w-4 h-4 text-white/90"
+												aria-hidden
+											/>
+										</span>
 										{item.label}
 									</li>
 								))}
 							</ul>
-							<div className="flex flex-wrap gap-2 pt-2">
+							<div className="flex flex-wrap w-full gap-2 pt-2">
 								<Link href="/contact">
 									<Button
 										size="md"
-										className="bg-white text-secondary hover:bg-white/92 border-0 shadow-md shadow-black/10"
+										className="cursor-pointer border-0 bg-white font-semibold text-black shadow-lg shadow-black/30 hover:bg-white/90"
 									>
 										Request a quote
 									</Button>
 								</Link>
 								<Link href="/contact">
 									<Button
-										variant="outline"
 										size="md"
-										className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
+										className="cursor-pointer border border-white/25 bg-transparent font-semibold text-white hover:border-white/40 hover:bg-white/10"
 									>
 										Talk to sales
 									</Button>
@@ -94,30 +100,31 @@ export function BusinessOrdersSection() {
 								}}
 							>
 								<div
-									className="absolute inset-0 rounded-2xl bg-linear-to-br from-white/20 to-white/5 border border-white/20 shadow-[0_20px_40px_rgba(0,0,0,0.35)]"
+									className="absolute inset-0 rounded-2xl border border-white/10 bg-zinc-900 shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
 									style={{ transform: "translateZ(0px)" }}
 								/>
 								<div
-									className="absolute inset-x-4 top-4 bottom-0 rounded-2xl bg-linear-to-br from-primary/90 to-primary-dark border border-white/25 shadow-xl"
+									className="absolute inset-x-4 top-4 bottom-0 rounded-2xl border border-white/10 bg-zinc-800 shadow-xl ring-1 ring-white/5"
 									style={{ transform: "translateZ(28px) translateY(-12px)" }}
 								/>
 								<div
-									className="relative rounded-2xl border border-white/30 bg-white/10 backdrop-blur-md p-5 md:p-6 shadow-[0_16px_48px_rgba(0,0,0,0.25)]"
+									className="relative rounded-2xl border border-white/10 bg-white p-5 text-foreground shadow-[0_16px_48px_rgba(0,0,0,0.35)] md:p-6"
 									style={{ transform: "translateZ(56px)" }}
 								>
-									<p className="text-[10px] font-medium uppercase tracking-widest text-white/60 mb-2">
+									<p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-primary">
 										Sample bundle
 									</p>
-									<p className="text-lg font-semibold text-white mb-1">
+									<p className="mb-1 text-lg font-semibold text-foreground">
 										Mixed biomass + coir
 									</p>
-									<p className="text-xs text-white/70 leading-relaxed mb-4">
+									<p className="mb-4 text-xs leading-relaxed text-text-secondary">
 										Tailored to kitchens, farms, or processing lines — moisture
 										and grade matched to spec.
 									</p>
 									<div className="flex gap-2">
-										<span className="inline-flex h-2 flex-1 rounded-full bg-white/25" />
-										<span className="inline-flex h-2 w-1/3 rounded-full bg-accent/80" />
+										<span className="inline-flex h-2 flex-1 rounded-full bg-border" />
+										<span className="inline-flex h-2 w-1/3 rounded-full bg-foreground/20" />
+										<span className="inline-flex h-2 w-8 rounded-full bg-foreground/40" />
 									</div>
 								</div>
 							</div>

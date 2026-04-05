@@ -1,195 +1,167 @@
 "use client";
 
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { FooterNewsletter } from "@/components/layout/FooterNewsletter";
+import { SITE_LOGO_PNG, SITE_NAME } from "@/lib/site-config";
 import { siteShellClass } from "@/lib/site-layout";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
+
+const linkClass =
+	"inline-flex items-center gap-1 rounded-md py-1 text-sm text-white/70 transition-colors hover:text-white focus:outline-none focus-visible:text-white focus-visible:ring-2 focus-visible:ring-primary-light/40 focus-visible:ring-offset-2 focus-visible:ring-offset-footer-surface";
 
 export function Footer() {
-	const [email, setEmail] = useState("");
-
-	const handleNewsletterSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		if (email.trim()) {
-			alert(`Thank you for subscribing with: ${email}`);
-			setEmail("");
-		}
-	};
-
 	return (
-		<footer className="mt-auto w-full min-w-0 border-t border-border bg-foreground text-white/90">
-			<div className={`${siteShellClass} py-8 sm:py-10 md:py-12`}>
-				<div className="flex flex-col lg:flex-row lg:items-end gap-6 sm:gap-8 lg:gap-12 pb-8 sm:pb-10 border-b border-white/10">
-					<div className="flex-1 max-w-md">
-						<Link href="/" className="inline-flex items-center gap-2 mb-3">
-							<span className="text-lg font-semibold tracking-tight">
-								<span className="text-primary-light">Flame</span>
-								<span className="text-white/95">Wood</span>
-							</span>
+		<footer className="mt-auto w-full min-w-0 border-t border-border bg-footer-surface text-white/90">
+			<div
+				className={`${siteShellClass} pb-8 pt-10 sm:pb-10 sm:pt-12 md:pb-12 md:pt-14`}
+			>
+				<FooterNewsletter className="mb-10 sm:mb-12 md:mb-14" />
+
+				<div className="grid grid-cols-1 gap-10 border-t border-white/10 pt-10 sm:gap-12 sm:pt-12 lg:grid-cols-12 lg:gap-10 lg:pt-14">
+					<div className="min-w-0 lg:col-span-4">
+						<Link
+							href="/"
+							className="inline-block rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-primary-light/40 focus-visible:ring-offset-2 focus-visible:ring-offset-footer-surface"
+							aria-label={`${SITE_NAME} home`}
+						>
+							<Image
+								src={SITE_LOGO_PNG}
+								alt=""
+								width={260}
+								height={64}
+								className="h-12 w-auto max-w-[min(100%,260px)] object-contain object-left sm:h-14"
+							/>
 						</Link>
-						<p className="text-sm text-white/60 leading-relaxed">
-							Biomass fuel and coconut products from Kerala — retail and bulk,
-							shipped with care.
+						<p className="mt-4 max-w-sm text-sm leading-relaxed text-white/55">
+							Premium biomass, firewood, and coconut products from Kerala —
+							retail orders and bulk supply, shipped reliably across India.
 						</p>
 					</div>
-					<form
-						onSubmit={handleNewsletterSubmit}
-						className="flex flex-col sm:flex-row gap-2 w-full lg:max-w-md"
-					>
-						<Input
-							type="email"
-							placeholder="Email for updates"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-white/35 text-sm min-h-[42px]"
-							required
-						/>
-						<Button
-							type="submit"
-							variant="secondary"
-							className="shrink-0 border-0 bg-primary text-white hover:bg-primary-light"
-						>
-							Subscribe
-						</Button>
-					</form>
-				</div>
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 md:gap-8 pt-8 sm:pt-10">
-					<div>
-						<h3 className="text-xs font-medium text-white/45 uppercase tracking-wide mb-3">
-							Shop
-						</h3>
-						<ul className="space-y-2.5 text-sm">
-							<li>
-								<Link
-									href="/products/all"
-									className="text-white/70 hover:text-white transition-colors inline-flex items-center gap-1 group"
-								>
-									All products
-									<ArrowRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/products/firewood"
-									className="text-white/70 hover:text-white transition-colors"
-								>
-									Firewood
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/products/coconut"
-									className="text-white/70 hover:text-white transition-colors"
-								>
-									Coconut
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/products/biomass"
-									className="text-white/70 hover:text-white transition-colors"
-								>
-									Biomass
-								</Link>
-							</li>
-						</ul>
+					<div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5 lg:gap-6">
+						<div>
+							<h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40">
+								Shop
+							</h3>
+							<ul className="space-y-2.5">
+								<li>
+									<Link href="/products/all" className={linkClass}>
+										All products
+										<ArrowUpRight
+											className="h-3.5 w-3.5 opacity-50"
+											aria-hidden
+										/>
+									</Link>
+								</li>
+								<li>
+									<Link href="/products/firewood" className={linkClass}>
+										Firewood
+									</Link>
+								</li>
+								<li>
+									<Link href="/products/coconut" className={linkClass}>
+										Coconut
+									</Link>
+								</li>
+								<li>
+									<Link href="/products/biomass" className={linkClass}>
+										Biomass
+									</Link>
+								</li>
+							</ul>
+						</div>
+						<div>
+							<h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40">
+								Support
+							</h3>
+							<ul className="space-y-2.5">
+								<li>
+									<Link href="/contact" className={linkClass}>
+										Contact
+									</Link>
+								</li>
+								<li>
+									<Link href="/track-order" className={linkClass}>
+										Track order
+									</Link>
+								</li>
+								<li>
+									<Link href="/about" className={linkClass}>
+										About
+									</Link>
+								</li>
+							</ul>
+						</div>
+						<div className="col-span-2 sm:col-span-1">
+							<h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40">
+								Legal
+							</h3>
+							<ul className="space-y-2.5">
+								<li>
+									<Link href="/privacy" className={linkClass}>
+										Privacy
+									</Link>
+								</li>
+								<li>
+									<Link href="/terms" className={linkClass}>
+										Terms
+									</Link>
+								</li>
+								<li>
+									<Link href="/refunds" className={linkClass}>
+										Refunds
+									</Link>
+								</li>
+							</ul>
+						</div>
 					</div>
-					<div>
-						<h3 className="text-xs font-medium text-white/45 uppercase tracking-wide mb-3">
-							Support
-						</h3>
-						<ul className="space-y-2.5 text-sm">
-							<li>
-								<Link
-									href="/contact"
-									className="text-white/70 hover:text-white transition-colors"
-								>
-									Contact
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/track-order"
-									className="text-white/70 hover:text-white transition-colors"
-								>
-									Track order
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/about"
-									className="text-white/70 hover:text-white transition-colors"
-								>
-									About
-								</Link>
-							</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="text-xs font-medium text-white/45 uppercase tracking-wide mb-3">
-							Legal
-						</h3>
-						<ul className="space-y-2.5 text-sm">
-							<li>
-								<Link
-									href="/privacy"
-									className="text-white/70 hover:text-white transition-colors"
-								>
-									Privacy
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/terms"
-									className="text-white/70 hover:text-white transition-colors"
-								>
-									Terms
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/refunds"
-									className="text-white/70 hover:text-white transition-colors"
-								>
-									Refunds
-								</Link>
-							</li>
-						</ul>
-					</div>
-					<div className="sm:col-span-2 lg:col-span-1">
-						<h3 className="text-xs font-medium text-white/45 uppercase tracking-wide mb-3">
+
+					<div className="min-w-0 lg:col-span-3">
+						<h3 className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40">
 							Contact
 						</h3>
-						<ul className="space-y-3 text-sm text-white/65">
-							<li className="flex gap-2.5">
-								<MapPin className="w-4 h-4 text-primary-light shrink-0 mt-0.5" />
-								<span>
+						<ul className="space-y-4 text-sm text-white/65">
+							<li className="flex gap-3">
+								<MapPin
+									className="mt-0.5 h-4 w-4 shrink-0 text-primary-light"
+									aria-hidden
+								/>
+								<span className="leading-relaxed">
 									Kochi EXZ, Ernakulam
 									<br />
 									Kerala 682001
 								</span>
 							</li>
-							<li className="flex items-center gap-2.5">
-								<Mail className="w-4 h-4 text-primary-light shrink-0" />
+							<li className="flex items-center gap-3">
+								<Mail
+									className="h-4 w-4 shrink-0 text-primary-light"
+									aria-hidden
+								/>
 								<a
 									href="mailto:support@flamewood.com"
-									className="hover:text-white transition-colors"
+									className="rounded-md text-white/70 underline decoration-white/20 underline-offset-2 transition-colors hover:text-white hover:decoration-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-light/40"
 								>
 									support@flamewood.com
 								</a>
 							</li>
-							<li className="flex items-center gap-2.5">
-								<Phone className="w-4 h-4 text-primary-light shrink-0" />
-								<span>+91 98765 43210</span>
+							<li className="flex items-center gap-3">
+								<Phone
+									className="h-4 w-4 shrink-0 text-primary-light"
+									aria-hidden
+								/>
+								<a
+									href="tel:+919876543210"
+									className="rounded-md text-white/70 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-light/40"
+								>
+									+91 98765 43210
+								</a>
 							</li>
 						</ul>
 					</div>
 				</div>
 
-				<div className="mt-8 sm:mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-white/45 text-center sm:text-left">
+				<div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-center text-xs text-white/40 sm:flex-row sm:text-left">
 					<p>
 						&copy; {new Date().getFullYear()} Flame Wood. All rights reserved.
 					</p>

@@ -4,8 +4,9 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Button } from "@/components/ui/Button";
 
 export const metadata = {
-	title: "Wishlist - Flame Wood",
-	description: "View your saved products",
+	title: "Wishlist",
+	description:
+		"Your saved FlameWood products — sign in to sync across devices.",
 };
 
 export default function WishlistPage() {

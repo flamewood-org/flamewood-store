@@ -246,8 +246,7 @@ export function SiteSearch({ open, onOpenChange }: SiteSearchProps) {
 													{hit.title}
 												</p>
 												<p className="text-xs text-text-tertiary mt-0.5 truncate">
-													{hit.vendor || "FlameWood"} · ₹
-													{hit.price.toFixed(2)}
+													{hit.vendor || "FlameWood"} · ₹{hit.price.toFixed(2)}
 												</p>
 											</div>
 											<ArrowRight className="h-4 w-4 text-text-tertiary shrink-0" />
@@ -263,7 +262,9 @@ export function SiteSearch({ open, onOpenChange }: SiteSearchProps) {
 								onClick={close}
 								className="text-xs font-medium text-primary hover:text-primary-dark inline-flex items-center gap-1"
 							>
-								{debounced.length >= 2 ? "View all in catalog" : "Browse catalog"}
+								{debounced.length >= 2
+									? "View all in catalog"
+									: "Browse catalog"}
 								<ArrowRight className="h-3.5 w-3.5" />
 							</Link>
 							<span className="text-[11px] text-text-tertiary hidden sm:inline">

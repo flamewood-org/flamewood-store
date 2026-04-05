@@ -20,9 +20,7 @@ export function AuthUrlSync() {
 
 		const rawCallback = searchParams.get("callbackUrl");
 		const callbackUrl =
-			rawCallback &&
-			rawCallback.startsWith("/") &&
-			!rawCallback.startsWith("//")
+			rawCallback?.startsWith("/") && !rawCallback.startsWith("//")
 				? rawCallback
 				: "/account";
 		const registered = searchParams.get("registered") === "1";

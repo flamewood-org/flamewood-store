@@ -1,11 +1,12 @@
 import { Clock, Mail, MapPin, Phone, Send } from "lucide-react";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { PageHeader } from "@/components/layout/PageHeader";
 
 export const metadata = {
-	title: "Contact — FlameWood",
-	description: "Reach the FlameWood team.",
+	title: "Contact",
+	description:
+		"Contact FlameWood for orders, bulk quotes, and product questions. We reply to retail and business inquiries.",
 };
 
 export default function ContactPage() {

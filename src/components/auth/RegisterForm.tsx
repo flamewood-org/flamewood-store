@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
@@ -25,6 +24,7 @@ export function RegisterForm({
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState<string | null>(null);
 	const [loading, setLoading] = useState(false);
@@ -34,12 +34,23 @@ export function RegisterForm({
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setError(null);
+		const phoneDigits = phone.replace(/\D/g, "");
+		if (!phone.trim() || phoneDigits.length < 8) {
+			setError("Enter a valid phone number (at least 8 digits).");
+			return;
+		}
 		setLoading(true);
 		try {
 			const res = await fetch("/api/auth/register", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ firstName, lastName, email, password }),
+				body: JSON.stringify({
+					firstName,
+					lastName,
+					email,
+					phone,
+					password,
+				}),
 			});
 			const data = await res.json().catch(() => ({}));
 			if (!res.ok) {
@@ -126,6 +137,24 @@ export function RegisterForm({
 				</div>
 				<div>
 					<label className="block text-sm font-semibold text-foreground mb-1.5">
+						Phone <span className="text-error">*</span>
+					</label>
+					<Input
+						type="tel"
+						inputMode="tel"
+						autoComplete="tel"
+						placeholder="+91 98765 43210"
+						value={phone}
+						onChange={(e) => setPhone(e.target.value)}
+						required
+						className={isModal ? "h-11" : "h-12"}
+					/>
+					<p className="text-xs text-text-tertiary mt-1">
+						Include country code. Used for delivery and order updates.
+					</p>
+				</div>
+				<div>
+					<label className="block text-sm font-semibold text-foreground mb-1.5">
 						Password
 					</label>
 					<Input
@@ -168,12 +197,23 @@ export function RegisterForm({
 						Sign in
 					</button>
 				) : (
-					<Link
-						href="/login"
+					<button
+						type="button"
+						onClick={() => {
+							const q = new URLSearchParams();
+							q.set("auth", "login");
+							if (
+								callbackUrl?.startsWith("/") &&
+								!callbackUrl.startsWith("//")
+							) {
+								q.set("callbackUrl", callbackUrl);
+							}
+							router.push(`/?${q.toString()}`);
+						}}
 						className="font-semibold text-primary hover:underline"
 					>
 						Sign in
-					</Link>
+					</button>
 				)}
 			</p>
 		</div>

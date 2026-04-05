@@ -1,28 +1,38 @@
 @import "tailwindcss";
 
 :root {
-	--color-primary: #b45309;
-	--color-primary-light: #d97706;
-	--color-primary-dark: #92400e;
-	--color-secondary: #713f12;
-	--color-accent: #eab308;
-	--color-accent-light: #facc15;
+	/* Logo-aligned brand palette */
+	--palette-coral: #cc5558;
+	--palette-cream: #fffae5;
+	--palette-bronze: #b5802f;
+	--palette-mauve: #b5615b;
+	--palette-gold: #cdae76;
+	--palette-sand: #e7d4a9;
+	--palette-peach: #f3c0b4;
 
-	--background: #f7f7f5;
-	--foreground: #1a1a18;
+	--color-primary: var(--palette-coral);
+	--color-primary-light: var(--palette-peach);
+	--color-primary-dark: var(--palette-mauve);
+	--color-secondary: var(--palette-bronze);
+	--color-accent: var(--palette-gold);
+	--color-accent-light: var(--palette-sand);
+
+	--background: #ffffff;
+	--foreground: #2a2220;
 	--color-surface: #ffffff;
-	--color-surface-alt: #f0f0ed;
-	--color-border: #e4e4df;
-	--color-border-light: #efefec;
-	--color-text-secondary: #6b6b66;
-	--color-text-tertiary: #94948f;
+	--color-surface-alt: #f5ebe3;
+	--color-border: var(--palette-sand);
+	--color-border-light: #f2e6d6;
+	--color-text-secondary: #5c4f4a;
+	--color-text-tertiary: #8a7d76;
 
 	--color-success: #15803d;
-	--color-warning: #ca8a04;
-	--color-error: #b91c1c;
+	--color-warning: #b5802f;
+	--color-error: #b42328;
 	--color-info: #1d4ed8;
 
-	--hero-tint: #fff8f0;
+	--hero-tint: #ffffff;
+	--footer-surface: #2a2220;
 }
 
 @theme inline {
@@ -45,6 +55,7 @@
 	--color-error: var(--color-error);
 	--color-info: var(--color-info);
 	--color-hero-tint: var(--hero-tint);
+	--color-footer-surface: var(--footer-surface);
 	--font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 	--radius-sm: 6px;
 	--radius-md: 10px;
@@ -53,6 +64,10 @@
 	--shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04);
 	--shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.06);
 	--shadow-sidebar: -4px 0 24px rgba(0, 0, 0, 0.08);
+}
+
+html {
+	background: var(--background);
 }
 
 body {
@@ -180,7 +195,7 @@ body {
 }
 
 .animate-shimmer {
-	background: linear-gradient(90deg, #f0f0ed 25%, #e4e4df 50%, #f0f0ed 75%);
+	background: linear-gradient(90deg, #f0e6d8 25%, #e8dcc8 50%, #f0e6d8 75%);
 	background-size: 200% 100%;
 	animation: shimmer 1.4s infinite;
 }
@@ -231,7 +246,7 @@ body {
 }
 
 .glass {
-	background: rgba(255, 255, 255, 0.85);
+	background: rgba(255, 255, 255, 0.88);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 }
@@ -267,6 +282,6 @@ body {
 }
 
 ::selection {
-	background: rgba(180, 83, 9, 0.12);
+	background: rgba(204, 85, 88, 0.18);
 	color: var(--foreground);
 }

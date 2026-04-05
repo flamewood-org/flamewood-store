@@ -103,7 +103,7 @@ export function MarketplaceProductCard({
 									e.stopPropagation();
 									onQuickView();
 								}}
-								className="w-8 h-8 bg-white/95 backdrop-blur-sm rounded-full shadow-md flex items-center justify-center text-foreground hover:text-primary transition-colors"
+								className="w-8 h-8 bg-surface/95 backdrop-blur-sm rounded-full shadow-md flex items-center justify-center text-foreground hover:text-primary transition-colors"
 								aria-label="Quick view"
 							>
 								<Eye className="w-3.5 h-3.5" />
@@ -115,7 +115,7 @@ export function MarketplaceProductCard({
 							className={`w-8 h-8 rounded-full shadow-md flex items-center justify-center transition-all duration-200 ${
 								inWishlist
 									? "bg-primary text-white"
-									: "bg-white/95 backdrop-blur-sm text-foreground hover:text-primary"
+									: "bg-surface/95 backdrop-blur-sm text-foreground hover:text-primary"
 							}`}
 							aria-label={
 								inWishlist ? "Remove from wishlist" : "Add to wishlist"

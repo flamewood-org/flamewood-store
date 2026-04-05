@@ -31,7 +31,7 @@ export function Button({
 		outline:
 			"border border-border bg-surface text-foreground hover:border-primary/40 hover:text-primary focus-visible:ring-primary/25",
 		ghost:
-			"text-text-secondary hover:text-foreground hover:bg-surface-alt focus-visible:ring-neutral-400/30",
+			"text-text-secondary hover:text-foreground hover:bg-surface-alt focus-visible:ring-primary/25",
 		danger:
 			"bg-error/10 text-error hover:bg-error hover:text-white focus-visible:ring-error/40",
 	};

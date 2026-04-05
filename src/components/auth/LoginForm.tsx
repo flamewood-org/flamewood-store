@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
@@ -146,12 +145,23 @@ export function LoginForm({
 						Create one
 					</button>
 				) : (
-					<Link
-						href="/register"
+					<button
+						type="button"
+						onClick={() => {
+							const q = new URLSearchParams();
+							q.set("auth", "register");
+							if (
+								callbackUrl?.startsWith("/") &&
+								!callbackUrl.startsWith("//")
+							) {
+								q.set("callbackUrl", callbackUrl);
+							}
+							router.push(`/?${q.toString()}`);
+						}}
 						className="font-semibold text-primary hover:underline"
 					>
 						Create one
-					</Link>
+					</button>
 				)}
 			</p>
 		</div>

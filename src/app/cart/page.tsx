@@ -55,9 +55,9 @@ export default function CartPage() {
 
 	if (!cart || cart.items.length === 0) {
 		return (
-			<div className="min-h-screen min-w-0 overflow-x-hidden bg-linear-to-b from-gray-50/50 to-white">
+			<div className="min-h-screen min-w-0 overflow-x-hidden bg-background">
 				{/* Breadcrumb */}
-				<div className="bg-white border-b border-border">
+				<div className="bg-surface border-b border-border">
 					<div className="w-full min-w-0 py-3 sm:py-4">
 						<nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm">
 							<Link
@@ -97,10 +97,7 @@ export default function CartPage() {
 							Looks like you haven&apos;t added any products yet.
 						</p>
 						<Link href="/products/all">
-							<Button
-								size="lg"
-								className="px-6"
-							>
+							<Button size="lg" className="px-6">
 								Start Shopping →
 							</Button>
 						</Link>
@@ -116,9 +113,9 @@ export default function CartPage() {
 			: cart.subtotal;
 
 	return (
-		<div className="min-h-screen min-w-0 overflow-x-hidden bg-linear-to-b from-gray-50/50 to-white">
+		<div className="min-h-screen min-w-0 overflow-x-hidden bg-background">
 			{/* Breadcrumb */}
-			<div className="bg-white border-b border-border">
+			<div className="bg-surface border-b border-border">
 				<div className="w-full min-w-0 py-3 sm:py-4">
 					<nav className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm">
 						<Link
@@ -148,7 +145,7 @@ export default function CartPage() {
 							>
 								<div className="flex gap-6">
 									{/* Product Image */}
-									<div className="relative w-28 h-28 shrink-0 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg overflow-hidden">
+									<div className="relative w-28 h-28 shrink-0 bg-surface-alt rounded-lg overflow-hidden border border-border/60">
 										{item.image ? (
 											<Image
 												src={item.image.url}
@@ -193,7 +190,7 @@ export default function CartPage() {
 											<Trash2 className="w-5 h-5" />
 										</button>
 
-										<div className="flex items-center gap-2 bg-gray-50 rounded-lg p-1">
+										<div className="flex items-center gap-2 bg-surface-alt rounded-lg p-1 border border-border/50">
 											<Button
 												variant="ghost"
 												size="sm"
@@ -204,7 +201,7 @@ export default function CartPage() {
 													)
 												}
 												disabled={item.quantity <= 1}
-												className="h-8 w-8 p-0 hover:bg-white"
+												className="h-8 w-8 p-0 hover:bg-surface"
 											>
 												<Minus className="w-4 h-4" />
 											</Button>
@@ -217,7 +214,7 @@ export default function CartPage() {
 												onClick={() =>
 													updateQuantity(item.id, item.quantity + 1)
 												}
-												className="h-8 w-8 p-0 hover:bg-white"
+												className="h-8 w-8 p-0 hover:bg-surface"
 											>
 												<Plus className="w-4 h-4" />
 											</Button>
@@ -282,7 +279,7 @@ export default function CartPage() {
 							</div>
 
 							{/* Shipping Estimator */}
-							<div className="mb-6 p-4 bg-gray-50 rounded-lg">
+							<div className="mb-6 p-4 bg-surface-alt rounded-lg border border-border/50">
 								<label className="block text-sm font-semibold text-foreground mb-3">
 									Estimate Shipping
 								</label>
@@ -300,7 +297,7 @@ export default function CartPage() {
 								</div>
 
 								{shippingEstimate && (
-									<div className="mt-3 p-3 bg-white rounded-lg border border-border">
+									<div className="mt-3 p-3 bg-surface rounded-lg border border-border">
 										<div className="flex items-start gap-3">
 											<CheckCircle2 className="w-5 h-5 text-success shrink-0 mt-0.5" />
 											<div>

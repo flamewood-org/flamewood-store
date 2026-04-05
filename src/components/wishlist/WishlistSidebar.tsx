@@ -71,7 +71,9 @@ export function WishlistSidebar() {
 				<div className="flex items-center justify-between px-6 py-5 border-b border-border">
 					<div className="flex items-center gap-3">
 						<Heart className="w-5 h-5 text-primary" />
-						<h2 className="text-base font-semibold text-foreground">Wishlist</h2>
+						<h2 className="text-base font-semibold text-foreground">
+							Wishlist
+						</h2>
 						{itemCount > 0 && (
 							<span className="inline-flex items-center justify-center h-5 min-w-[20px] px-1.5 rounded-full bg-primary text-white text-[11px] font-medium">
 								{itemCount}

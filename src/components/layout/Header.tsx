@@ -10,13 +10,15 @@ import {
 	ShoppingBag,
 	X,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { HeaderAccountLink } from "@/components/layout/HeaderAccountLink";
+import { HeaderAccountMenu } from "@/components/layout/HeaderAccountMenu";
 import { SiteSearch } from "@/components/search/SiteSearch";
+import { SITE_LOGO_PNG, SITE_NAME } from "@/lib/site-config";
+import { siteShellClass } from "@/lib/site-layout";
 import { useCartContext } from "@/store/CartContext";
 import { useDeliveryLocation } from "@/store/DeliveryLocationContext";
-import { siteShellClass } from "@/lib/site-layout";
 import { useWishlistContext } from "@/store/WishlistContext";
 
 export function Header() {
@@ -38,11 +40,13 @@ export function Header() {
 	return (
 		<header
 			className={`sticky top-0 z-50 w-full min-w-0 bg-surface transition-shadow duration-200 ${
-				scrolled ? "shadow-sm border-b border-border/80" : "border-b border-border/50 md:border-transparent"
+				scrolled
+					? "shadow-sm border-b border-border/80"
+					: "border-b border-border/50 md:border-transparent"
 			}`}
 		>
-			{/* Top utility strip — contact, nav shortcuts, account (hidden on small screens) */}
-			<div className="hidden md:block bg-secondary text-white text-[12px] md:text-[13px]">
+			{/* Top utility strip — contact, nav shortcuts (hidden on small screens) */}
+			<div className="hidden  md:block bg-secondary text-white text-[12px] md:text-[13px]">
 				<div
 					className={`${siteShellClass} flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-y-1.5 py-1.5 md:py-2`}
 				>
@@ -97,14 +101,13 @@ export function Header() {
 						>
 							Track order
 						</Link>
-						<HeaderAccountLink variant="inverse" />
 					</div>
 				</div>
 			</div>
 
 			<div
 				className={`transition-colors duration-200 ${
-					scrolled ? "bg-white/95 backdrop-blur-md" : "bg-surface"
+					scrolled ? "bg-surface/95 backdrop-blur-md" : "bg-surface"
 				}`}
 			>
 				<div
@@ -123,17 +126,17 @@ export function Header() {
 
 							<Link
 								href="/"
-								className="group flex min-w-0 max-w-[min(52vw,14rem)] items-center gap-2 sm:max-w-none md:gap-2.5"
+								className="flex min-w-0 max-w-[min(62vw,16rem)] shrink-0 items-center sm:max-w-[18rem] md:max-w-[20rem]"
+								aria-label={`${SITE_NAME} home`}
 							>
-								<div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-linear-to-br from-primary/12 to-secondary/10 ring-1 ring-border/50">
-									<span className="text-lg leading-none" aria-hidden>
-										🔥
-									</span>
-								</div>
-								<span className="truncate text-[1.0625rem] font-semibold leading-tight tracking-tight sm:text-lg md:text-[1.05rem]">
-									<span className="text-primary">Flame</span>
-									<span className="text-secondary">Wood</span>
-								</span>
+								<Image
+									src={SITE_LOGO_PNG}
+									alt=""
+									width={240}
+									height={60}
+									className="h-10 w-auto max-h-11 object-contain object-left sm:h-11 sm:max-h-12 md:h-12 md:max-h-14"
+									priority
+								/>
 							</Link>
 						</div>
 
@@ -165,6 +168,8 @@ export function Header() {
 									{itemCount}
 								</span>
 							</button>
+
+							<HeaderAccountMenu />
 						</div>
 					</div>
 				</div>
@@ -186,10 +191,20 @@ export function Header() {
 			>
 				<div className="flex flex-col h-full">
 					<div className="flex items-center justify-between p-4 border-b border-border">
-						<span className="text-lg font-semibold">
-							<span className="text-primary">Flame</span>
-							<span className="text-secondary">Wood</span>
-						</span>
+						<Link
+							href="/"
+							className="flex min-w-0 max-w-[min(70vw,16rem)] shrink-0 items-center"
+							onClick={() => setIsMobileMenuOpen(false)}
+							aria-label={`${SITE_NAME} home`}
+						>
+							<Image
+								src={SITE_LOGO_PNG}
+								alt=""
+								width={240}
+								height={60}
+								className="h-10 w-auto max-h-11 object-contain object-left sm:h-11"
+							/>
+						</Link>
 						<button
 							type="button"
 							onClick={() => setIsMobileMenuOpen(false)}

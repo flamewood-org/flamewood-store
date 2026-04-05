@@ -3,7 +3,9 @@ import Image from "next/image";
 import { PageHeader } from "@/components/layout/PageHeader";
 
 export const metadata = {
-	title: "About — FlameWood",
+	title: "About",
+	description:
+		"Learn how FlameWood supplies firewood, biomass, and coconut products from Kerala with consistent quality and delivery.",
 };
 
 export default function AboutPage() {

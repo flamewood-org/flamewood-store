@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { getCategoryFromProduct } from "@/lib/product-category";
 import { getProducts } from "@/lib/shopify";
 

@@ -2,17 +2,17 @@
 
 import {
 	createContext,
+	type ReactNode,
 	useCallback,
 	useContext,
 	useMemo,
 	useState,
-	type ReactNode,
 } from "react";
 
 type AuthView = "login" | "register";
 
 function safeCallbackUrl(url: string | undefined | null): string {
-	if (url && url.startsWith("/") && !url.startsWith("//")) return url;
+	if (url?.startsWith("/") && !url.startsWith("//")) return url;
 	return "/account";
 }
 
@@ -72,15 +72,7 @@ export function AuthModalProvider({ children }: { children: ReactNode }) {
 			openRegister,
 			close,
 		}),
-		[
-			open,
-			view,
-			callbackUrl,
-			registeredBanner,
-			openLogin,
-			openRegister,
-			close,
-		],
+		[open, view, callbackUrl, registeredBanner, openLogin, openRegister, close],
 	);
 
 	return (

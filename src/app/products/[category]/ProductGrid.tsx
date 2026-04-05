@@ -103,7 +103,9 @@ export default function ProductGrid({ category }: { category: string }) {
 			{search && (
 				<p className="text-sm text-text-secondary mb-4">
 					Showing results for{" "}
-					<span className="font-medium text-foreground">&ldquo;{search}&rdquo;</span>
+					<span className="font-medium text-foreground">
+						&ldquo;{search}&rdquo;
+					</span>
 					{" · "}
 					<Link
 						href={`/products/${category}`}

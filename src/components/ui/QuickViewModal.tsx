@@ -27,20 +27,24 @@ export function QuickViewModal({
 	const [activeImageIndex, setActiveImageIndex] = useState(0);
 	const [quantity, setQuantity] = useState(1);
 
-	// Reset state when product changes
 	useEffect(() => {
 		if (isOpen) {
-			setQuantity(1);
-			setActiveImageIndex(0);
 			document.body.style.overflow = "hidden";
 		} else {
 			document.body.style.overflow = "";
 		}
-
 		return () => {
 			document.body.style.overflow = "";
 		};
-	}, [isOpen, product]);
+	}, [isOpen]);
+
+	// Reset picker state when opening or when the viewed product changes
+	// biome-ignore lint/correctness/useExhaustiveDependencies: product?.id must re-run when quick-view target changes
+	useEffect(() => {
+		if (!isOpen) return;
+		setQuantity(1);
+		setActiveImageIndex(0);
+	}, [isOpen, product?.id]);
 
 	if (!isOpen || !product) return null;
 
@@ -60,24 +64,26 @@ export function QuickViewModal({
 	return (
 		<div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto overscroll-contain">
 			{/* Backdrop */}
-			<div
-				className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
+			<button
+				type="button"
+				className="absolute inset-0 cursor-default bg-black/60 backdrop-blur-sm animate-fade-in"
 				onClick={onClose}
+				aria-label="Close quick view"
 			/>
 
 			{/* Modal Content */}
-			<div className="relative my-auto w-full max-w-4xl max-h-[min(92dvh,900px)] overflow-hidden rounded-2xl bg-white shadow-xl animate-scale-in flex flex-col md:flex-row">
+			<div className="relative my-auto w-full max-w-4xl max-h-[min(92dvh,900px)] overflow-hidden rounded-2xl bg-surface shadow-xl animate-scale-in flex flex-col md:flex-row">
 				<button
 					type="button"
 					onClick={onClose}
-					className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors"
+					className="absolute top-4 right-4 z-10 w-10 h-10 bg-surface/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-surface-alt transition-colors border border-border/60"
 				>
-					<X className="w-5 h-5 text-gray-700" />
+					<X className="w-5 h-5 text-foreground" />
 				</button>
 
 				{/* Left: Image Gallery */}
 				<div className="w-full md:w-1/2 min-h-[220px] h-[38vh] sm:h-[42vh] md:h-auto md:min-h-[min(500px,55vh)] bg-surface-alt relative p-4 sm:p-6 flex flex-col gap-4">
-					<div className="relative flex-1 bg-white rounded-2xl overflow-hidden">
+					<div className="relative flex-1 bg-surface rounded-2xl overflow-hidden">
 						{product.images[activeImageIndex] ? (
 							<Image
 								src={product.images[activeImageIndex].url}
