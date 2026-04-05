@@ -215,7 +215,13 @@ const ADD_TO_CART_MUTATION = `
           }
         }
         cost {
+          totalAmount {
+            amount
+          }
           subtotalAmount {
+            amount
+          }
+          totalTaxAmount {
             amount
           }
         }
@@ -263,7 +269,13 @@ const UPDATE_CART_ITEM_MUTATION = `
           }
         }
         cost {
+          totalAmount {
+            amount
+          }
           subtotalAmount {
+            amount
+          }
+          totalTaxAmount {
             amount
           }
         }
@@ -311,7 +323,13 @@ const REMOVE_FROM_CART_MUTATION = `
           }
         }
         cost {
+          totalAmount {
+            amount
+          }
           subtotalAmount {
+            amount
+          }
+          totalTaxAmount {
             amount
           }
         }
@@ -358,7 +376,13 @@ const GET_CART_QUERY = `
         }
       }
       cost {
+        totalAmount {
+          amount
+        }
         subtotalAmount {
+          amount
+        }
+        totalTaxAmount {
           amount
         }
       }
@@ -630,6 +654,8 @@ function transformCart(cartData: Record<string, any>): Cart {
 		checkoutUrl: cartData.checkoutUrl || "",
 		items,
 		subtotal: parseFloat(cartData.cost?.subtotalAmount?.amount || 0),
+		totalTax: parseFloat(cartData.cost?.totalTaxAmount?.amount || 0),
+		totalAmount: parseFloat(cartData.cost?.totalAmount?.amount || 0),
 		totalWeight,
 		itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
 	};

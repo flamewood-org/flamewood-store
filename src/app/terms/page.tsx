@@ -86,8 +86,8 @@ export default function TermsOfServicePage() {
 				payment failure, delivery restrictions to your pincode).
 			</p>
 			<p>
-				Payment is processed through our secure checkout (including Shopify
-				Checkout or other providers we enable). You authorise us and our payment
+				Payment is processed through our secure checkout and payment partners.
+				You authorise us and our payment
 				partners to charge your selected payment method for the total amount
 				shown at checkout, including applicable taxes and shipping.
 			</p>

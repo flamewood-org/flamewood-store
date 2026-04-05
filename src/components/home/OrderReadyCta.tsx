@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
 const TRUST_POINTS = [
-	"Secure Shopify checkout",
+	"Secure Encrypted Checkout",
 	"Live inventory & weights",
 	"Bulk & custom quotes",
 ] as const;
@@ -24,7 +24,7 @@ export function OrderReadyCta() {
 				<div className="relative overflow-hidden rounded-3xl border-2 border-primary/25 bg-surface shadow-[0_4px_24px_rgba(204,85,88,0.12),0_1px_3px_rgba(0,0,0,0.06)] ring-1 ring-primary/10">
 					{/* Warm wash + corner accents */}
 					<div
-						className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/[0.11] via-accent/[0.08] to-secondary/[0.08]"
+						className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/11 via-accent/8 to-secondary/8"
 						aria-hidden
 					/>
 					<div
@@ -64,7 +64,7 @@ export function OrderReadyCta() {
 									<span className="relative whitespace-nowrap text-primary">
 										<span className="relative z-10">place an order?</span>
 										<span
-											className="absolute -inset-x-1 -bottom-1 top-[60%] -z-0 rounded-md bg-primary/15 sm:-inset-x-2"
+											className="absolute -inset-x-1 -bottom-1 top-[60%] z-0 rounded-md bg-primary/15 sm:-inset-x-2"
 											aria-hidden
 										/>
 									</span>
@@ -93,7 +93,7 @@ export function OrderReadyCta() {
 							</ul>
 						</div>
 
-						<div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch lg:flex-col lg:items-stretch xl:min-w-[17rem]">
+						<div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch lg:flex-col lg:items-stretch xl:min-w-68">
 							<Link
 								href="/products/all"
 								className="inline-flex sm:flex-1 lg:flex-none"

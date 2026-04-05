@@ -53,8 +53,7 @@ export default function PrivacyPolicyPage() {
 			<ul>
 				<li>
 					<strong>Identity &amp; account data</strong> — name, account or
-					customer identifiers when you create or use an account with us or
-					Shopify.
+					customer identifiers when you create or use an account with us.
 				</li>
 				<li>
 					<strong>Contact data</strong> — email address, phone number, billing
@@ -66,8 +65,8 @@ export default function PrivacyPolicyPage() {
 					related to your order.
 				</li>
 				<li>
-					<strong>Payment data</strong> — payments are processed by our payment
-					providers (e.g. Shopify Payments or other gateways). We do not store
+					<strong>Payment data</strong> — payments are processed by our secure
+					payment providers and gateways. We do not store
 					full card numbers on our own servers; we may receive limited
 					confirmation data (e.g. last four digits, status).
 				</li>
@@ -149,8 +148,8 @@ export default function PrivacyPolicyPage() {
 			</p>
 			<ul>
 				<li>
-					<strong>Shopify</strong> — our e-commerce platform (hosting, checkout,
-					and related services).
+					<strong>Platform partners</strong> — our secure e-commerce platform
+					(hosting, checkout, and related services).
 				</li>
 				<li>
 					<strong>Payment providers</strong> — to authorise and settle payments.

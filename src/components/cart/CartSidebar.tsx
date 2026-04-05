@@ -1,15 +1,17 @@
 "use client";
 
-import { ArrowRight, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import { ArrowRight, MapPin, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { useCartContext } from "@/store/CartContext";
+import { useDeliveryLocation } from "@/store/DeliveryLocationContext";
 
 export function CartSidebar() {
 	const { cart, isLoading, isOpen, closeCart, updateQuantity, removeFromCart } =
 		useCartContext();
+	const { location, openModal } = useDeliveryLocation();
 	const [isClosing, setIsClosing] = useState(false);
 
 	// Lock body scroll when sidebar is open
@@ -145,9 +147,11 @@ export function CartSidebar() {
 										>
 											{item.productTitle}
 										</Link>
-										<p className="text-xs text-text-secondary mt-0.5">
-											{item.variant.title}
-										</p>
+										{item.variant.title !== "Default Title" && (
+											<p className="text-xs text-text-secondary mt-0.5">
+												{item.variant.title}
+											</p>
+										)}
 										<p className="text-sm font-semibold text-primary mt-1 tabular-nums">
 											₹{(item.variant.price * item.quantity).toFixed(2)}
 										</p>
@@ -197,49 +201,51 @@ export function CartSidebar() {
 					)}
 				</div>
 
+				{/* Delivery Estimate (Compact Highlight) */}
+				{!isEmpty && cart && location && (
+					<div className="px-4 py-2.5 bg-success/5 border-y border-success/10 flex items-center justify-between gap-3">
+						<div className="flex items-center gap-2 min-w-0">
+							<MapPin className="w-3.5 h-3.5 text-success shrink-0" />
+							<p className="text-[11px] font-medium text-success truncate">
+								Free Delivery to <span className="font-bold">{location.pincode}</span>
+							</p>
+						</div>
+						<button
+							type="button"
+							onClick={openModal}
+							className="text-[10px] font-bold text-success/70 uppercase hover:text-success"
+						>
+							Change
+						</button>
+					</div>
+				)}
+
 				{/* Footer */}
 				{!isEmpty && cart && (
 					<div className="border-t border-border px-4 sm:px-6 py-4 sm:py-5 space-y-4 bg-surface shrink-0 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
-						{/* Summary */}
-						<div className="space-y-2">
-							<div className="flex justify-between text-sm">
-								<span className="text-text-secondary">
-									Subtotal ({cart.itemCount} items)
-								</span>
-								<span className="font-semibold text-foreground">
-									₹{cart.subtotal.toFixed(2)}
-								</span>
-							</div>
-							<div className="flex justify-between text-sm">
-								<span className="text-text-secondary">Shipping</span>
-								<span className="text-text-secondary text-xs">
-									Calculated at checkout
-								</span>
-							</div>
-							<div className="flex justify-between pt-2 border-t border-border">
-								<span className="font-medium text-foreground">Total</span>
-								<span className="font-semibold text-lg text-primary tabular-nums">
-									₹{cart.subtotal.toFixed(2)}
-								</span>
-							</div>
-						</div>
+						{/* Final Action Area */}
 
 						{/* Actions */}
-						<div className="space-y-2">
+						<div className="space-y-3">
 							<Button
 								size="lg"
 								fullWidth
 								onClick={handleCheckout}
-								className="flex items-center justify-center gap-2 font-medium"
+								className="flex items-center justify-between px-6 font-bold shadow-lg shadow-primary/20"
 							>
-								Checkout
-								<ArrowRight className="w-4 h-4" />
+								<span className="flex items-center gap-2">
+									Checkout <ArrowRight className="w-4 h-4" />
+								</span>
+								<span className="text-lg tracking-tighter">₹{cart.subtotal.toFixed(0)}</span>
 							</Button>
-							<Link href="/cart" onClick={handleClose} className="block">
-								<Button variant="ghost" size="md" fullWidth className="text-sm">
-									View Full Cart
-								</Button>
-							</Link>
+							
+							{cart.items.length > 2 && (
+								<Link href="/cart" onClick={handleClose} className="block">
+									<Button variant="ghost" size="md" fullWidth className="text-xs font-semibold text-text-secondary uppercase tracking-widest hover:text-primary">
+										View Full Cart
+									</Button>
+								</Link>
+							)}
 						</div>
 
 						{/* Trust Badge */}
@@ -258,7 +264,7 @@ export function CartSidebar() {
 									d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
 								/>
 							</svg>
-							Secure checkout powered by Shopify
+							Secure Checkout SSL Encrypted
 						</div>
 					</div>
 				)}

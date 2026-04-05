@@ -285,7 +285,7 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 									Addresses
 								</h2>
 								<p className="text-text-secondary text-sm mb-6">
-									Addresses from checkout are managed in Shopify. Update them at
+									Addresses are managed in your secure store portal. Update them at
 									checkout or in your{" "}
 									<a
 										href={`https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || ""}/account/addresses`}
@@ -293,14 +293,14 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 										target="_blank"
 										rel="noreferrer"
 									>
-										Shopify account portal
+										account portal
 									</a>
 									.
 								</p>
 								<Card className="p-8 text-center border-dashed border-border text-text-secondary">
 									<MapPin className="w-10 h-10 mx-auto mb-2 opacity-50" />
 									<p className="text-sm">
-										Saved addresses sync with your next Shopify checkout.
+										Saved addresses sync with your next checkout.
 									</p>
 								</Card>
 							</div>
@@ -339,8 +339,8 @@ export function AccountDashboard({ customer }: { customer: CustomerProfile }) {
 										<p className="font-medium">{customer.phone || "—"}</p>
 									</div>
 									<p className="text-sm text-text-secondary pt-4 border-t border-border">
-										To change your password or email, use your store&apos;s
-										customer account settings in Shopify.
+										To change your password or email, use your secure
+										customer account settings in the portal.
 									</p>
 								</Card>
 							</div>

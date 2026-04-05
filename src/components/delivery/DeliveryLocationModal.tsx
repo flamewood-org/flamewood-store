@@ -231,7 +231,7 @@ export function DeliveryLocationModal() {
 	if (!hydrated || !isModalOpen) return null;
 
 	return (
-		<div className="fixed inset-0 z-[110] flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto overscroll-contain">
+		<div className="fixed inset-0 z-110 flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto overscroll-contain">
 			{/* Backdrop: does not close the modal — must complete verification */}
 			<div
 				className="absolute inset-0 bg-black/55 backdrop-blur-sm animate-fade-in cursor-default"
@@ -239,7 +239,7 @@ export function DeliveryLocationModal() {
 			/>
 
 			<div
-				className="relative z-[1] my-auto w-full max-w-[min(100%,28rem)] rounded-2xl border border-border bg-surface shadow-lg animate-scale-in overflow-hidden flex flex-col max-h-[min(92dvh,40rem)]"
+				className="relative z-1 my-auto w-full max-w-[min(100%,28rem)] rounded-2xl border border-border bg-surface shadow-lg animate-scale-in overflow-hidden flex flex-col max-h-[min(92dvh,40rem)]"
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby="delivery-location-title"
@@ -287,25 +287,32 @@ export function DeliveryLocationModal() {
 						</div>
 
 						{suggestions.length > 0 && (
-							<div className="absolute z-10 left-0 right-0 mt-2 max-h-48 overflow-y-auto rounded-xl border border-border bg-surface shadow-lg py-1">
+							<div className="mt-4 max-h-72 overflow-y-auto rounded-xl border border-primary/20 bg-surface-alt/40 shadow-inner py-1.5 custom-scrollbar">
+								<div className="px-3 py-1.5 mb-1 text-[10px] uppercase font-bold tracking-widest text-primary/60 border-b border-primary/10">
+									Select your area
+								</div>
 								{suggestions.map((row, i) => (
 									<button
 										key={`${officeKey(row)}-${i}`}
 										type="button"
-										className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+										className={`w-full text-left px-4 py-3 text-sm transition-all duration-200 ${
 											i === highlight
-												? "bg-primary/10 text-foreground"
-												: "hover:bg-surface-alt text-foreground"
+												? "bg-primary text-white shadow-md"
+												: "hover:bg-primary/5 text-foreground border-b border-border/50 last:border-0"
 										}`}
 										onMouseDown={(e) => e.preventDefault()}
 										onClick={() => applyOffice(row)}
 									>
-										<span className="font-bold tabular-nums">
-											{row.Pincode}
-										</span>
-										<span className="text-text-secondary font-medium">
-											{" "}
-											· {row.Name}, {row.District}
+										<div className="flex items-center gap-2">
+											<span className="font-bold tabular-nums">
+												{row.Pincode}
+											</span>
+											<span className={`text-[10px] px-1.5 py-0.5 rounded-sm uppercase font-bold tracking-tighter ${i === highlight ? "bg-white/20 text-white" : "bg-primary/5 text-primary/70"}`}>
+												{row.District}
+											</span>
+										</div>
+										<span className={`block text-xs mt-1.5 font-medium ${i === highlight ? "text-white/90" : "text-text-secondary"}`}>
+											{row.Name}, {row.State}
 										</span>
 									</button>
 								))}

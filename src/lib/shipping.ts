@@ -23,7 +23,7 @@ export const REGION_RATES = {
 	INTERNATIONAL: {
 		baseRate: 0,
 		perKgRate: 0,
-		name: "International",
+		name: "Outside Service Area",
 		requiresQuote: true,
 	},
 };
@@ -57,8 +57,8 @@ export function detectRegion(pincode: string): keyof typeof REGION_RATES {
 		return "SOUTH_INDIA";
 	}
 
-	// International pincodes (simplified check)
-	if (pincode.length > 6 || code < 100000) {
+	// Outside India (simplified check for 6-digit Indian pincode standard)
+	if (pincode.length !== 6 || code < 100000 || code > 999999) {
 		return "INTERNATIONAL";
 	}
 
@@ -77,13 +77,13 @@ export function calculateShipping(totalWeight: number, pincode: string) {
 	const region = detectRegion(pincode);
 	const regionData = REGION_RATES[region];
 
-	// Check if manual quote is required
+	// Check if region is served
 	if (regionData.requiresQuote) {
 		return {
 			region: regionData.name,
 			tier: "FREIGHT" as const,
 			cost: 0,
-			estimatedDays: "TBD",
+			estimatedDays: "N/A",
 			requiresManualQuote: true,
 		};
 	}
@@ -98,13 +98,11 @@ export function calculateShipping(totalWeight: number, pincode: string) {
 
 	const tierData = SHIPPING_TIERS[tier];
 
-	// Calculate cost
-	const cost = regionData.baseRate + totalWeight * regionData.perKgRate;
-
+	// Shipping is included in product price (Free Shipping strategy)
 	return {
 		region: regionData.name,
 		tier,
-		cost: Math.round(cost),
+		cost: 0, // Always 0 as per user strategy
 		estimatedDays: tierData.estimatedDays,
 		requiresManualQuote: false,
 	};

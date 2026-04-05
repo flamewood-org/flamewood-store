@@ -10,6 +10,7 @@ import {
 	useState,
 } from "react";
 import {
+	isLocationExpired,
 	readSavedDeliveryLocation,
 	type SavedDeliveryLocation,
 	writeSavedDeliveryLocation,
@@ -44,7 +45,8 @@ export function DeliveryLocationProvider({
 		const stored = readSavedDeliveryLocation();
 		setLocation(stored);
 		setHydrated(true);
-		if (!stored) {
+
+		if (!stored || isLocationExpired(stored.savedAt)) {
 			setIsModalOpen(true);
 		}
 	}, []);

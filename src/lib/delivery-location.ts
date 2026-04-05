@@ -2,6 +2,7 @@ import type { IndiaPostOffice } from "@/lib/india-post-pincode";
 import { detectRegion, REGION_RATES } from "@/lib/shipping";
 
 export const DELIVERY_LOCATION_STORAGE_KEY = "flamewood:delivery-location";
+export const PINCODE_EXPIRY_MS = 3 * 60 * 60 * 1000; // 3 hours
 
 export type SavedDeliveryLocation = {
 	pincode: string;
@@ -48,4 +49,14 @@ export function writeSavedDeliveryLocation(
 	location: SavedDeliveryLocation,
 ): void {
 	localStorage.setItem(DELIVERY_LOCATION_STORAGE_KEY, JSON.stringify(location));
+}
+
+export function isLocationExpired(savedAt: string): boolean {
+	try {
+		const savedDate = new Date(savedAt).getTime();
+		const now = Date.now();
+		return now - savedDate > PINCODE_EXPIRY_MS;
+	} catch {
+		return true;
+	}
 }

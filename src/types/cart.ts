@@ -14,6 +14,8 @@ export interface Cart {
 	checkoutUrl: string;
 	items: CartItem[];
 	subtotal: number;
+	totalTax?: number;
+	totalAmount?: number;
 	totalWeight: number;
 	itemCount: number;
 }

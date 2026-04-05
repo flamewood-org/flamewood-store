@@ -59,9 +59,9 @@ export function ShopByCategorySection({
 								<li key={collection.id} className="min-w-0">
 									<Link
 										href={`/products/${collection.handle}`}
-										className="group flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-border/80 bg-surface shadow-[0_1px_0_rgba(0,0,0,0.03)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-[var(--shadow-card-hover)]"
+										className="group flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-border/80 bg-surface shadow-[0_1px_0_rgba(0,0,0,0.03)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-(--shadow-card-hover)"
 									>
-										<div className="relative aspect-[5/4] w-full overflow-hidden bg-surface-alt sm:aspect-[4/3]">
+										<div className="relative aspect-5/4 w-full overflow-hidden bg-surface-alt sm:aspect-4/3">
 											{collection.image ? (
 												<Image
 													src={collection.image.url}
@@ -109,7 +109,7 @@ export function ShopByCategorySection({
 							No collections yet
 						</p>
 						<p className="mx-auto mt-2 max-w-sm text-sm text-text-secondary">
-							Add collections in Shopify — they will show up here automatically.
+							Add collections in the dashboard — they will show up here automatically.
 						</p>
 					</div>
 				)}
