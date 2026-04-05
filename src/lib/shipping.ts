@@ -73,7 +73,11 @@ export function isStandardDeliveryAvailable(pincode: string): boolean {
 	return detectRegion(pincode.trim()) !== "INTERNATIONAL";
 }
 
-export function calculateShipping(totalWeight: number, pincode: string) {
+export function calculateShipping(
+	totalWeight: number,
+	pincode: string,
+	subtotal: number = 0,
+) {
 	const region = detectRegion(pincode);
 	const regionData = REGION_RATES[region];
 
@@ -96,14 +100,14 @@ export function calculateShipping(totalWeight: number, pincode: string) {
 		tier = "HEAVY";
 	}
 
-	const tierData = SHIPPING_TIERS[tier];
+	// Apply Domestic Shipping rule: Free for orders >= ₹300, else ₹99
+	const cost = subtotal >= 300 ? 0 : 99;
 
-	// Shipping is included in product price (Free Shipping strategy)
 	return {
 		region: regionData.name,
 		tier,
-		cost: 0, // Always 0 as per user strategy
-		estimatedDays: tierData.estimatedDays,
+		cost,
+		estimatedDays: "3-5",
 		requiresManualQuote: false,
 	};
 }

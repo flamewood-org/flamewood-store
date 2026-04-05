@@ -143,14 +143,14 @@ export function RegisterForm({
 						type="tel"
 						inputMode="tel"
 						autoComplete="tel"
-						placeholder="+91 98765 43210"
+						placeholder="98765 43210"
 						value={phone}
 						onChange={(e) => setPhone(e.target.value)}
 						required
 						className={isModal ? "h-11" : "h-12"}
 					/>
 					<p className="text-xs text-text-tertiary mt-1">
-						Include country code. Used for delivery and order updates.
+						Used for delivery and order updates.
 					</p>
 				</div>
 				<div>

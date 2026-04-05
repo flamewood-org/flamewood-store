@@ -84,7 +84,8 @@ export default function ProductDetailPage() {
 			setPincode(location.pincode);
 			if (selectedVariant) {
 				const totalWeight = (selectedVariant.weight || 0) * quantity;
-				const estimate = calculateShipping(totalWeight, location.pincode);
+				const currentSubtotal = (unitPrice * quantity);
+				const estimate = calculateShipping(totalWeight, location.pincode, currentSubtotal);
 				setShippingEstimate(estimate);
 			}
 		}
@@ -111,6 +112,7 @@ export default function ProductDetailPage() {
 	const {
 		unitPrice,
 		compareAtUnit,
+		basePriceTotal,
 		totalPrice,
 		compareAtLineTotal,
 		displayTags,
@@ -130,10 +132,13 @@ export default function ProductDetailPage() {
 				)
 			: [];
 
+		const baseTotal = up * quantity;
+		const finalTotal = baseTotal >= 300 ? baseTotal : baseTotal + 99;
 		return {
 			unitPrice: up,
 			compareAtUnit: cau,
-			totalPrice: up * quantity,
+			basePriceTotal: baseTotal,
+			totalPrice: finalTotal,
 			compareAtLineTotal: cau != null ? cau * quantity : undefined,
 			displayTags: dt,
 		};
@@ -211,7 +216,8 @@ export default function ProductDetailPage() {
 		if (!selectedVariant) return;
 
 		const totalWeight = selectedVariant.weight * quantity;
-		const estimate = calculateShipping(totalWeight, pincode);
+		const currentSubtotal = (unitPrice * quantity);
+		const estimate = calculateShipping(totalWeight, pincode, currentSubtotal);
 		setShippingEstimate(estimate);
 		setShowShippingError(false);
 	};
@@ -409,7 +415,9 @@ export default function ProductDetailPage() {
 													? shippingEstimate.region === "Outside Service Area"
 														? "Currently limited to India"
 														: "Heavy shipment detected"
-													: `FREE Delivery to ${shippingEstimate.region}`}
+													: shippingEstimate.cost === 0
+														? `FREE Delivery to ${shippingEstimate.region}`
+														: `₹${shippingEstimate.cost} Delivery to ${shippingEstimate.region}`}
 											</p>
 											{!shippingEstimate.requiresManualQuote ? (
 												<p className="text-sm text-text-secondary mt-1">
@@ -417,6 +425,7 @@ export default function ProductDetailPage() {
 													<span className="font-medium text-foreground">
 														{shippingEstimate.estimatedDays} days
 													</span>
+													{shippingEstimate.cost > 0 && " • Free with ₹300+"}
 												</p>
 											) : (
 												<p className="text-[11px] text-text-secondary mt-1 max-w-[240px]">
@@ -485,14 +494,14 @@ export default function ProductDetailPage() {
 										</div>
 										<div className="text-right min-w-0">
 											{compareAtLineTotal != null &&
-												compareAtLineTotal > totalPrice && (
+												compareAtLineTotal > basePriceTotal && (
 													<p className="text-xs text-text-tertiary line-through tabular-nums mt-0.5">
 														₹{compareAtLineTotal.toFixed(2)}
 													</p>
 												)}
 											<p className="text-[11px] text-text-secondary mt-0.5">
-												{quantity} × ₹
-												{unitPrice > 0 ? unitPrice.toFixed(2) : "0.00"}
+												{quantity} × ₹{unitPrice > 0 ? unitPrice.toFixed(2) : "0.00"}
+												{basePriceTotal < 300 && " + ₹99 shipping"}
 											</p>
 										</div>
 									</div>
@@ -673,11 +682,11 @@ export default function ProductDetailPage() {
 									{product?.title}
 								</p>
 								<p className="text-primary font-semibold text-sm tabular-nums">
-									₹
-									{Number.isFinite(totalPrice) ? totalPrice.toFixed(2) : "0.00"}
+									₹{Number.isFinite(totalPrice) ? totalPrice.toFixed(2) : "0.00"}
 								</p>
 								<p className="text-[11px] text-text-secondary tabular-nums">
 									{quantity} × ₹{unitPrice > 0 ? unitPrice.toFixed(2) : "0.00"}
+									{basePriceTotal < 300 && " + ₹99 ship"}
 								</p>
 							</div>
 						</div>

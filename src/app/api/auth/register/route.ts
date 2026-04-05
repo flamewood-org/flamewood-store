@@ -41,12 +41,17 @@ export async function POST(request: Request) {
 		);
 	}
 
+	let formattedPhone = phoneRaw;
+	if (phoneRaw && !phoneRaw.startsWith("+")) {
+		formattedPhone = `+91${phoneDigits}`;
+	}
+
 	const created = await registerCustomer({
 		email,
 		password,
 		firstName,
 		lastName,
-		phone: phoneRaw,
+		phone: formattedPhone,
 	});
 	if (!created.ok) {
 		return NextResponse.json({ error: created.message }, { status: 400 });

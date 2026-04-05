@@ -26,7 +26,11 @@ export default function CartPage() {
 		if (location?.pincode) {
 			setPincode(location.pincode);
 			if (cart) {
-				const estimate = calculateShipping(cart.totalWeight, location.pincode);
+				const estimate = calculateShipping(
+					cart.totalWeight,
+					location.pincode,
+					cart.subtotal,
+				);
 				setShippingEstimate(estimate);
 			}
 		}
@@ -38,7 +42,7 @@ export default function CartPage() {
 			return;
 		}
 
-		const estimate = calculateShipping(cart.totalWeight, pincode);
+		const estimate = calculateShipping(cart.totalWeight, pincode, cart.subtotal);
 		setShippingEstimate(estimate);
 		setShowShippingError(false);
 	};
@@ -108,10 +112,11 @@ export default function CartPage() {
 		);
 	}
 
+	const defaultShippingCost = cart.subtotal >= 300 ? 0 : 99;
 	const shippingCost =
 		shippingEstimate && !shippingEstimate.requiresManualQuote
 			? shippingEstimate.cost
-			: 0;
+			: defaultShippingCost;
 	const finalTotal = cart.subtotal + shippingCost;
 
 	return (
@@ -271,18 +276,56 @@ export default function CartPage() {
 							</h2>
 
 							<div className="space-y-4 mb-6">
-								<div className="flex justify-between items-end border-b border-border/50 pb-4">
+								{/* Free Shipping Progress */}
+								<div className="bg-surface-alt rounded-lg p-3 border border-border/50">
+									{cart.subtotal >= 300 ? (
+										<div className="flex flex-col gap-1.5">
+											<div className="flex items-center gap-2 text-success">
+												<CheckCircle2 className="w-4 h-4" />
+												<p className="text-sm font-bold uppercase tracking-wide">
+													Free Shipping Unlocked
+												</p>
+											</div>
+											<div className="w-full h-1.5 bg-success rounded-full" />
+										</div>
+									) : (
+										<div className="flex flex-col gap-1.5 mt-1">
+											<p className="text-sm font-medium text-foreground">
+												Add <span className="font-bold text-primary">₹{(300 - cart.subtotal).toFixed(2)}</span> to get free shipping
+											</p>
+											<div className="w-full h-1.5 bg-border rounded-full overflow-hidden mt-1">
+												<div
+													className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
+													style={{ width: `${Math.min(100, (cart.subtotal / 300) * 100)}%` }}
+												/>
+											</div>
+										</div>
+									)}
+								</div>
+
+								<div className="flex justify-between items-center text-sm font-medium border-b border-border/50 pb-3">
+									<span className="text-text-secondary">Subtotal</span>
+									<span className="text-foreground">₹{cart.subtotal.toFixed(2)}</span>
+								</div>
+								
+								<div className="flex justify-between items-center text-sm font-medium border-b border-border/50 pb-3">
+									<span className="text-text-secondary">Shipping</span>
+									{shippingCost === 0 ? (
+										<span className="text-success font-semibold">Free</span>
+									) : (
+										<span className="text-foreground">₹{shippingCost.toFixed(2)}</span>
+									)}
+								</div>
+
+								<div className="flex justify-between items-end pb-4 pt-1">
 									<div className="flex flex-col">
 										<span className="text-xs font-bold text-text-secondary uppercase tracking-widest mb-1">
 											Total Amount
 										</span>
-										<span className="text-[10px] text-success font-bold uppercase">
-											Free Delivery Included
-										</span>
 									</div>
 									<div className="text-right">
 										<p className="text-3xl font-black text-primary tracking-tighter tabular-nums">
-											₹{finalTotal.toFixed(0)}
+											₹{finalTotal.toFixed(2)}
 										</p>
 										<p className="text-[10px] text-text-tertiary">Includes GST</p>
 									</div>

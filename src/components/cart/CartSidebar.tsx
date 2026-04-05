@@ -201,22 +201,26 @@ export function CartSidebar() {
 					)}
 				</div>
 
-				{/* Delivery Estimate (Compact Highlight) */}
-				{!isEmpty && cart && location && (
-					<div className="px-4 py-2.5 bg-success/5 border-y border-success/10 flex items-center justify-between gap-3">
-						<div className="flex items-center gap-2 min-w-0">
-							<MapPin className="w-3.5 h-3.5 text-success shrink-0" />
-							<p className="text-[11px] font-medium text-success truncate">
-								Free Delivery to <span className="font-bold">{location.pincode}</span>
+				{/* Free Shipping Progress (Compact) */}
+				{!isEmpty && cart && (
+					<div className="px-4 py-3 bg-surface border-y border-border">
+						{cart.subtotal >= 300 ? (
+							<p className="text-xs font-bold text-success text-center mb-1">
+								🎉 You've unlocked Free Shipping!
 							</p>
-						</div>
-						<button
-							type="button"
-							onClick={openModal}
-							className="text-[10px] font-bold text-success/70 uppercase hover:text-success"
-						>
-							Change
-						</button>
+						) : (
+							<div className="flex flex-col gap-1.5">
+								<p className="text-xs font-medium text-center text-text-secondary">
+									Add <span className="font-bold text-primary">₹{(300 - cart.subtotal).toFixed(2)}</span> for <span className="font-bold text-foreground">Free Shipping</span>
+								</p>
+								<div className="w-full h-1.5 bg-surface-alt rounded-full overflow-hidden">
+									<div
+										className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
+										style={{ width: `${Math.min(100, (cart.subtotal / 300) * 100)}%` }}
+									/>
+								</div>
+							</div>
+						)}
 					</div>
 				)}
 
@@ -227,6 +231,20 @@ export function CartSidebar() {
 
 						{/* Actions */}
 						<div className="space-y-3">
+							<div className="flex justify-between items-center text-sm font-medium border-b border-border/50 pb-2 mb-1">
+								<span className="text-text-secondary">Subtotal</span>
+								<span className="text-foreground">₹{cart.subtotal.toFixed(2)}</span>
+							</div>
+							
+							<div className="flex justify-between items-center text-sm font-medium border-b border-border/50 pb-2 mb-2">
+								<span className="text-text-secondary">Shipping</span>
+								{cart.subtotal >= 300 ? (
+									<span className="text-success font-semibold">Free</span>
+								) : (
+									<span className="text-foreground">₹99.00</span>
+								)}
+							</div>
+
 							<Button
 								size="lg"
 								fullWidth
@@ -236,7 +254,7 @@ export function CartSidebar() {
 								<span className="flex items-center gap-2">
 									Checkout <ArrowRight className="w-4 h-4" />
 								</span>
-								<span className="text-lg tracking-tighter">₹{cart.subtotal.toFixed(0)}</span>
+								<span className="text-lg tracking-tighter">₹{(cart.subtotal + (cart.subtotal >= 300 ? 0 : 99)).toFixed(2)}</span>
 							</Button>
 							
 							{cart.items.length > 2 && (
